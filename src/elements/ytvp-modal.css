@@ -1,0 +1,423 @@
+
+ytvp-modal {
+
+	display: flex;
+
+	flex-flow: column nowrap;
+
+	width: 100%;
+	height: 100%;
+
+	min-width: var(--modal-min-width);
+	min-height: var(--modal-min-height); 
+
+	font-family: "Roboto", sans-serif;
+	font-weight: var(--modal-text-weight);
+
+	color: var(--modal-text-color);
+	background-color: var(--player-background-color);
+
+	/* modal variables */
+
+	--modal-animation-speed: 300ms;
+
+	--modal-min-width: 560px;
+	--modal-min-height: 500px;
+
+	--modal-text-color: #fff;
+	--modal-text-weight: 400;
+
+	--modal-text-primary-size: 1.9vw;
+	--modal-text-secondary-size: 1.8vw;
+	--modal-text-tertiary-size: 1.3vw;
+
+	--modal-text-primary-opacity: 0.87;
+	--modal-text-secondary-opacity: 0.54;
+	--modal-text-tertiary-opacity: 0.38;
+
+	--modal-text-tertiary-weight: 400;
+
+	--modal-divider-width: 0.08vw;
+	--modal-divider-color: rgba(255, 255, 255, 0.12);
+	--modal-divider-opacity: 0.12;
+
+	--modal-disabled-opacity: 0.12;
+
+	/* players variables */
+
+	--player-background-color: #212121;
+
+		/* used in js */
+	--player-vertical-padding: 50; 
+
+	/* info variables */
+
+	--info-background-color: #383838;
+	--info-border-top: none;
+	--info-border-bottom: none;
+
+	--info-height: 10%;
+
+	--progress-likes-color: #ff4b4b;
+	--progress-dislikes-color: #1E88E5;
+
+	/* actions variables */
+
+	--actions-background-color: #303030;
+	--actions-icon-size: 2.5vw;
+	--actions-icon-color: #ffffff;
+	--actions-icon-opacity: 0.54;
+
+	--actions-icon-hover-color: var(--actions-icon-color);
+	--actions-icon-hover-opacity: 0.78;
+
+	--actions-text-hover-color: var(--modal-text-color);
+	--actions-text-hover-opacity: 0.78;
+
+	--actions-min-height: 25%;
+
+	--actions-button-hover-color: steelblue;
+
+}
+
+ytvp-modal, ytvp-modal-player, ytvp-modal-info, ytvp-modal-actions {
+	transition: width var(--modal-animation-speed), height var(--modal-animation-speed), transform 1s, background-color 150ms;
+}
+
+ytvp-modal-player {
+
+	display: flex;
+	flex: 1;
+
+	width: 100%;
+	height: 65%;
+
+	min-height: 315px;
+
+	justify-content: center;
+	align-items: center;
+
+	overflow: hidden;
+
+	background-color: var(--player-background-color);
+
+}
+
+ytvp-modal-player iframe video {
+	z-index: 10000000000;
+}
+
+ytvp-modal-info {
+
+	display: flex;
+	flex-flow: row nowrap;
+
+	justify-content: space-between;
+
+	height: var(--info-height);
+
+	padding: 0 2vw 0 4vw;
+
+	border-top: var(--info-border-top);
+	border-bottom: var(--info-border-bottom);
+
+	background-color: var(--info-background-color);
+
+}
+
+ytvp-modal-info-title {
+
+	display: flex;
+
+	width: 60%;
+	height: 100%;
+
+	align-items: center;
+
+	overflow: hidden;
+
+}
+
+ytvp-modal-info-title .ytvp-video-title {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+ytvp-modal-info-extra {
+
+	position: relative;
+
+	display: flex;
+	flex-flow: column nowrap;
+
+	justify-content: center;
+	align-items: center;
+
+	width: 30%;
+	height: 100%;
+
+	/*background-color: lightblue;*/
+}
+
+ytvp-modal-actions {
+
+	display: flex;
+	flex-flow: row nowrap;
+
+	width: 100%;
+	/*min-height: var(--actions-min-height);*/
+	height: var(--actions-min-height);
+
+	background-color: var(--actions-background-color);
+
+}
+
+ytvp-modal-channel {
+
+	display: flex;
+	flex-flow: column nowrap;
+
+	justify-content: center;
+	align-items: center;
+
+	flex: 2.4;
+
+}
+
+ytvp-modal-button {
+
+	display: flex;
+	flex-flow: column nowrap;
+
+	justify-content: center;
+	align-items: center;
+
+	flex: 1;
+
+	cursor: pointer;
+
+	color: var(--actions-icon-color);
+
+	border-left: var(--modal-divider-width) solid var(--modal-divider-color);
+	transition: background-color 150ms;
+}
+
+/*ytvp-modal-button:hover {
+	background-color: var(--actions-button-hover-color);
+}*/
+
+ytvp-modal-button .material-icons {
+	opacity: var(--actions-icon-opacity);
+	font-size: var(--actions-icon-size);
+}
+
+ytvp-modal-button:hover .material-icons {
+	opacity: var(--actions-icon-hover-opacity);
+	color: var(--actions-icon-hover-color);
+}
+
+ytvp-modal-button:hover .ytvp-tertiary-text {
+	opacity: var(--actions-text-hover-opacity);
+	color: var(--actions-text-hover-color);
+}
+
+ytvp-modal-channel > .ytvp-tertiary-text {
+
+	margin: 1vh;
+
+}
+
+ytvp-subscribe-button {
+	cursor: pointer;
+	padding: 0.7vh 3vh 0.7vh 3vh;
+	background-color: var(--modal-divider-color);
+}
+
+ytvp-subscribe-button:hover .ytvp-tertiary-text {
+	opacity: var(--actions-text-hover-opacity);
+	color: var(--actions-text-hover-color);
+	padding: 0vh 0.2vh 0vh 0.2vh
+}
+
+ytvp-subscribe-button * {
+	margin: 0;
+	padding: 0;
+}
+
+ytvp-modal a {
+	cursor: pointer;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+ytvp-modal .ytvp-primary-text {
+	font-size: var(--modal-text-primary-size);
+	opacity: var(--modal-text-primary-opacity);
+}
+
+ytvp-modal .ytvp-secondary-text {
+	font-size: var(--modal-text-secondary-size);
+	opacity: var(--modal-text-secondary-opacity);
+}
+
+ytvp-modal .ytvp-tertiary-text {
+	font-weight: var(--modal-text-tertiary-weight);
+	font-size: var(--modal-text-tertiary-size);
+	opacity: var(--modal-text-tertiary-opacity);
+}
+
+ytvp-modal .ytvp-channel-title:hover {
+	opacity: var(--actions-text-hover-opacity);
+	color: var(--actions-text-hover-color);
+}
+
+.ytvp-primary-text::selection,
+.ytvp-secondary-text::selection,
+.ytvp-tertiary-text::selection {
+	background-color: lightblue;
+}
+
+.ytvp-button-title {
+	margin-top: 1vh;
+}
+/* like/dislike bar */
+
+ytvp-modal .ytvp-video-ratings {
+
+	position: absolute;
+	-webkit-appearance: none;
+
+	bottom: 1.1vh;
+
+	width: 100%;
+	height: 0.6vh;
+
+}
+
+ytvp-modal .ytvp-video-ratings::-webkit-progress-bar {
+	background-color: var(--progress-likes-color);
+}
+
+ytvp-modal .ytvp-video-ratings::-webkit-progress-value {
+	background-color: var(--progress-dislikes-color);
+}
+
+/* theming and preferences */
+
+ytvp-modal[data-theme="light"] {
+
+	--modal-text-color: #000000;
+
+	--player-background-color: #fafafa;
+
+	--info-background-color: #fafafa;
+
+	--actions-background-color: #fafafa;
+	--actions-button-hover-color: #7ab1e6;
+
+	--modal-divider-color: #e0e0e0;
+
+	--modal-text-tertiary-weight: 700;
+
+	--actions-icon-color: #000000;
+
+	--actions-icon-opacity: 0.38;
+
+	--info-border-bottom: none;
+	--info-border-top: var(--modal-divider-width) solid var(--modal-divider-color);
+
+}
+
+ytvp-modal[data-top][data-theme="light"] {
+	--info-border-top: none;
+	--info-border-bottom: var(--modal-divider-width) solid var(--modal-divider-color);
+}
+
+ytvp-modal[data-theme="dark"],
+ytvp-modal {
+
+	--modal-text-color: #ffffff;
+
+	--player-background-color: #212121;
+
+	--info-background-color: #383838;
+
+	--actions-background-color: #303030;
+
+	--modal-text-tertiary-opacity: 0.64;
+
+}
+
+/* theater mode */
+
+ytvp-modal[data-theater] ytvp-modal-info,
+ytvp-modal[data-theater] ytvp-modal-actions {
+	display: none;
+}
+
+ytvp-modal[data-theater] ytvp-modal-player {
+
+	position: absolute;
+
+	top: 0vw;
+	left: 0vh;
+
+	width: 100%;
+	height: 100%;
+
+}
+
+/*ytvp-modal[data-theater] * {
+	--progress-likes-color: black;
+	--progress-dislikes-color: black;
+	--modal-divider-color: black;
+
+	background-color: black;
+	color: black;
+	border: none;
+}*/
+
+/* puts title and views on top of the video */
+
+ytvp-modal[data-top] ytvp-modal-info {
+	order: -1;
+}
+
+/* compact mode */
+
+ytvp-modal[data-compact] {
+	--actions-min-height: 10%;
+	--info-height: 8%;
+
+	--modal-text-primary-size: 1.3vw;
+	--modal-text-secondary-size: 1.5vw;
+	--modal-text-tertiary-size: 1.1vw;
+
+}
+
+ytvp-modal[data-compact] ytvp-subscribe-button {
+	display: none;
+}
+ytvp-modal[data-compact] .ytvp-button-title {
+	display: none;
+}
+
+.ytvp-modal-info-top-button i.material-icons {
+	transform: rotate(90deg);
+}
+
+/* minimum text size */
+@media only screen and (max-width: 800px) {
+
+	ytvp-modal, ytvp-modal[data-compact] {
+
+		--modal-text-primary-size: 15.218px;
+		--modal-text-secondary-size: 14.418px;
+		--modal-text-tertiary-size: 10.387px;
+
+		--actions-icon-size: 16.01px;
+
+	}
+
+}
