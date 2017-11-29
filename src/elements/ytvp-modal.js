@@ -152,6 +152,7 @@ class YTVPModal extends HTMLElement {
 		this.getElementsByClassName("ytvp-channel-title")[0].addEventListener("click", () => this.player.pauseVideo());
 
 		this.resizeVideo();
+
 	}
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (name === "data-theater") {
@@ -276,10 +277,10 @@ class YTVPModal extends HTMLElement {
 			});
 		});
 	}
-	resizeVideo() {
+	resizeVideo(w = this.videoContainer.offsetWidth, h = this.videoContainer.offsetHeight) {
 		// iframe container dimensions
-		const contW = this.videoContainer.offsetWidth;
-		const contH = this.videoContainer.offsetHeight;
+		const contW = w;
+		const contH = h;
 		const ratio = 9 / 16;
 
 		const playerStyles = window.getComputedStyle(this.videoContainer);

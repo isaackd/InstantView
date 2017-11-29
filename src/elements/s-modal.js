@@ -49,12 +49,25 @@ class sModal extends HTMLElement {
   		if (this.opened) {
   			this.open(true);
   		}
+
+        this.setAttribute("data-mini", "");
+
   	}
 
   	open(nocheck = false) {
-        if (!nocheck && !this.opened && !this.animating) {
+        if (!this.opened && !this.animating || !nocheck) {
             this.animating = true;
-            this.dialog.showModal();
+
+            if (this.mini) {
+                console.log("mini");
+                this.dialog.show();
+            }
+            else {
+                console.log("modal");
+                this.dialog.showModal();
+            }
+
+
             this.setAttribute("data-open", "");
             window.currentSModal = this;
         }
@@ -76,6 +89,13 @@ class sModal extends HTMLElement {
   	set closeOptions(options) {
   		this.setAttribute("close-options", options.join(","));
   	}
+
+    get mini() {
+        return this.hasAttribute("data-mini");
+    }
+    set mini(val) {
+        val ? this.setAttribute("data-mini", "") : this.removeAttribute("data-mini");
+    }
 
   	get closeOptions() {
 		let attr = this.getAttribute("close-options");

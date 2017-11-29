@@ -47,8 +47,10 @@ ytvp-modal {
 
 	--player-background-color: #212121;
 
-		/* used in js */
+	/* used in js */
 	--player-vertical-padding: 50; 
+
+	--player-min-height: 315px;
 
 	/* info variables */
 
@@ -92,7 +94,7 @@ ytvp-modal-player {
 	width: 100%;
 	height: 65%;
 
-	min-height: 315px;
+	min-height: var(--player-min-height);
 
 	justify-content: center;
 	align-items: center;

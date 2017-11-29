@@ -2,6 +2,24 @@ s-modal {
 	position: fixed;
 	width: 100%;
 	height: 100%;
+	z-index: 2147483646;
+
+	/* 16 * value - automaticall gets height */
+	--mini-width-multi: 32; 
+
+	--mini-padding: 1.3em;
+	--mini-transition-speed: 300ms;
+	--mini-border: 1px solid rgba(0, 0, 0, 0.15);
+
+	--mini-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	--mini-hover-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+
+	--mini-bgcolor: white;
+
+}
+
+s-modal:not([data-open]) {
+	display: none;
 }
 
 s-modal dialog {
@@ -16,6 +34,7 @@ s-modal dialog {
 	transition: transform 400ms, opacity 300ms;
 	transform: scale(0.6, 0.6);
 	opacity: 0;
+	z-index: 2147483647;
 }
 s-modal[data-open] dialog[open] {
 	transform: scale(1, 1);
@@ -29,4 +48,56 @@ s-modal dialog::backdrop {
 }
 s-modal[data-open] dialog::backdrop {
 	opacity: 0.85;
+}
+
+/* miniplayer */
+
+s-modal[data-mini] {
+	position: fixed;
+
+	bottom: 5em;
+	right: 5em;
+
+	width: auto;
+	height: auto;
+
+	overflow: hidden;
+
+	/*background-color: yellow;*/
+}
+
+s-modal[data-open][data-mini] {
+	display: flex;
+
+	padding: var(--mini-padding);
+
+	box-shadow: var(--mini-shadow);
+	border: var(--mini-border);
+
+    background-color: var(--mini-bgcolor);
+    transition: var(--mini-transition-speed);
+}
+s-modal[data-mini]:hover {
+	box-shadow: var(--mini-hover-shadow);
+}
+
+s-modal[data-mini] ytvp-modal {
+	min-width: 0;
+	min-height: 0;
+
+	--player-background-color: none;
+	--player-min-height: 0;
+}
+
+s-modal[data-mini][data-open] dialog {
+	position: relative;
+
+	width: 100%;
+	height: 100%;
+}
+
+/* miniplayer */
+
+s-modal[data-mini] ytvp-modal-info, s-modal[data-mini] ytvp-modal-actions {
+	display: none;
 }
