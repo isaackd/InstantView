@@ -119,7 +119,6 @@ class sModal extends HTMLElement {
     }
 
     close(animate = true, pause = true) {
-        console.log("pausing: " + pause);
         return new Promise((resolve, reject) => {
 
             if (this.opened && !this.animating) {
@@ -188,8 +187,6 @@ class sModal extends HTMLElement {
     set mini(val) {
 
         const vidPlaying = this.ytvp.player.getPlayerState() === 1 ? true : false;
-
-        console.log("vidplaying: " + vidPlaying);
 
         // if we want to switch to mini mode
         if (val && !this.mini) {
