@@ -51,7 +51,6 @@ class YTVP {
 	}
 
 	createModal(ytplayer) {
-		// confusing af
 		this.popup = document.createElement("s-modal");
 		this.modal = document.createElement("ytvp-modal");
 		this.modal.init(YT, this.options.API_KEY);
@@ -62,14 +61,15 @@ class YTVP {
 
 		document.body.prepend(this.popup);
 
-		this.popup.addEventListener("ModalOpened", e => {this.modal.resizeVideo()});
-		this.popup.addEventListener("BeforeModalClosed", e => {this.modal.player.pauseVideo()});
+		// this.popup.addEventListener("ModalOpened", e => {this.modal.resizeVideo()});
+		this.popup.addEventListener("ModalOpened", e => {this.popup.resizeModalVideo()});
 
 		this.modal.addEventListener("PlayerReady", e => {
 			this.initialised = true;
 			this.constructor.log("Fully initialised and ready! :)");
-			// createSnackbar("YTVP LOADED");
 		});
+
+		window.addEventListener("resize", () => this.popup.resizeModalVideo());
 
 	}
 	waitForDesign() {
@@ -152,7 +152,9 @@ class YTVP {
 
 const ytvp = new YTVP({enabled: true, API_KEY: "AIzaSyBBdCo-KyDeWBHkR2JrGdeL7tyrMq3z1-4"});
 document.addEventListener("click", (e) => {
-	if (ytvp.initialised) ytvp.handleThumbnailClick(e);
+	if (ytvp.initialised) {
+		ytvp.handleThumbnailClick(e);
+	}
 	else  {
 		e.stopImmediatePropagation();
 		e.preventDefault();

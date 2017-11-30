@@ -2,6 +2,25 @@ s-modal {
 	position: fixed;
 	width: 100%;
 	height: 100%;
+
+	/* 20% of document width */
+	--mini-width-percent: 0.25; 
+
+	--mini-padding: 1.3em;
+	--mini-transition-speed: 300ms;
+	--mini-border: 1px solid rgba(0, 0, 0, 0.15);
+
+	--mini-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	--mini-hover-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+
+	--mini-bgcolor: white;
+
+	--mini-button-color: white;
+    --mini-button-bgcolor: #1e88e5;
+    --mini-button-margin: 0.6em;
+    --mini-button-padding: 1.1em;
+    --mini-button-height: 2.4em;
+
 }
 
 s-modal dialog {
@@ -12,14 +31,6 @@ s-modal dialog {
 	border: none;
 
 	background-color: rgba(0, 0, 0, 0);
-
-	transition: transform 400ms, opacity 300ms;
-	transform: scale(0.6, 0.6);
-	opacity: 0;
-}
-s-modal[data-open] dialog[open] {
-	transform: scale(1, 1);
-	opacity: 1;
 }
 s-modal dialog::backdrop {
 	cursor: pointer;
@@ -29,4 +40,94 @@ s-modal dialog::backdrop {
 }
 s-modal[data-open] dialog::backdrop {
 	opacity: 0.85;
+}
+
+/* miniplayer */
+
+s-modal[data-mini] {
+	position: fixed;
+
+	bottom: 5em;
+	right: 5em;
+
+	width: auto;
+	height: auto;
+
+	overflow: hidden;
+}
+
+s-modal[data-open][data-mini] {
+	display: flex;
+	flex-flow: column nowrap;
+
+	z-index: 99999999;
+
+	padding: var(--mini-padding);
+
+	box-shadow: var(--mini-shadow);
+	border: var(--mini-border);
+
+    background-color: var(--mini-bgcolor);
+    /*transition: var(--mini-transition-speed);*/
+}
+s-modal[data-mini]:hover {
+	box-shadow: var(--mini-hover-shadow);
+}
+
+s-modal[data-mini] ytvp-modal {
+	min-width: 0;
+	min-height: 0;
+
+	/*--player-background-color: none;*/
+	--player-min-height: 0;
+	--player-vertical-padding: 0;
+}
+
+s-modal[data-mini][data-open] dialog {
+	position: relative;
+
+	width: 100%;
+	height: 100%;
+}
+
+s-modal[data-mini] ytvp-modal-info, s-modal[data-mini] ytvp-modal-actions {
+	display: none;
+}
+
+.ytvp-mini-exit {
+	display: none;
+
+
+}
+
+s-modal[data-mini][data-open] .ytvp-mini-exit {
+	display: block;
+}
+
+.ytvp-mini-exit {
+
+    height: var(--mini-button-height);
+    border-radius: 2px;
+
+    margin-top: var(--mini-button-margin);
+
+    padding-left: var(--mini-button-padding);
+    padding-right: var(--mini-button-padding);
+
+    border: none;
+    font-weight: bold;
+    white-space: nowrap;
+
+
+    color: var(--mini-button-color);
+    background-color: var(--mini-button-bgcolor);
+    transition: box-shadow 150ms;
+}
+
+.ytvp-mini-exit:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.32);
+}
+.ytvp-mini-exit:focus {
+    outline: none;
 }
