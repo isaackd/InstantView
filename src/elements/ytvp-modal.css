@@ -210,6 +210,7 @@ ytvp-modal-button {
 }*/
 
 ytvp-modal-button .material-icons {
+	user-select: none;
 	opacity: var(--actions-icon-opacity);
 	font-size: var(--actions-icon-size);
 }
