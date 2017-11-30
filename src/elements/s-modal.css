@@ -2,10 +2,9 @@ s-modal {
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	z-index: 2147483646;
 
-	/* 16 * value - automaticall gets height */
-	--mini-width-multi: 32; 
+	/* 20% of document width */
+	--mini-width-percent: 0.25; 
 
 	--mini-padding: 1.3em;
 	--mini-transition-speed: 300ms;
@@ -16,10 +15,12 @@ s-modal {
 
 	--mini-bgcolor: white;
 
-}
+	--mini-button-color: white;
+    --mini-button-bgcolor: #1e88e5;
+    --mini-button-margin: 0.6em;
+    --mini-button-padding: 1.1em;
+    --mini-button-height: 2.4em;
 
-s-modal:not([data-open]) {
-	display: none;
 }
 
 s-modal dialog {
@@ -30,15 +31,6 @@ s-modal dialog {
 	border: none;
 
 	background-color: rgba(0, 0, 0, 0);
-
-	transition: transform 400ms, opacity 300ms;
-	transform: scale(0.6, 0.6);
-	opacity: 0;
-	z-index: 2147483647;
-}
-s-modal[data-open] dialog[open] {
-	transform: scale(1, 1);
-	opacity: 1;
 }
 s-modal dialog::backdrop {
 	cursor: pointer;
@@ -62,12 +54,13 @@ s-modal[data-mini] {
 	height: auto;
 
 	overflow: hidden;
-
-	/*background-color: yellow;*/
 }
 
 s-modal[data-open][data-mini] {
 	display: flex;
+	flex-flow: column nowrap;
+
+	z-index: 99999999;
 
 	padding: var(--mini-padding);
 
@@ -75,7 +68,7 @@ s-modal[data-open][data-mini] {
 	border: var(--mini-border);
 
     background-color: var(--mini-bgcolor);
-    transition: var(--mini-transition-speed);
+    /*transition: var(--mini-transition-speed);*/
 }
 s-modal[data-mini]:hover {
 	box-shadow: var(--mini-hover-shadow);
@@ -85,8 +78,9 @@ s-modal[data-mini] ytvp-modal {
 	min-width: 0;
 	min-height: 0;
 
-	--player-background-color: none;
+	/*--player-background-color: none;*/
 	--player-min-height: 0;
+	--player-vertical-padding: 0;
 }
 
 s-modal[data-mini][data-open] dialog {
@@ -96,8 +90,44 @@ s-modal[data-mini][data-open] dialog {
 	height: 100%;
 }
 
-/* miniplayer */
-
 s-modal[data-mini] ytvp-modal-info, s-modal[data-mini] ytvp-modal-actions {
 	display: none;
+}
+
+.ytvp-mini-exit {
+	display: none;
+
+
+}
+
+s-modal[data-mini][data-open] .ytvp-mini-exit {
+	display: block;
+}
+
+.ytvp-mini-exit {
+
+    height: var(--mini-button-height);
+    border-radius: 2px;
+
+    margin-top: var(--mini-button-margin);
+
+    padding-left: var(--mini-button-padding);
+    padding-right: var(--mini-button-padding);
+
+    border: none;
+    font-weight: bold;
+    white-space: nowrap;
+
+
+    color: var(--mini-button-color);
+    background-color: var(--mini-button-bgcolor);
+    transition: box-shadow 150ms;
+}
+
+.ytvp-mini-exit:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.32);
+}
+.ytvp-mini-exit:focus {
+    outline: none;
 }

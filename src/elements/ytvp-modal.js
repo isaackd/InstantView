@@ -108,7 +108,7 @@ class YTVPModal extends HTMLElement {
 		}
 
 		this.currentVideoInfo = this.options.defaultInfo;
-		window.addEventListener("resize", () => this.resizeVideo()); // keep "this" to the reference of the modal
+		// window.addEventListener("resize", () => this.resizeVideo());
 
 	}
 
@@ -139,8 +139,9 @@ class YTVPModal extends HTMLElement {
 		this.actionButtons = [
 			this.createActionButton("theme", "invert_colors", "ytvp-modal-theme-button", e => { (this.theme === "dark" || !this.theme) ? this.theme = "light" : this.theme = "dark" }), 
 			this.createActionButton("layout", "compare_arrows", "ytvp-modal-info-top-button", e => { this.infoTop = !this.infoTop }),
-			this.createActionButton("compact view", "dashboard", "ytvp-modal-compact-button", e => { this.compactView = !this.compactView }),
-			this.createActionButton("theater mode", "theaters", "ytvp-modal-theater-button", e => { this.theaterMode = !this.theaterMode })
+			this.createActionButton("compact", "dashboard", "ytvp-modal-compact-button", e => { this.compactView = !this.compactView }),
+			this.createActionButton("theater", "theaters", "ytvp-modal-theater-button", e => { this.theaterMode = !this.theaterMode }),
+			this.createActionButton("minimize", "photo_size_select_small", "ytvp-modal-minimize-button", e => { this.popup.mini = !this.popup.mini })
 		];
 
 		this.videoContainer.append(this.playerPlaceholder);
@@ -148,7 +149,13 @@ class YTVPModal extends HTMLElement {
 			onReady: e => this.onPlayerReady(e)
 		}});
 
-		this.getElementsByClassName("ytvp-video-title")[0].addEventListener("click", () => this.player.pauseVideo());
+		this.videoTitleEl = this.getElementsByClassName("ytvp-video-title")[0];
+
+		this.videoTitleEl.addEventListener("click", () => {
+			const t = this.player.getCurrentTime();
+			if (t) this.videoTitleEl.href = `${this.videoURL}&t=${Math.floor(t)}s`;
+			this.player.pauseVideo();
+		});
 		this.getElementsByClassName("ytvp-channel-title")[0].addEventListener("click", () => this.player.pauseVideo());
 
 		this.resizeVideo();
@@ -177,6 +184,11 @@ class YTVPModal extends HTMLElement {
 	// notifyRetrieving = sets video info to "retrieving"
 	loadVideo(id, notifyRetrieving = true) {
 		if (!id) return;
+		if (id === this.videoId) {
+			this.player.playVideo();
+			return;
+		}
+		this.videoId = id;
 		this.player.loadVideoById(id, 0);
 
 		if (notifyRetrieving) this.currentVideoInfo = this.options.retrievingInfo;
@@ -345,11 +357,17 @@ class YTVPModal extends HTMLElement {
 		mode ? this.setAttribute("data-theater", "") : this.removeAttribute("data-theater");
 	}
 
+	get mini() {
+		return this.closest("s-modal").mini;
+	}
+
 	set currentVideoInfo(info) {
 
 		if (!this.initialised) return;
 
 		info = Object.assign({}, this.options.defaultInfo, info);
+
+		this.videoURL = info.videoURL;
 
 		this.videoTitle.textContent = info.title;
 		this.videoTitle.href = info.videoURL;
@@ -366,6 +384,10 @@ class YTVPModal extends HTMLElement {
 	}
 	get userPrefs() {
 		return JSON.parse(localStorage.getItem("ytvp_prefs"));
+	}
+
+	get popup() {
+		return this.closest("s-modal");
 	}
 
 	setPreference(name, value) {

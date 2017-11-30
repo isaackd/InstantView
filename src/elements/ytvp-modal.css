@@ -140,7 +140,7 @@ ytvp-modal-info-title {
 
 }
 
-ytvp-modal-info-title .ytvp-video-title {
+ytvp-modal-info-title .ytvp-video-title, .ytvp-button-title {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -358,7 +358,7 @@ ytvp-modal[data-theater] ytvp-modal-actions {
 	display: none;
 }
 
-ytvp-modal[data-theater] ytvp-modal-player {
+s-modal:not([data-mini]) ytvp-modal[data-theater] ytvp-modal-player {
 
 	position: absolute;
 
@@ -407,6 +407,10 @@ ytvp-modal[data-compact] .ytvp-button-title {
 
 .ytvp-modal-info-top-button i.material-icons {
 	transform: rotate(90deg);
+}
+
+.ytvp-modal-minimize-button i.material-icons {
+	transform: rotate(180deg) rotateX(180deg);
 }
 
 /* minimum text size */
