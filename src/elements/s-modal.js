@@ -63,12 +63,29 @@ class sModal extends HTMLElement {
 
         this.append(this.miniExit);
 
+
+        // christmas lights
+        //https://github.com/iamshaunjp/CSS-Tips-and-Tricks/blob/01-christmas-lights
+
+        this.christmasWire = document.createElement("ul");
+
+        for (let i = 0; i < 5; i++) {
+            this.christmasWire.append(document.createElement("li"));
+        }
+
+        this.append(this.christmasWire);
+
+
         this.animating = false;
 
         if (this.opened) {
             this.open(true);
         }
 
+        const cDate = new Date();
+        if (cDate.getMonth() === 11) {
+            this.setAttribute("data-christmas", "");
+        }
     }
 
     attributeChangedCallback(name, oldValue, newValue) {

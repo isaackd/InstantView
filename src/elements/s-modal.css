@@ -3,7 +3,7 @@ s-modal {
 	width: 100%;
 	height: 100%;
 
-	/* 20% of document width */
+	/* 25% of document width */
 	--mini-width-percent: 0.25; 
 
 	--mini-padding: 1.3em;
@@ -53,7 +53,7 @@ s-modal[data-mini] {
 	width: auto;
 	height: auto;
 
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 s-modal[data-open][data-mini] {
@@ -130,4 +130,107 @@ s-modal[data-mini][data-open] .ytvp-mini-exit {
 }
 .ytvp-mini-exit:focus {
     outline: none;
+}
+
+/* christmas lights */
+
+s-modal ul, s-modal li {
+	display: none;
+}
+
+s-modal[data-christmas][data-mini] ul {
+	display: flex;
+	position: absolute;
+
+    justify-content: center;
+
+    left: 0px;
+
+    width: 100%;
+
+    bottom: -3.5em;
+
+    padding: 0;
+    white-space: nowrap;
+ }
+
+s-modal[data-christmas][data-mini] li {
+    position: relative;
+    display: inline-block;
+
+    bottom: 0px;
+
+    min-width: 15px;
+    width: 15px;
+    height: 30px;
+
+    list-style: none;
+
+    margin: 0px 15px;
+    padding: 0;
+    border-radius: 50%;
+
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-iteration-count:infinite;
+    animation-name: even-flash;
+}
+
+s-modal[data-christmas] li:nth-child(odd){
+     animation-name: odd-flash;
+ }
+
+s-modal[data-christmas] li:before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 10px;
+    border-radius: 4px;
+    top: -5px;
+    left: 0px;
+    background: #444;
+}
+
+@keyframes even-flash {
+    0%, 100% {
+        background: rgba(255,230,65,1);
+        box-shadow: 0px 2px 20px 4px rgba(255,230,65,1);
+    }
+    50% {
+        background: rgba(255,230,65,0.5);
+        box-shadow: 0px 2px 20px 4px rgba(255,230,65,0.3);
+    }
+}
+
+@keyframes odd-flash {
+    50% {
+        background: rgba(255,65,185,1);
+        box-shadow: 0px 2px 20px 4px rgba(255,65,185,1);
+    }
+    0%,100% {
+        background: rgba(255,65,185,0.5);
+        box-shadow: 0px 2px 20px 4px rgba(255,65,185,0.3);
+    }
+}
+
+@media only screen and (max-width: 780px) {
+
+	s-modal[data-christmas][data-mini] ul li:first-child {
+		display: none;
+	}
+	s-modal[data-christmas][data-mini] ul li:last-child {
+		display: none;
+	}
+
+}
+
+@media only screen and (max-width: 335px) {
+
+	s-modal[data-christmas][data-mini] ul li:nth-child(2) {
+		display: none;
+	}
+	s-modal[data-christmas][data-mini] ul li:nth-child(4) {
+		display: none;
+	}
+
 }
