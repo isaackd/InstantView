@@ -396,7 +396,6 @@ class YTVPModal extends HTMLElement {
 
 	reloadUserPrefs() {
 		this.getUserPrefs().then(prefs => {
-			console.log(prefs);
 			this.theme = prefs.theme;
 			this.infoTop = (prefs.infopos === "bottom" ? false : true);
 	 		
