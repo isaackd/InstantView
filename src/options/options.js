@@ -38,7 +38,6 @@ function loadOptions() {
         }
 
         chrome.storage.local.get("iv_options", function(items) {
-            console.log(JSON.parse(items.iv_options));
 
             const data = JSON.parse(items.iv_options);
 
@@ -48,11 +47,15 @@ function loadOptions() {
             form.compact.checked = data.compact;
             form.christmas.checked = data.christmas;
 
+            resolve(data);
+
         });
 
     });
 
 }
 
-loadOptions();
-document.getElementsByClassName("save-options")[0].addEventListener("click", saveOptions);
+document.addEventListener("DOMContentLoaded", e => {
+    loadOptions();
+    document.getElementsByClassName("save-options")[0].addEventListener("click", saveOptions);
+});
