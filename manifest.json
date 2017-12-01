@@ -8,7 +8,8 @@
   	"description": "Allows youtube videos to be opened in a popup (without changing pages)",
 
     "permissions": [
-        "https://www.googleapis.com/*"
+        "https://www.googleapis.com/*",
+        "storage"
     ],
 
     "icons": {

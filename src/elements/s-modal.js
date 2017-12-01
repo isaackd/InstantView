@@ -34,6 +34,9 @@ class sModal extends HTMLElement {
                 this.close();
             }
         });
+        this.addEventListener("ModalOpened", function() {
+            this.ytvp.reloadUserPrefs();
+        });
     }
     connectedCallback() {
         

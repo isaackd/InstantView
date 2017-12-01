@@ -1,58 +1,55 @@
 function saveOptions() {
-    const form = document.forms["iv-options"];
-    
-    if (!form) {
-        document.write("There was an error");
-        return;
-    }
+    return new Promise((resolve, reject) => {
 
-    const data = new FormData(form);
+        const form = document.forms["iv-options"];
+        
+        if (!form) {
+            document.write("There was an error");
+            return;
+        }
 
-    const newOptions = {};
+        const data = new FormData(form);
 
-    for (let opt of data.entries()) {
-        newOptions[opt[0]] = opt[1];
-    }
+        const newOptions = {};
 
-    newOptions["christmas"] = form.christmas.checked;
-    newOptions["compact"] = form.compact.checked;
+        for (let opt of data.entries()) {
+            newOptions[opt[0]] = opt[1];
+        }
 
-    localStorage.setItem("iv_options", JSON.stringify(newOptions));
+        newOptions["christmas"] = form.christmas.checked;
+        newOptions["compact"] = form.compact.checked;
 
-    // https://stackoverflow.com/questions/29926598/sendmessage-from-popup-to-content-js-not-working-in-chrome-extension
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
-        const activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: "optionChange", data: newOptions});
+        chrome.storage.local.set({iv_options: JSON.stringify(newOptions)}, function() {
+            console.log("hey");
+            resolve(newOptions);
+        });
+
     });
 }
 
 function loadOptions() {
-    if (!localStorage.getItem("iv_options")) {
-        chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
-            const activeTab = tabs[0];
-            chrome.tabs.sendMessage(activeTab.id, {message: "optionChange", data});
+
+    return new Promise((resolve, reject) => {
+        const form = document.forms["iv-options"];
+
+        if (!form) {
+            document.write("error");
+            reject("Couldn\'t get form");
+        }
+
+        chrome.storage.local.get("iv_options", function(items) {
+            console.log(JSON.parse(items.iv_options));
+
+            const data = JSON.parse(items.iv_options);
+
+            form[`theme-${data.theme}`].checked = true;
+            form[`infopos-${data.infopos}`].checked = true;
+
+            form.compact.checked = data.compact;
+            form.christmas.checked = data.christmas;
+
         });
-        return;
-    }
 
-    const form = document.forms["iv-options"];
-    
-    if (!form) {
-        document.write("There was an error");
-        return;
-    }
-
-    const data = JSON.parse(localStorage.getItem("iv_options"));
-
-    form[`theme-${data.theme}`].checked = true;
-    form[`infopos-${data.infopos}`].checked = true;
-
-    form.compact.checked = data.compact;
-    form.christmas.checked = data.christmas;
-
-    chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
-        const activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {message: "optionChange", data});
     });
 
 }

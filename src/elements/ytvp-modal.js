@@ -100,14 +100,21 @@ class YTVPModal extends HTMLElement {
 		this.options = Object.assign({}, this.constructor.defaultOptions, options);
 		this.options.API_KEY = API_KEY;
 
-		this.preferences = Object.assign({}, this.constructor.defaultPreferences, this.userPrefs);
-		console.table(this.preferences);
+		this.getUserPrefs().then(prefs => {
+			this.preferences = Object.assign({}, this.constructor.defaultPreferences, prefs);
+		});
 
-		for (const pref in this.preferences) {
+		for (let pref in this.preferences) {
 			this[pref] = this.preferences[pref];
 		}
 
 		this.currentVideoInfo = this.options.defaultInfo;
+		(function(modal) {
+			chrome.storage.onChanged.addListener(function(changes, areaName) {
+				modal.reloadUserPrefs();
+			});
+		})(this);
+		this.reloadUserPrefs();
 		// window.addEventListener("resize", () => this.resizeVideo());
 
 	}
@@ -156,6 +163,8 @@ class YTVPModal extends HTMLElement {
 		this.getElementsByClassName("ytvp-channel-title")[0].addEventListener("click", () => this.player.pauseVideo());
 
 		this.resizeVideo();
+
+
 
 	}
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -329,28 +338,24 @@ class YTVPModal extends HTMLElement {
 		return attr !== null ? attr : null;
 	}
 	set theme(newTheme) {
-		this.setPreference("theme", newTheme);
 		this.setAttribute("data-theme", newTheme);
 	}
 	get infoTop() {
 		return this.hasAttribute("data-top") ? true : false;
 	}
 	set infoTop(top) {
-		this.setPreference("infoTop", top);
 		top ? this.setAttribute("data-top", "") : this.removeAttribute("data-top");
 	}
 	get compactView() {
 		return this.hasAttribute("data-compact") ? true : false;
 	}
 	set compactView(view) {
-		this.setPreference("compactView", view);
 		view ? this.setAttribute("data-compact", "") : this.removeAttribute("data-compact");
 	}
 	get theaterMode() {
 		return this.hasAttribute("data-theater") ? true : false;
 	}
 	set theaterMode(mode) {
-		this.setPreference("theaterMode", mode);
 		mode ? this.setAttribute("data-theater", "") : this.removeAttribute("data-theater");
 	}
 
@@ -379,18 +384,36 @@ class YTVPModal extends HTMLElement {
 	get initialised() {
 		return this.player ? true : false;
 	}
-	get userPrefs() {
-		return JSON.parse(localStorage.getItem("ytvp_prefs"));
-	}
 
 	get popup() {
 		return this.closest("s-modal");
 	}
 
-	setPreference(name, value) {
-		if (!name) return;
-		this.preferences[name] = value;
-		localStorage.setItem("ytvp_prefs", JSON.stringify(this.preferences));
+	getUserPrefs() {
+		return new Promise((resolve, reject) => {
+			chrome.storage.local.get("iv_options", function(items) {
+				if (items && items.iv_options) {
+					resolve(JSON.parse(items.iv_options));
+				}
+				else {
+					reject("Items object doesn\'t exist");
+				}
+			});
+		});
+	}
+
+	reloadUserPrefs() {
+		this.getUserPrefs().then(prefs => {
+			console.log(prefs);
+			this.theme = prefs.theme;
+			this.infoTop = (prefs.infopos === "bottom" ? false : true);
+	 		
+			if (prefs.christmas) {this.popup.setAttribute("data-christmas", true);}
+			else {this.popup.removeAttribute("data-christmas");}
+
+			if (prefs.compact) {this.compactView = true;}
+			else {this.compactView = false;}
+		});
 	}
 
 	// EVENTS
