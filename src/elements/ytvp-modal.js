@@ -100,14 +100,6 @@ class YTVPModal extends HTMLElement {
 		this.options = Object.assign({}, this.constructor.defaultOptions, options);
 		this.options.API_KEY = API_KEY;
 
-		this.getUserPrefs().then(prefs => {
-			this.preferences = Object.assign({}, this.constructor.defaultPreferences, prefs);
-		});
-
-		for (let pref in this.preferences) {
-			this[pref] = this.preferences[pref];
-		}
-
 		this.currentVideoInfo = this.options.defaultInfo;
 		(function(modal) {
 			chrome.storage.onChanged.addListener(function(changes, areaName) {

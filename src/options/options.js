@@ -39,6 +39,11 @@ function loadOptions() {
 
         chrome.storage.local.get("iv_options", function(items) {
 
+            if (!items || !items.iv_options) {
+                saveOptions();
+                reject("No items object");
+            }
+
             const data = JSON.parse(items.iv_options);
 
             form[`theme-${data.theme}`].checked = true;

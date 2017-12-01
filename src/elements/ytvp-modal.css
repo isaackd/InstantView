@@ -19,7 +19,7 @@ ytvp-modal {
 
 	/* modal variables */
 
-	--modal-animation-speed: 300ms;
+	--modal-animation-speed: 320ms;
 
 	--modal-min-width: 560px;
 	--modal-min-height: 500px;
@@ -308,7 +308,7 @@ ytvp-modal .ytvp-video-ratings::-webkit-progress-value {
 
 /* theming and preferences */
 
-ytvp-modal[data-theme="light"] {
+ytvp-modal:not([data-theme]), ytvp-modal[data-theme="light"] {
 
 	--modal-text-color: #000000;
 
@@ -322,6 +322,7 @@ ytvp-modal[data-theme="light"] {
 	--modal-divider-color: #e0e0e0;
 
 	--modal-text-tertiary-weight: 700;
+	--modal-text-tertiary-opacity: 0.64;
 
 	--actions-icon-color: #000000;
 
@@ -332,13 +333,12 @@ ytvp-modal[data-theme="light"] {
 
 }
 
-ytvp-modal[data-top][data-theme="light"] {
+ytvp-modal:not([data-theme])[data-top], ytvp-modal[data-top][data-theme="light"] {
 	--info-border-top: none;
 	--info-border-bottom: var(--modal-divider-width) solid var(--modal-divider-color);
 }
 
-ytvp-modal[data-theme="dark"],
-ytvp-modal {
+ytvp-modal[data-theme="dark"] {
 
 	--modal-text-color: #ffffff;
 
