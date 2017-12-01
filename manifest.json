@@ -3,7 +3,7 @@
   	"manifest_version": 2,
   	"name": "InstantView for Youtube™",
     "short_name": "InstantView",
-  	"version": "3.3",
+  	"version": "3.3.1",
 
   	"description": "Allows youtube videos to be opened in a popup (without changing pages)",
 
