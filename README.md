@@ -3,7 +3,7 @@ Chrome extension for youtube
 
 Opens videos in a popup when their thumbnails are clicked
 
-Current Version: 3.1.1
+Current Version: 3.3
 
 ## Planned features
 - [x] Mini Player (Button to scale down the popup and place it in the bottom right corner to allow you to continue interacting with the page while the video plays (like the youtube mobile apps)
