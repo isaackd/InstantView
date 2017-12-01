@@ -13,5 +13,5 @@ Current Version: 3.1.1
 - [ ] Replace the cheap subscribe button with an actual embedded one from youtube
 - [ ] Quickly making a playlist by selecting multiple videos (using shift maybe?)
 - [x] Don't reload video if it's the same as the one already in the popup
-- [ ] Options page
+- [x] Options page
 - [ ] Cross tab control of videos playing in popups
