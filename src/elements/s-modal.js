@@ -86,13 +86,16 @@ class sModal extends HTMLElement {
         if (cDate.getMonth() === 11) {
             this.setAttribute("data-christmas", "");
         }
+
+        this.ytvp.addEventListener("ThemeChange", e => {
+            this.updateBackgroundColor();
+        });
+
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === "data-mini") {
-            const playerStyles = window.getComputedStyle(this.ytvp);
-            const playerColor = playerStyles.getPropertyValue('--player-background-color');
-            this.style.backgroundColor = playerColor;
+            this.updateBackgroundColor();
         }
     }
 
@@ -236,6 +239,12 @@ class sModal extends HTMLElement {
 
     get ytvp() {
         return this.getElementsByTagName("ytvp-modal")[0];
+    }
+
+    updateBackgroundColor() {
+        const playerStyles = window.getComputedStyle(this.ytvp);
+        const playerColor = playerStyles.getPropertyValue('--player-background-color');
+        this.style.backgroundColor = playerColor;
     }
 
     // EVENTS //

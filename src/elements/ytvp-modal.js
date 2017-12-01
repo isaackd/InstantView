@@ -137,9 +137,6 @@ class YTVPModal extends HTMLElement {
 		});
 
 		this.actionButtons = [
-			this.createActionButton("theme", "invert_colors", "ytvp-modal-theme-button", e => { (this.theme === "dark" || !this.theme) ? this.theme = "light" : this.theme = "dark" }), 
-			this.createActionButton("layout", "compare_arrows", "ytvp-modal-info-top-button", e => { this.infoTop = !this.infoTop }),
-			this.createActionButton("compact", "dashboard", "ytvp-modal-compact-button", e => { this.compactView = !this.compactView }),
 			this.createActionButton("theater", "theaters", "ytvp-modal-theater-button", e => { this.theaterMode = !this.theaterMode }),
 			this.createActionButton("minimize", "photo_size_select_small", "ytvp-modal-minimize-button", e => { this.popup.mini = !this.popup.mini })
 		];

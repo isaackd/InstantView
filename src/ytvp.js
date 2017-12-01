@@ -176,9 +176,6 @@ function onYouTubeIframeAPIReady() {
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	console.log("rtololol");
-	console.log(request, request.message);
-
 	if (request.message === "optionChange") {
 
 		ytvp.modal.theme = request.data.theme;
