@@ -3,7 +3,7 @@
   	"manifest_version": 2,
   	"name": "InstantView for Youtube™",
     "short_name": "InstantView",
-  	"version": "3.2",
+  	"version": "3.3",
 
   	"description": "Allows youtube videos to be opened in a popup (without changing pages)",
 
@@ -14,6 +14,11 @@
     "icons": {
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
+    },
+
+    "browser_action": {
+        "default_title": "InstantView",      // optional; shown in tooltip
+        "default_popup": "src/options/options.html"        // optional
     },
 
   	"content_scripts": [

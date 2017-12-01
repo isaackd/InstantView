@@ -1,0 +1,72 @@
+body {
+    width: 22em;
+    font-family: sans-serif;
+}
+
+form {
+    width: 100%;
+}
+
+iv-options-container {
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    background-color: #f8f8f8;
+
+}
+
+iv-option {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.2em;
+
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    background-color: white;
+
+}
+
+iv-option-input {
+    align-self: flex-end;
+}
+
+.iv-option-name {
+    font-size: 1.3em;
+}
+
+.save-options {
+
+}
+
+.save-options {
+
+    width: 100%;
+    height: 2.4em;
+    border-radius: 2px;
+
+    padding-left: 1.1em;
+    padding-right: 1.1em;
+
+    border: none;
+    font-weight: bold;
+    white-space: nowrap;
+
+    color: white;
+    background-color: #1e88e5;
+    transition: box-shadow 150ms;
+}
+
+.save-options:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.32);
+}
+
+.save-options:focus {
+    outline: none;
+}

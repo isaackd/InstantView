@@ -174,3 +174,21 @@ function onYouTubeIframeAPIReady() {
 	});
 
 }
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	console.log("rtololol");
+	console.log(request, request.message);
+
+	if (request.message === "optionChange") {
+
+		ytvp.modal.theme = request.data.theme;
+		ytvp.modal.infoTop = (request.data.infopos === "bottom" ? false : true);
+ 		
+		if (request.data.christmas) {ytvp.popup.setAttribute("data-christmas", true);}
+		else {ytvp.popup.removeAttribute("data-christmas");}
+
+		if (request.data.compact) {ytvp.modal.compactView = true;}
+		else {ytvp.modal.compactView = false;}
+
+ 	}
+});

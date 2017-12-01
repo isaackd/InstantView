@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="options.css">
+</head>
+<body>
+
+    <form name="iv-options">
+
+        <iv-options-container>
+
+            <iv-option>
+                <span class="iv-option-name">Theme</span>
+
+                <iv-option-input>
+                    <label for="theme-dark">Dark</label>
+                    <input id="theme-dark" class="iv-option" type="radio" name="theme" value="dark" />
+                    <label for="theme-light">Light</label>
+                    <input id="theme-light" class="iv-option" type="radio" name="theme" value="light" checked />
+                </iv-option-input>
+            </iv-option>
+
+            <iv-option>
+                <span class="iv-option-name">Info Position</span>
+
+                <iv-option-input>
+                    <label for="infopos-bottom">Bottom</label>
+                    <input id="infopos-bottom" class="iv-option" type="radio" name="infopos" value="bottom" checked />
+                    <label for="infopos-top">Top</label>
+                    <input id="infopos-top" class="iv-option" type="radio" name="infopos" value="top" />
+                </iv-option-input>
+            </iv-option>
+
+            <iv-option>
+                <span class="iv-option-name">Compact View</span>
+
+                <iv-option-input>
+                    <input id="compact" class="iv-option" type="checkbox" name="compact" />
+                </iv-option-input>
+            </iv-option>
+
+            <iv-option>
+                <span class="iv-option-name">Christmas Lights</span>
+
+                <iv-option-input>
+                    <input id="christmas" class="iv-option" type="checkbox" name="christmas" checked />
+                </iv-option-input>
+            </iv-option>
+
+        </iv-options-container>
+
+        <input type="button" class="save-options" value="Save" />
+
+    </form>
+
+    <script src="options.js"></script>
+
+</body>
+</html>
