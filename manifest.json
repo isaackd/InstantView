@@ -37,7 +37,7 @@
         "default_popup": "src/options/dist/index.html"
     },
     "content_scripts": [{
-        "matches": ["*://www.youtube.com/*"],
+        "matches": ["https://www.youtube.com/*"],
         "js": ["libs/youtube_iframe_api.js", "src/iv.js", "src/modal/dist/js/bundle.js"],
         "all_frames": false
     }],
