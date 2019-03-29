@@ -29,8 +29,6 @@ const Snackbar = () => {
 				base.style.display = "block";
 				base.innerHTML = text;
 
-				console.log(appendElements);
-
 				if (appendElements) {
 					base.append(...appendElements);
 				}
