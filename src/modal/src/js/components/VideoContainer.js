@@ -162,29 +162,42 @@ function initPlayer(el) {
         height: 390, 
         playerVars: {autoplay: 1, iv_load_policy: 3},
         events: {
-            onReady:  onPlayerReady,
-            onStateChange: e => {
-                // pause the video if the modal is closed by the time it loads
-                if (e.data === 1 && !instantview.store.getState().state.modalOpen) {
-                    instantview.player.pauseVideo();
-                }
-            }
+            onReady:  onPlayerReady
         }
     });
 }
 
 async function onPlayerReady() {
-    if (!instantview.initializedAudio) {
+    if (!instantview.initializedAudio && !document.initializedInstantViewAudio) {
 
         let media;
 
         if (mode === prod) {
             const vidContainer = document.getElementById("iv-video-container");
             const iframe = vidContainer.getElementsByTagName("iframe")[0] || vidContainer.player.a;
+
             iframe.setAttribute("allow", "autoplay");
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             const HTML5VidContainer = iframeDoc.querySelector(".html5-video-player.ytp-embed");
             const vid = iframeDoc.querySelector("video.html5-main-video");
+
+            // for some reason onPlayerReady is being called twice
+            // I think it's because youtube loads its own version of the iframe API
+            // so onReady is called twice
+            // this is a workaround until I can fix the actual issue
+            if (vid) {
+                instantview.initializedAudio = true;
+                document.initializedInstantViewAudio = true;
+                instantview.player.addEventListener("onStateChange", e => {
+                    // pause the video if the modal is closed by the time it loads
+                    if (e.data === 1 && !instantview.store.getState().state.modalOpen) {
+                        instantview.player.pauseVideo();
+                    }
+                });
+            }
+            else {
+                return;
+            }
 
             HTML5VidContainer.classList.remove("ytp-hide-info-bar");
 
@@ -245,7 +258,6 @@ async function onPlayerReady() {
         instantview.visualizer.setupAudio(media);
 
         instantview.analyzer = instantview.visualizer.analyzer;
-        instantview.initializedAudio = true;
     }
 }
 
