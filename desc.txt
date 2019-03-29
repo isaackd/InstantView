@@ -37,6 +37,7 @@ CHANGELOG
     - Video information would fail to load. This was caused by a bug introduced in Chrome 72 that causes network issues with extensions
       - The workaround for now is to go to chrome://flags/#network-service, set this option to "Disabled", and clicking "Relaunch Now" on the bottom right
     - If the currently loaded video doesn't have a description, the description from the previous video will be displayed
+    - Browse playlist button in the top left of the video is now shown again
 
     CHANGES
     - Removed the Holidays and Halloween visualizers
