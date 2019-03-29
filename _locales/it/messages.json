@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "Consente di aprire i video di YouTube in un popup (senza cambiare pagina)"
+	},
+
+	"signInNotificationText": {
+		"message": "Vorresti consentire a InstantView l'accesso al tuo account YouTube per l'iscrizione ai canali e ai video di valutazione?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "sì"
+	},
+	"signInNotificationText_Deny": {
+		"message": "no"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "non mostrare più"
+	},
+
+	"authAccepted": {
+		"message": "Ora puoi iscriverti ai canali e valutare i video!"
+	},
+	"authDenied": {
+		"message": "InstantView ha bisogno di accedere al tuo account per essere in grado di valutare i video e iscriversi ai canali"
+	},
+
+	"identityDenied": {
+		"message": "InstantView necessita dell'autorizzazione \"identità\" per valutare i video e iscriversi ai canali."
+	},
+
+	"thresholdWait": {
+		"message": "Si prega di attendere per iscriversi o votare di nuovo: (<span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2})"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "Impossibile recuperare i dati video :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "Impossibile recuperare i dati del canale :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "Impossibile recuperare i dati dei commenti :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "Iscrizione aggiunta"
+	},
+	"subscriptionRemoved": {
+		"message": "Abbonamento rimosso"
+	},
+	"subscribeError": {
+		"message": "Si è verificato un errore durante il tentativo di iscrizione. Per favore riprova più tardi."
+	},
+	"unsubscribeError": {
+		"message": "Si è verificato un errore durante il tentativo di annullare l'iscrizione. Per favore riprova più tardi."
+	},
+
+	"likeSuccess": {
+		"message": "Aggiunto ai video piaciuti"
+	},
+	"dislikeSuccess": {
+		"message": "Aggiunto ai video non piaciuti"
+	},
+	"removeRatingSuccess": {
+		"message": "Valutazione rimossa dal video"
+	},
+	"ratingError": {
+		"message": "Si è verificato un errore durante il tentativo di valutare il video. Per favore riprova più tardi."
+	},
+
+	"waitText_second": {
+		"message": "secondo"
+	},
+	"waitText_seconds": {
+		"message": "secondi"
+	}
+}

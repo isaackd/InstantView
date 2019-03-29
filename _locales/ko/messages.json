@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "YouTube 동영상을 팝업으로 열 수 있습니다 (페이지를 변경하지 않고도 가능)."
+	},
+
+	"signInNotificationText": {
+		"message": "InstantView에서 채널 및 등급 동영상 구독을 위해 YouTube 계정에 액세스 권한을 부여 하시겠습니까?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "예"
+	},
+	"signInNotificationText_Deny": {
+		"message": "아니"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "다시 표시하지 않음"
+	},
+
+	"authAccepted": {
+		"message": "이제 채널을 구독하고 비디오를 평가할 수 있습니다!"
+	},
+	"authDenied": {
+		"message": "InstantView는 비디오를 평가하고 채널을 구독 할 수 있도록 계정에 액세스해야합니다."
+	},
+
+	"identityDenied": {
+		"message": "InstantView는 비디오를 평가하고 채널을 구독하려면 \"신분\"권한이 필요합니다."
+	},
+
+	"thresholdWait": {
+		"message": "구독 또는 다시 평가를 기다리십시오 : (<span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2})"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "비디오 데이터를 가져올 수 없습니다 :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "채널 데이터를 검색 할 수 없습니다 :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "주석 데이터를 가져올 수 없습니다 :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "구독이 추가되었습니다"
+	},
+	"subscriptionRemoved": {
+		"message": "구독이 삭제되었습니다"
+	},
+	"subscribeError": {
+		"message": "구독을 시도하는 중에 오류가 발생했습니다. 나중에 다시 시도하십시오."
+	},
+	"unsubscribeError": {
+		"message": "수신 거부를 시도하는 중에 오류가 발생했습니다. 나중에 다시 시도하십시오."
+	},
+
+	"likeSuccess": {
+		"message": "좋아하는 비디오에 추가되었습니다"
+	},
+	"dislikeSuccess": {
+		"message": "싫어하는 동영상에 추가되었습니다"
+	},
+	"removeRatingSuccess": {
+		"message": "동영상에서 등급 삭제됨"
+	},
+	"ratingError": {
+		"message": "동영상 평가 중 오류가 발생했습니다. 나중에 다시 시도하십시오."
+	},
+
+	"waitText_second": {
+		"message": "둘째"
+	},
+	"waitText_seconds": {
+		"message": "초"
+	}
+}

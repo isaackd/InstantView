@@ -1,0 +1,35 @@
+#iv-modal:not([data-comments]) {
+    #iv-comments {
+        display: none;
+    }
+}
+
+#iv-comments {
+	width: 20vw;
+	min-width: 20vw;
+	height: 100%;
+
+	padding: 1.5vw;
+
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	box-sizing: border-box;
+
+	border-left: 1px solid var(--iv-comments-border-color);
+    background-color: var(--iv-comments-color);
+
+	#iv-video-description-container {
+		width: 100%;
+
+		border-bottom: 1px solid var(--iv-comments-description-container-border-color);
+		margin-bottom: 1vw;
+
+		.iv-video-description {
+			font-size: 0.9vw; 
+			color: white;
+		}
+
+	}
+
+}

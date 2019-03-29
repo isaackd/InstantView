@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "Permite que los videos de youtube se abran en una ventana emergente (sin cambiar las páginas)"
+	},
+
+	"signInNotificationText": {
+		"message": "¿Le gustaría dar acceso a InstantView a su cuenta de YouTube para suscribirse a canales y calificar videos?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "sí"
+	},
+	"signInNotificationText_Deny": {
+		"message": "no"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "no mostrar de nuevo"
+	},
+
+	"authAccepted": {
+		"message": "¡Ahora puedes suscribirte a canales y calificar videos!"
+	},
+	"authDenied": {
+		"message": "InstantView necesita acceso a su cuenta para poder calificar videos y suscribirse a canales"
+	},
+
+	"identityDenied": {
+		"message": "InstantView necesita el permiso \"identidad\" para calificar videos y suscribirse a canales."
+	},
+
+	"thresholdWait": {
+		"message": "Por favor, espere <span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2} más para suscribirse o calificar nuevamente."
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "No se pudieron recuperar los datos de video :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "No se pudieron recuperar los datos del canal :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "No se pudieron recuperar los datos del comentario :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "Suscripción añadida"
+	},
+	"subscriptionRemoved": {
+		"message": "Suscripción eliminada"
+	},
+	"subscribeError": {
+		"message": "Se ha producido un error al intentar suscribirse. Por favor, inténtelo de nuevo más tarde."
+	},
+	"unsubscribeError": {
+		"message": "Se ha producido un error al intentar cancelar la suscripción. Por favor, inténtelo de nuevo más tarde."
+	},
+
+	"likeSuccess": {
+		"message": "Añadido a los videos favoritos"
+	},
+	"dislikeSuccess": {
+		"message": "Añadido a los videos que no me gustan"
+	},
+	"removeRatingSuccess": {
+		"message": "Eliminado la calificación del video"
+	},
+	"ratingError": {
+		"message": "Ocurrió un error al intentar calificar el video. Por favor, inténtelo de nuevo más tarde."
+	},
+
+	"waitText_second": {
+		"message": "segundo"
+	},
+	"waitText_seconds": {
+		"message": "segundos"
+	}
+}

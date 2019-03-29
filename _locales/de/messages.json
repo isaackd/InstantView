@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "Ermöglicht das Öffnen von YouTube-Videos in einem Popup-Fenster (ohne Seitenwechsel)"
+	},
+
+	"signInNotificationText": {
+		"message": "Möchten Sie InstantView Zugriff auf Ihr YouTube-Konto gewähren, um Channels zu abonnieren und Videos zu bewerten?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "Ja"
+	},
+	"signInNotificationText_Deny": {
+		"message": "Nein"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "nicht mehr zeigen"
+	},
+
+	"authAccepted": {
+		"message": "Sie können jetzt Kanäle abonnieren und Videos bewerten!"
+	},
+	"authDenied": {
+		"message": "InstantView benötigt Zugriff auf Ihr Konto, um Videos bewerten und Kanäle abonnieren zu können"
+	},
+
+	"identityDenied": {
+		"message": "InstantView benötigt die Berechtigung \"Identität\", um Videos zu bewerten und Kanäle zu abonnieren."
+	},
+
+	"thresholdWait": {
+		"message": "Bitte warten Sie weitere <span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2}, um erneut zu abonnieren oder zu bewerten."
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "Videodaten konnten nicht abgerufen werden :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "Kanaldaten konnten nicht abgerufen werden :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "Kommentardaten konnten nicht abgerufen werden :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "Abonnement hinzugefügt"
+	},
+	"subscriptionRemoved": {
+		"message": "Abonnement entfernt"
+	},
+	"subscribeError": {
+		"message": "Beim Abonnieren ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
+	},
+	"unsubscribeError": {
+		"message": "Beim Abbestellen ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
+	},
+
+	"likeSuccess": {
+		"message": "Zu beliebten Videos hinzugefügt"
+	},
+	"dislikeSuccess": {
+		"message": "Zu ungeliebten Videos hinzugefügt"
+	},
+	"removeRatingSuccess": {
+		"message": "Bewertung aus Video entfernt"
+	},
+	"ratingError": {
+		"message": "Beim Versuch, das Video zu bewerten, ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
+	},
+
+	"waitText_second": {
+		"message": "zweite"
+	},
+	"waitText_seconds": {
+		"message": "Sekunden"
+	}
+}

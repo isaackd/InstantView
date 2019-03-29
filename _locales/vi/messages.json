@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "Cho phép mở video trên youtube trong cửa sổ bật lên (không thay đổi trang)"
+	},
+
+	"signInNotificationText": {
+		"message": "Bạn có muốn cấp quyền truy cập InstantView cho tài khoản YouTube của bạn để đăng ký kênh và xếp hạng video không?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "Vâng"
+	},
+	"signInNotificationText_Deny": {
+		"message": "Không"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "không hiển thị lại"
+	},
+
+	"authAccepted": {
+		"message": "Giờ đây, bạn có thể đăng ký kênh và xếp hạng video!"
+	},
+	"authDenied": {
+		"message": "InstantView cần quyền truy cập vào tài khoản của bạn để có thể xếp hạng video và đăng ký kênh"
+	},
+
+	"identityDenied": {
+		"message": "InstantView cần quyền \"nhận dạng\" để xếp hạng video và đăng ký kênh."
+	},
+
+	"thresholdWait": {
+		"message": "Vui lòng đợi để đăng ký hoặc xếp hạng lại: (<span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2})"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "Không thể truy xuất dữ liệu video :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "Không thể truy xuất dữ liệu kênh :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "Không thể truy xuất dữ liệu nhận xét :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "Đã thêm đăng ký"
+	},
+	"subscriptionRemoved": {
+		"message": "Đã xóa đăng ký"
+	},
+	"subscribeError": {
+		"message": "Đã xảy ra lỗi khi cố gắng đăng ký. Vui lòng thử lại sau."
+	},
+	"unsubscribeError": {
+		"message": "Đã xảy ra lỗi khi cố gắng hủy đăng ký. Vui lòng thử lại sau."
+	},
+
+	"likeSuccess": {
+		"message": "Đã thêm vào video đã thích"
+	},
+	"dislikeSuccess": {
+		"message": "Đã thêm vào video không thích"
+	},
+	"removeRatingSuccess": {
+		"message": "Đã xóa xếp hạng khỏi video"
+	},
+	"ratingError": {
+		"message": "Đã xảy ra lỗi khi cố gắng xếp hạng video. Vui lòng thử lại sau."
+	},
+
+	"waitText_second": {
+		"message": "thứ hai"
+	},
+	"waitText_seconds": {
+		"message": "giây"
+	}
+}

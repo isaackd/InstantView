@@ -1,0 +1,113 @@
+#iv-video-actions {
+    display: grid;
+
+    grid-template-columns: 50% 50%;
+
+    padding: 0.4vw 4vw 0.4vw 4vw;
+
+    #iv-actions {
+        display: flex;
+        justify-self: flex-end;
+        grid-template-columns: auto auto;
+        grid-column-gap: 0.6em;
+        max-width: 100%;
+    }
+
+    .iv-ratings-buttons {
+        position: relative;
+        margin-right: 1.2vw;
+
+        &:before {
+            content: "";
+            position: absolute;
+            background-color: deepPink;
+            width: 110%;
+            height: 0.25vw;
+            left: -5%;
+            bottom: -0.28vw;
+            background: linear-gradient(
+                90deg,
+                var(--iv-ratings-likes-color) 0%,
+                var(--iv-ratings-likes-color) var(--iv-ratings-likes-percent),
+                var(--iv-ratings-dislikes-color) var(--iv-ratings-likes-percent),
+                var(--iv-ratings-dislikes-color) 100% 
+            );
+        }
+    }
+
+    .iv-ratings-buttons,
+    .iv-common-buttons {
+        display: flex;
+        flex-flow: row nowrap;
+
+        align-items: center;
+
+        .iv-action-button:not(:first-child) {
+            margin-left: 0.8em;
+        }
+
+    }
+
+    #iv-minimize-button svg {
+        transition: 0.2s transform ease-in-out;
+    }
+
+    #iv-like-spinner,
+    #iv-dislike-spinner {
+        width: var(--iv-action-button-icon-size);
+        height: var(--iv-action-button-icon-size);
+    }
+
+    #iv-like-spinner:not(.active),
+    #iv-dislike-spinner:not(.active) {
+        position: absolute;
+        visibility: hidden;
+    }
+
+}
+
+#iv-modal[data-rating=like] {
+
+    #iv-like-button {
+
+        border-color: var(--iv-like-button-active-color);
+        opacity: 1;
+        .iv-action-button-icon {
+            fill: var(--iv-like-button-active-color);
+        }
+        .iv-action-button-title {
+            color: var(--iv-like-button-active-color);
+        }
+
+    }
+
+    svg circle {
+        fill: var(--iv-like-button-active-color);
+    }
+    svg stop {
+        stop-color: var(--iv-like-button-active-color);
+    }
+
+}
+
+#iv-modal[data-rating=dislike] {
+
+    #iv-dislike-button {
+        border-color: var(--iv-dislike-button-active-color);
+        opacity: 1;
+        .iv-action-button-icon {
+            fill: var(--iv-dislike-button-active-color);
+        }
+        .iv-action-button-title {
+            color: var(--iv-dislike-button-active-color);
+        }
+    }
+
+    svg circle {
+        fill: var(--iv-dislike-button-active-color);
+    }
+    svg stop {
+        stop-color: var(--iv-dislike-button-active-color);
+    }
+
+}

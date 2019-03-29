@@ -1,0 +1,19 @@
+#iv-snackbar {
+    display: none;
+	position: fixed; 
+    
+    left: 2vw; 
+    bottom: 2vw;
+    min-width: 250px;
+
+    padding: 1vw 2vw 1vw 2vw;
+
+    font-size: 0.9vw;
+
+    border-radius: 2px; 
+    background-color: #333; 
+    color: #f8f8f8; 
+    cursor: pointer;
+    // z-index same as var(--iv-layer-1)
+    z-index: 2147483646;
+}

@@ -1,0 +1,69 @@
+$modal-background-color: black;
+$visualizer-background-color: darken($modal-background-color, 8%);
+
+#iv-modal[data-theme=halloween] {
+
+    // general theme styles
+    --iv-border-color: orange;
+
+    --iv-text-color: orange;
+    --iv-link-color: #aaaafa;
+
+    // modal styles
+    --iv-modal-background-color: #{$modal-background-color};
+    
+    // visualizer styles
+    --iv-visualizer-background-color: #{$visualizer-background-color};
+
+    --iv-visualizer-back-color: var(--iv-modal-background-color);
+    --iv-visualizer-back-icon-color: #fafafa;
+
+    --iv-visualizer-module-color: var(--iv-modal-background-color);
+
+    // comments styles
+    --iv-comments-color: var(--iv-modal-background-color);
+    --iv-comments-border-color: var(--iv-border-color);
+
+    --iv-comments-description-container-border-color: var(--iv-border-color);
+
+    // comment styles
+    --iv-comment-border-color: var(--iv-border-color);
+    --iv-comment-author-text-color: var(--iv-text-color);
+    --iv-comment-text-color: rgba(255, 255, 255, 0.85);
+
+    --iv-channel-owner-color: #de3e3e;
+
+    // button styles
+    --iv-action-button-opacity: 0.85;
+    --iv-action-button-hover-opacity: 1;
+
+    --iv-action-button-border-color: var(--iv-text-color);
+
+    --iv-ratings-likes-color: #2d6ef0;
+    --iv-ratings-dislikes-color:  #ff4b4b;
+
+    --iv-like-button-active-color: #2d6ef0;
+    --iv-dislike-button-active-color: #ff0000;
+
+    // other custom styles
+
+    #iv-video-panel {
+        border: 1px solid var(--iv-border-color);
+    }
+
+    #iv-comments {
+        border: 1px solid var(--iv-border-color);
+    }
+
+    &[data-comments]:not([data-comment-separation]) {
+        #iv-video-panel {
+            border-right: none;
+        }
+    }
+
+    &[data-mini] {
+        #iv-video-panel {
+            border: none;
+        }
+    }
+}

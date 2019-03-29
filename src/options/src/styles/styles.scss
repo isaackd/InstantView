@@ -1,0 +1,152 @@
+html {
+    width: 24em;
+    height: 35em;
+    margin: 0;
+    overflow-y: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0.5em;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+#options-page {
+    width: 100%;
+}
+
+#overlay-mode-wrapper {
+    display: block;
+
+    #overlay-mode-additional {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-left: 1.5em;
+    }
+
+    #overlay-opacity-wrapper,
+    #backdrop-opacity-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin: 0.25em 0 0.25em 0;
+    }
+
+    #backdrop-color-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin: 0.25em 0 0.25em 0;
+    }
+}
+
+#custom-colors-wrapper {
+    display: block;
+
+    #custom-colors-additional {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-left: 1.5em;
+
+        div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+    }
+}
+
+#primary-color,
+#secondary-color {
+    width: 8em;
+    height: 2em;
+    margin-left: 0.4em;
+    background-color: white;
+    border: none;
+}
+
+
+#animation-speed-wrapper,
+#mini-size-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0.4em;
+}
+
+.animation-speed-display,
+.mini-size-display {
+    display: flex;
+    width: 4em;
+    justify-content: center;
+    border: 1px solid #888;
+}
+
+#mini-position-wrapper,
+#click-modifier-wrapper,
+#show-date-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+#mini-position,
+#click-modifier,
+#show-date {
+    margin-left: 1em;
+}
+
+#theme-wrapper,
+#info-position-wrapper {
+    display: block;
+}
+
+#theme-choices,
+#info-position-choices {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 1.5em;
+
+    input[name=theme] {
+        margin-right: 0.5em;
+    }
+}
+
+input[type=button] {
+    padding: 0.5em;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: darken(white, 6%);
+}
+
+input[type=button]:active {
+    background-color: darken(white, 15%);
+}
+
+#actions {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#restore-defaults {
+    grid-column: 1 / 4;
+}
+
+#links {
+    display: block;
+    grid-row: 3;
+    grid-column: 1 / 4;
+    a {
+        margin-right: 1em;
+    }
+}
+
+.mini-opt .header-left img {
+    transform: rotateY(180deg);
+}

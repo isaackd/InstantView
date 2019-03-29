@@ -1,0 +1,96 @@
+{
+	"extDesc": {
+		"message": "Allows youtube videos to be opened in a popup (without changing pages)",
+		"description": "The description of the application, displayed in the web store."
+	},
+
+	"signInNotificationText": {
+		"message": "Would you like to give InstantView access to your YouTube account for subscribing to channels and rating videos?",
+		"description": "The text shown in the first-time notification asking if you want to give InstantView access to your account."
+	},
+	"signInNotificationText_Accept": {
+		"message": "yes",
+		"description": "The text shown on the 'accept' button."
+	},
+	"signInNotificationText_Deny": {
+		"message": "no",
+		"description": "The text shown on the 'deny' button."
+	},
+	"signInNotificationText_DontShow": {
+		"message": "don't show again",
+		"description": "The text shown on the 'don't show' button."
+	},
+
+	"authAccepted": {
+		"message": "You can now subscribe to channels and rate videos!",
+		"description": "Text shown in the notification when the user gives account access."
+	},
+	"authDenied": {
+		"message": "InstantView needs access to your account to be able to rate videos and subscribe to channels",
+		"description": "Text shown in the notification when the user denies account access."
+	},
+
+	"identityDenied": {
+		"message": "InstantView needs the \"identity\" permission to rate videos and subscribe to channels.",
+		"description": "Text shown in the notification if the identity permission is denied."
+	},
+
+	"thresholdWait": {
+		"message": "Please wait <span style=\"color: var(--iv-channel-owner-color)\">{1}</span> more {2} to subscribe or rate again.",
+		"description": "Text shown in the notification when the user tries to rate or subscribe to quickly after a previous request."
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "Couldn't retrieve video data :/",
+		"description": "Text shown in the notification when video data cannot be retrieved."
+	},
+	"retrieveDataFail_Channel": {
+		"message": "Couldn't retrieve channel data :/",
+		"description": "Text shown in the notification when channel data cannot be retrieved."
+	},
+	"retrieveDataFail_Comment": {
+		"message": "Couldn't retrieve comment data :/",
+		"description": "Text shown in the notification when comment data cannot be retrieved."
+	},
+
+	"subscriptionAdded": {
+		"message": "Subscription added",
+		"description": "Text shown when a channel is successfully subscribed to."
+	},
+	"subscriptionRemoved": {
+		"message": "Subscription removed",
+		"description": "Text shown when a channel is successfully unsubscribed from."
+	},
+	"subscribeError": {
+		"message": "An error occurred while trying to subscribe. Please try again later.",
+		"description": "Text shown when a subscribe error occurs."
+	},
+	"unsubscribeError": {
+		"message": "An error occurred while trying to unsubscribe. Please try again later.",
+		"description": "Text shown when an unsubscribe error occurs."
+	},
+
+	"likeSuccess": {
+		"message": "Added to liked videos",
+		"description": "Text shown when a 'like' rating request is successful."
+	},
+	"dislikeSuccess": {
+		"message": "Added to disliked videos",
+		"description": "Text shown when a 'dislike' rating request is successful."
+	},
+	"removeRatingSuccess": {
+		"message": "Removed rating from video",
+		"description": "Text shown when a 'none' rating request is successful."
+	},
+	"ratingError": {
+		"message": "An error occurred while trying to rate the video. Please try again later.",
+		"description": "Text shown when a rating error occurs."
+	},
+
+	"waitText_second": {
+		"message": "second"
+	},
+	"waitText_seconds": {
+		"message": "seconds"
+	}
+}

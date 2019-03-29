@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "Permet d'ouvrir les vidéos youtube dans une fenêtre contextuelle (sans changer de page)"
+	},
+
+	"signInNotificationText": {
+		"message": "Souhaitez-vous donner à InstantView un accès à votre compte YouTube pour vous abonner à des chaînes et évaluer des vidéos?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "oui"
+	},
+	"signInNotificationText_Deny": {
+		"message": "non"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "ne plus montrer"
+	},
+
+	"authAccepted": {
+		"message": "Vous pouvez maintenant vous abonner à des chaînes et noter des vidéos!"
+	},
+	"authDenied": {
+		"message": "InstantView a besoin d'accéder à votre compte pour pouvoir évaluer des vidéos et s'abonner à des chaînes"
+	},
+
+	"identityDenied": {
+		"message": "InstantView a besoin de l'autorisation \"identité\" pour évaluer les vidéos et s'abonner aux chaînes."
+	},
+
+	"thresholdWait": {
+		"message": "Attendez s'il vous plaît <span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2} de plus pour vous abonner ou évaluer à nouveau"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "Impossible de récupérer les données vidéo :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "Impossible de récupérer les données du canal :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "Impossible de récupérer les données de commentaire :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "Abonnement ajouté"
+	},
+	"subscriptionRemoved": {
+		"message": "Abonnement supprimé"
+	},
+	"subscribeError": {
+		"message": "Une erreur s'est produite lors de la tentative d'abonnement. Veuillez réessayer plus tard."
+	},
+	"unsubscribeError": {
+		"message": "Une erreur s'est produite lors de la tentative de désinscription. Veuillez réessayer plus tard."
+	},
+
+	"likeSuccess": {
+		"message": "Ajouté aux vidéos aimées"
+	},
+	"dislikeSuccess": {
+		"message": "Ajouté aux vidéos que je n'aime pas"
+	},
+	"removeRatingSuccess": {
+		"message": "Note supprimée de la vidéo"
+	},
+	"ratingError": {
+		"message": "Une erreur s'est produite lors de la tentative de notation de la vidéo. Veuillez réessayer plus tard."
+	},
+
+	"waitText_second": {
+		"message": "seconde"
+	},
+	"waitText_seconds": {
+		"message": "secondes"
+	}
+}

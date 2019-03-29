@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "允許您在彈出窗口中打開YouTube視頻（無需更改頁面）"
+	},
+
+	"signInNotificationText": {
+		"message": "您是否希望InstantView訪問您的YouTube帳戶以訂閱頻道和評分視頻？"
+	},
+	"signInNotificationText_Accept": {
+		"message": "是"
+	},
+	"signInNotificationText_Deny": {
+		"message": "沒有"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "不要再顯示了"
+	},
+
+	"authAccepted": {
+		"message": "您現在可以訂閱頻道和評分視頻！"
+	},
+	"authDenied": {
+		"message": "InstantView需要訪問您的帳戶才能為視頻評分和訂閱頻道."
+	},
+
+	"identityDenied": {
+		"message": "InstantView需要“身份”權限才能對視頻進行評分並訂閱頻道。"
+	},
+
+	"thresholdWait": {
+		"message": "請稍候再訂閱或評分:(<span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2}）"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "無法檢索視頻數據：/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "無法檢索頻道數據：/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "無法檢索評論數據：/"
+	},
+
+	"subscriptionAdded": {
+		"message": "訂閱已添加."
+	},
+	"subscriptionRemoved": {
+		"message": "訂閱已刪除."
+	},
+	"subscribeError": {
+		"message": "嘗試訂閱時發生錯誤。 請稍後再試。"
+	},
+	"unsubscribeError": {
+		"message": "嘗試取消訂閱時發生錯誤。 請稍後再試。"
+	},
+
+	"likeSuccess": {
+		"message": "添加到喜歡的視頻."
+	},
+	"dislikeSuccess": {
+		"message": "添加到不喜歡的視頻."
+	},
+	"removeRatingSuccess": {
+		"message": "從視頻中刪除了評分."
+	},
+	"ratingError": {
+		"message": "嘗試為視頻評分時發生錯誤。 請稍後再試。"
+	},
+
+	"waitText_second": {
+		"message": "第二"
+	},
+	"waitText_seconds": {
+		"message": "秒"
+	}
+}

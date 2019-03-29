@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "Позволяет открывать видеоролики youtube во всплывающем окне (без изменения страниц)"
+	},
+
+	"signInNotificationText": {
+		"message": "Вы хотите предоставить InstantView доступ к своей учетной записи YouTube для подписки на каналы и рейтинг видео?"
+	},
+	"signInNotificationText_Accept": {
+		"message": "да"
+	},
+	"signInNotificationText_Deny": {
+		"message": "нет"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "не показывать снова"
+	},
+
+	"authAccepted": {
+		"message": "Теперь вы можете подписаться на каналы и оценивать видеоролики!"
+	},
+	"authDenied": {
+		"message": "InstantView нуждается в доступе к вашей учетной записи, чтобы иметь возможность оценивать видео и подписываться на каналы"
+	},
+
+	"identityDenied": {
+		"message": "InstantView нуждается в «удостоверении личности», чтобы оценивать видео и подписываться на каналы."
+	},
+
+	"thresholdWait": {
+		"message": "Пожалуйста, подождите, чтобы подписаться или оценить заново: (<span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2})"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "Не удалось получить видеоданные :/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "Не удалось получить данные канала :/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "Не удалось получить данные комментариев :/"
+	},
+
+	"subscriptionAdded": {
+		"message": "Добавлена ​​подписка"
+	},
+	"subscriptionRemoved": {
+		"message": "Подписка удалена"
+	},
+	"subscribeError": {
+		"message": "При попытке подписаться произошла ошибка. Пожалуйста, попробуйте позже."
+	},
+	"unsubscribeError": {
+		"message": "При попытке отказаться от подписки произошла ошибка. Пожалуйста, попробуйте позже."
+	},
+
+	"likeSuccess": {
+		"message": "Добавлено в понравившиеся видео"
+	},
+	"dislikeSuccess": {
+		"message": "Добавлено в нелюбимые видео"
+	},
+	"removeRatingSuccess": {
+		"message": "Удаленная оценка с видео"
+	},
+	"ratingError": {
+		"message": "При попытке оценить видео произошла ошибка. Пожалуйста, попробуйте позже."
+	},
+
+	"waitText_second": {
+		"message": "второй"
+	},
+	"waitText_seconds": {
+		"message": "секунд"
+	}
+}

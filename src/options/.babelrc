@@ -1,0 +1,16 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env", {
+				"targets": {
+					"firefox": "61",
+					"chrome": "67"
+				}
+			}
+		]
+	],
+	"plugins": [
+		["@babel/transform-react-jsx", { "pragma": "h" }],
+		["@babel/plugin-proposal-class-properties"]
+	]
+}

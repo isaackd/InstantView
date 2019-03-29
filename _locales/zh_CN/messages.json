@@ -1,0 +1,76 @@
+{
+	"extDesc": {
+		"message": "允许您在弹出窗口中打开YouTube视频（无需更改页面）"
+	},
+
+	"signInNotificationText": {
+		"message": "您是否希望InstantView访问您的YouTube帐户以订阅频道和评分视频？"
+	},
+	"signInNotificationText_Accept": {
+		"message": "是"
+	},
+	"signInNotificationText_Deny": {
+		"message": "没有"
+	},
+	"signInNotificationText_DontShow": {
+		"message": "不要再显示了"
+	},
+
+	"authAccepted": {
+		"message": "您现在可以订阅频道和评分视频！"
+	},
+	"authDenied": {
+		"message": "InstantView需要访问您的帐户才能为视频评分和订阅频道"
+	},
+
+	"identityDenied": {
+		"message": "InstantView需要“身份”权限才能对视频进行评分并订阅频道。"
+	},
+
+	"thresholdWait": {
+		"message": "请稍候再订阅或评分:(<span style=\"color: var(--iv-channel-owner-color)\">{1}</span> {2}）"
+	},
+
+	"retrieveDataFail_Video": {
+		"message": "无法检索视频数据：/"
+	},
+	"retrieveDataFail_Channel": {
+		"message": "无法检索频道数据：/"
+	},
+	"retrieveDataFail_Comment": {
+		"message": "无法检索评论数据：/"
+	},
+
+	"subscriptionAdded": {
+		"message": "订阅已添加"
+	},
+	"subscriptionRemoved": {
+		"message": "订阅已删除"
+	},
+	"subscribeError": {
+		"message": "尝试订阅时发生错误。 请稍后再试。"
+	},
+	"unsubscribeError": {
+		"message": "尝试取消订阅时发生错误。 请稍后再试。"
+	},
+
+	"likeSuccess": {
+		"message": "添加到喜欢的视频"
+	},
+	"dislikeSuccess": {
+		"message": "添加到不喜欢的视频"
+	},
+	"removeRatingSuccess": {
+		"message": "从视频中删除了评分"
+	},
+	"ratingError": {
+		"message": "尝试为视频评分时发生错误。 请稍后再试。"
+	},
+
+	"waitText_second": {
+		"message": "第二"
+	},
+	"waitText_seconds": {
+		"message": "秒"
+	}
+}
