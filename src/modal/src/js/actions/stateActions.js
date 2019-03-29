@@ -30,8 +30,8 @@ export function openModal(play = true) {
 	            if (items && !items.iv_first_time_auth_denied) {
 					askForAuth();
 	            }
-	            chrome.storage.local.get("iv_chrome_bug_acknowledged", items => {
-        			if (items && !items.iv_chrome_bug_acknowledged) {
+	            chrome.storage.local.get("iv_chrome_bug_acknowledged", crbitems => {
+        			if (crbitems && !crbitems.iv_chrome_bug_acknowledged) {
 	            		notifyChrome72Bug();
 	            	}
 	        	});
