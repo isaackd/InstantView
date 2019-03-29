@@ -34,28 +34,29 @@ CHANGELOG
   v4.5.1
 
     FIXES
-    - Video information would fail to load. This was caused by a bug introduced in Chrome 72 that causes network issues with extensions
+    - Video information might fail to load. This was caused by a bug introduced in Chrome 72 that causes network issues with extensions
       - The workaround for now is to go to chrome://flags/#network-service, set this option to "Disabled", and clicking "Relaunch Now" on the bottom right
     - If the currently loaded video doesn't have a description, the description from the previous video will be displayed
     - Browse playlist button in the top left of the video is now shown again
 
     CHANGES
+    - Added a note about the Chrome issue
     - Removed the Holidays and Halloween visualizers
     - Updated the Github repo (https://github.com/afrmtbl/InstantView)
 
-	v4.5.0
-	
-	  FEATURES
-		- Added an option to show the video upload date above or below the views
+  v4.5.0
+  
+    FEATURES
+    - Added an option to show the video upload date above or below the views
     - You can now add keyboard shortcuts for play/pause, next/previous and stop
-		- Added an option to make the mini player open by default
+    - Added an option to make the mini player open by default
     - Added an option to show the visualizers over the video (overlay)
-    	- Added options to change visualizer opacity, and backdrop color and opacity
+      - Added options to change visualizer opacity, and backdrop color and opacity
     - Added a visualizer for the Holidays!
-	 	- The last visualizer used is remembered and used by default
+    - The last visualizer used is remembered and used by default
 
     FIXES
-  	- Modal no longer gets stuck if esc is pressed while the mini player is being dragged
+    - Modal no longer gets stuck if the 'escape' key is pressed while the mini player is being dragged
 
   v4.4.0
     - Subscribe to channels and rate videos in the popup!
@@ -94,9 +95,9 @@ CHANGELOG
     - Fixed videos on youtube.com/feed/music not opening in the popup
     - Added a new visualizer: "Dzozef" (dwitter.net/d/2887)
 
-	v4.2.2
-  	- Added an option to specify a button (shift, alt, ctrl) that must be pressed while clicking on a video's thumbnail (none by default)
-  	- Fixed options page not working properly on Vivaldi
+  v4.2.2
+    - Added an option to specify a button (shift, alt, ctrl) that must be pressed while clicking on a video's thumbnail (none by default)
+    - Fixed options page not working properly on Vivaldi
 
 ========== v4.2.1 ==========
     - Added an option for resizing the mini player
