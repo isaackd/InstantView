@@ -10,6 +10,7 @@ Features
   • Mini player (picture in picture)
   • Visualizations
   • Many different options to customize look and behavior
+  • Open Source (https://github.com/afrmtbl/InstantView)
 
 If you find any bugs, let me know and I'll fix them as soon as I can :)
 * Requires Chrome 64+ *
@@ -31,6 +32,11 @@ https://dribbble.com/aureliensalomon
 https://dribbble.com/shots/1338727-Youtube-Redesign
 
 CHANGELOG
+  v4.5.2
+
+    FIXES
+    - Video information may fail to load on the YouTube home page (unrelated to the Chrome 72+ bug)
+  
   v4.5.1
 
     FIXES
