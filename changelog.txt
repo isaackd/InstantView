@@ -1,0 +1,176 @@
+CHANGELOG
+  v4.5.3
+    FIXES
+    - Video information may fail to load (again!). This was due to new security features introduced in Chrome 76 causing network requests to fail.
+    
+  v4.5.2
+
+    FIXES
+    - Video information may fail to load on the YouTube home page (unrelated to the Chrome 72+ bug)
+  
+  v4.5.1
+
+    FIXES
+    - Video information might fail to load. This was caused by a bug introduced in Chrome 72 that causes network issues with extensions
+      - The workaround for now is to go to chrome://flags/#network-service, set this option to "Disabled", and clicking "Relaunch Now" on the bottom right
+    - If the currently loaded video doesn't have a description, the description from the previous video will be displayed
+    - Browse playlist button in the top left of the video is now shown again
+
+    CHANGES
+    - Added a note about the Chrome issue
+    - Removed the Holidays and Halloween visualizers
+    - Updated the Github repo (https://github.com/afrmtbl/InstantView)
+
+  v4.5.0
+  
+    FEATURES
+    - Added an option to show the video upload date above or below the views
+    - You can now add keyboard shortcuts for play/pause, next/previous and stop
+    - Added an option to make the mini player open by default
+    - Added an option to show the visualizers over the video (overlay)
+      - Added options to change visualizer opacity, and backdrop color and opacity
+    - Added a visualizer for the Holidays!
+    - The last visualizer used is remembered and used by default
+
+    FIXES
+    - Modal no longer gets stuck if the 'escape' key is pressed while the mini player is being dragged
+
+  v4.4.0
+    - Subscribe to channels and rate videos in the popup!
+    - Language support
+      - Chinese (Simplified)
+      - Chinese (Traditional)
+      - Vietnamese
+      - Korean
+      - German
+      - Spanish
+      - Russian
+      - Italian
+      - French
+
+    - New design with 2 new themes (revised dark theme and Halloween theme)
+    - Default text size is now greatly reduced. Compact view option is no longer included
+    - Playlists are now loaded into the popup correctly (button on top left of the video to browse playlist)
+    - The mini player is now draggable (resets on page refresh), and also has separate buttons for going back to the popup and closing it
+    - Comments
+      - Author is now a clickable link to their channel
+      - Comments from the video uploader are now highlighted (fake channels with the same name are not highlighted)
+      - A few new options for customizing the look of comments
+    - Tab title is now changed to the title of the video while the popup is opened
+    - Visualizations
+      - Halloween visualizer
+      - "Cave" visualizer
+
+  v4.3.0
+    - Added a close button on the top right of the mini player
+    - Redesigned options page
+      - Added an option for visualizer animation speed
+        - Should be lowered on monitors with higher refresh rates (120, 144, 165, 240)
+    - Only affects Iverjo and Plaid
+    - Fixed problem with video playing while the popup was closed
+      - If a video starts playing while the popup is closed, the visualizers may stop working. As a workaround, refreshing the page fixes it.
+    - Fixed videos on youtube.com/feed/music not opening in the popup
+    - Added a new visualizer: "Dzozef" (dwitter.net/d/2887)
+
+  v4.2.2
+    - Added an option to specify a button (shift, alt, ctrl) that must be pressed while clicking on a video's thumbnail (none by default)
+    - Fixed options page not working properly on Vivaldi
+
+========== v4.2.1 ==========
+    - Added an option for resizing the mini player
+    - Added options to choose visualizer colors (works with most)
+    - Added a light visualizer theme
+    - Added a new visualizer: "Travis"
+    - Scrolling is now disabled while the modal is opened
+    - Fixed double clicking the minimize button permanently keeping the mini player open
+    - Removed save button from options page (automatically saves and applies now)
+        - Dragging the color picker may cause your computer to slowdown. Click instead!
+    - Pressing escape to close the modal right after opening it now properly stops the video
+    - Clicking on the thumbnail of a playlist item will now correctly open in the modal on the new youtube design
+    - The minimize icon is now the correct orientation on first loadup of the extension 
+    - Fixed having to doubleclick a visual for it to load after exiting the visualizer without one selected
+    - Disabled annoying moving animations when opening and closing the mini player
+
+    ---- TOFIX ----
+        - Audio messes up if you try to go into visualizer while the video is loading (first load, skipping) (FIX BY REFRESHING PAGE)
+
+
+========== v4.2 ==========
+
+    - Audio visualizers!
+        *** Some visualizers might not run smoothly on less powerful devices ***
+        *** Runs smoothly on Core2 Quad Q9450 (2008) & HD7770 (2012) ***
+        - Iverjo is the most intensive of the visualisations
+        - Iverjo and Plaid work best with songs that have heavier bass and drums
+        - If Iverjo or Plaid aren't reacting very much with a song, it's because Iverjo averages the first 4 bins (see analyser), and plaid uses the second, which works well with some songs and badly with others :/.
+
+        - Please report any bugs, as this is quite a big change from the previous version
+
+========== v4.1 ==========
+
+    - Made the resizing of the youtube video much smoother (using new ResizeObserver api)
+    - Added a panel for comments next to the main panel (instead of underneath the video)
+    - Created an option to choose which corner of the screen the mini player should appear in
+    - Modified dark theme
+    - Removed theater mode and replaced it with a repeat button
+    - Channel name now shows up in compact mode
+    - Fixed the extension preventing all clicks when it couldn't detect the current youtube design
+
+===== PLANNED FEATURES =====
+
+    - Quickly making a playlist by selecting multiple videos
+    - Non-ugly icon hopefully
+    - Options for mini player size, and font size
+    - Cross-tab control of videos playing in popups
+    - Any other good ideas
+
+OLDER VERSIONS
+
+========== v4.0 ==========
+
+    - Added the ability to view comments and the video description in the popup
+    - Replaced the subscribe button with an actual one (instead of linking to channel page and prompting)
+    - Popup will no longer open when clicking on the title or channel name of a video in a playlist
+    - Popup will no longer open when clicking playlist management buttons (remove, more menu) (4.0.1)
+    - Comments and description will now expand to the size of non-compact mode in compact mode. (4.0.2)
+
+
+========= v3.3.1 =========
+
+    - Options page popup (when clicking on the extension icon in top right)
+    - Removed compact, theme, and info position buttons and placed them in the options page
+    - Added some christmas
+    - Switched from localStorage to chrome.storage api
+
+========== v3.2 ==========
+
+    - Mini Player (Button to scale down the popup and place it in the bottom right corner to allow you to continue interacting with the page while the video plays like the youtube mobile apps)
+    - When the video title on the popup is clicked, the tab that opens starts from the current time in the popup
+    - Don't reload video if it's the same as the one already in the popup
+
+========== v3.1 ==========
+
+    - Compact View (Lowers font sizes, hides button titles, etc. to give the video more room)
+    - Links now pause the video and open in a new tab (video title and channel title)
+    - Add click handler as soon as the extension loads so clicking a video won't redirect pages
+    - Smoother animations for entering and exiting compact view and theater mode
+
+========== v3.0 ==========
+
+    - Theater mode (can be exited by pressing escape, might need to click on modal first)
+    - New and improved popup design with better animation
+    - Light and Dark popup themes
+    - Allow changing the position of the video information bar (video title, views, and rating)
+    - Channel name is now also a link to the channel
+    - Switched to the youtube api instead of scraping the video information off the page, resulting in more and consistent information and much less compatibility code needed between the two designs
+    - Changed the modal css so that it doesn't break on huge displays (4k, 8k)
+    - Cleaned up code
+
+========== v2.2 ==========
+  
+    - Support for old and new youtube designs
+    - Fixed popup opening when clicking on thumbnail buttons added by the Youtube+ 
+    extension
+    - Improved detection of which youtube design is on
+
+==========================
