@@ -1,1 +1,1 @@
-zip -r dist.zip _locales icons images libs manifest.json src/background.js src/iv.js src/modal/dist/js/bundle.js src/options/dist
+zip -r dist.zip _locales icons images libs manifest.json src/background.js src/background_video_info.js src/iv.js src/modal/dist/js/bundle.js src/options/dist

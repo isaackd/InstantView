@@ -40,8 +40,10 @@ export function loadVideo(videoId, playVideo = true, startSeconds = 0) {
                     });
                 });
             }
+            store.dispatch(videoDataAction);
+        }).catch(err => {
+            instantview.stateActions.showToast(err.error, 5 * 1000);
         });
-        store.dispatch(videoDataAction);
 
         instantview.stateActions.getIdentityGranted().then(() => {
             // We have the identity permission
