@@ -30,20 +30,20 @@ export function openModal(play = true) {
 	            if (items && !items.iv_first_time_auth_denied) {
 					askForAuth();
 	            }
-	            chrome.storage.local.get("iv_chrome_bug_acknowledged", crbitems => {
-        			if (crbitems && !crbitems.iv_chrome_bug_acknowledged) {
-	            		notifyChrome72Bug();
-	            	}
-	        	});
+	         //    chrome.storage.local.get("iv_chrome_bug_acknowledged", crbitems => {
+        		// 	if (crbitems && !crbitems.iv_chrome_bug_acknowledged) {
+	         //    		notifyChrome72Bug();
+	         //    	}
+	        	// });
 	        });
 		}
 		else if (mode === dev) {
 			if (!localStorage.getItem("iv_first_time_auth_denied")) {
 				askForAuth();
 			}
-			if (!localStorage.getItem("iv_chrome_bug_acknowledged")) {
-				notifyChrome72Bug();
-			}
+			// if (!localStorage.getItem("iv_chrome_bug_acknowledged")) {
+			// 	notifyChrome72Bug();
+			// }
 		}
 
 	}
@@ -80,39 +80,39 @@ export function openModal(play = true) {
 	}
 }
 
-function notifyChrome72Bug() {
-	const message = `
-		<span style="color: yellow">Video information may fail to load due to an issue affecting Chrome 72+
-		<br>Please use the following fix for the time being</span>
-		`;
-	const fixList = `<ol style=";padding: 10px; padding-left: 30px; margin: 0">
-	    <li>Navigate to <span style="color: lightblue">chrome://flags/#network-service</span> in the Chrome address bar
-	    <li>Set this to <span style="color: lightblue">Disabled</span></li>
-	    <li>Restart Chrome</li>
-	</ol>`;
+// function notifyChrome72Bug() {
+// 	const message = `
+// 		<span style="color: yellow">Video information may fail to load due to an issue affecting Chrome 72+
+// 		<br>Please use the following fix for the time being</span>
+// 		`;
+// 	const fixList = `<ol style=";padding: 10px; padding-left: 30px; margin: 0">
+// 	    <li>Navigate to <span style="color: lightblue">chrome://flags/#network-service</span> in the Chrome address bar
+// 	    <li>Set this to <span style="color: lightblue">Disabled</span></li>
+// 	    <li>Restart Chrome</li>
+// 	</ol>`;
 
-	const dontShowButton = document.createElement("button");
-	dontShowButton.classList.add("iv-notification-button");
-	dontShowButton.textContent = instantview.i18n["signInNotificationText_DontShow"];
-	dontShowButton.addEventListener("click", () => {
-		if (mode === prod) {
-			chrome.storage.local.set({iv_chrome_bug_acknowledged: true}, function() {
-	            // after the data is saved
-	        });
-		}
-		else if (mode === dev) {
-			localStorage.setItem("iv_chrome_bug_acknowledged", true);
-		}
-	});
-	dontShowButton.style.marginTop = "0.5vw";
-	dontShowButton.style.marginLeft = "0";
+// 	const dontShowButton = document.createElement("button");
+// 	dontShowButton.classList.add("iv-notification-button");
+// 	dontShowButton.textContent = instantview.i18n["signInNotificationText_DontShow"];
+// 	dontShowButton.addEventListener("click", () => {
+// 		if (mode === prod) {
+// 			chrome.storage.local.set({iv_chrome_bug_acknowledged: true}, function() {
+// 	            // after the data is saved
+// 	        });
+// 		}
+// 		else if (mode === dev) {
+// 			localStorage.setItem("iv_chrome_bug_acknowledged", true);
+// 		}
+// 	});
+// 	dontShowButton.style.marginTop = "0.5vw";
+// 	dontShowButton.style.marginLeft = "0";
 
-	showToast(
-		`${message} ${fixList}For more information see <a class="iv-notification-link" href="http://bit.ly/2V0HQzt">here<br></a><span>Sorry for the inconvenience</span><br>`, 
-		120 * 1000, 
-		[dontShowButton]
-	);
-}
+// 	showToast(
+// 		`${message} ${fixList}For more information see <a class="iv-notification-link" href="http://bit.ly/2V0HQzt">here<br></a><span>Sorry for the inconvenience</span><br>`, 
+// 		120 * 1000, 
+// 		[dontShowButton]
+// 	);
+// }
 
 function askForAuth() {
 
