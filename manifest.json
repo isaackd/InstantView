@@ -42,7 +42,7 @@
         "all_frames": false
     }],
     "background": {
-        "scripts": ["src/background.js"],
+        "scripts": ["src/background.js", "src/background_video_info.js"],
         "persistent": false
     },
 
