@@ -32,7 +32,6 @@ function handleGetVideoData(request, sender, sendResponse) {
             }
         }
         catch(e) {
-            console.log("there was an error", e);
             reject({error: e});
         }
     });
