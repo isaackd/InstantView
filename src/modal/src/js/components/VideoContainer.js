@@ -199,7 +199,7 @@ async function onPlayerReady() {
                 return;
             }
 
-            HTML5VidContainer.classList.remove("ytp-hide-info-bar");
+            // HTML5VidContainer.classList.remove("ytp-hide-info-bar");
 
             instantview.iframeDoc = iframeDoc;
 
@@ -242,7 +242,13 @@ async function onPlayerReady() {
             observer.observe(playlistMenu, { attributes : true, attributeFilter : ["style"] });
 
             videoTitle.remove();
-            videoButtons.remove();
+            // videoButtons.remove();
+
+            const annoyingButtons = iframeDoc.querySelectorAll(".ytp-watch-later-button, .ytp-share-button");
+            for (const ab of annoyingButtons) {
+                ab.remove();
+            }
+
             pauseOverlay.remove();
 
             media = vid;

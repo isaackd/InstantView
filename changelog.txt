@@ -1,7 +1,8 @@
 CHANGELOG
   v4.5.3
     FIXES
-    - Video information may fail to load (again!). This was due to new security features introduced in Chrome 76 causing network requests to fail.
+    - Video information may fail to load (again!). This was due to new security features introduced in Chrome 76 causing network requests to fail
+    - Playlist browse button on top left can now be seen again when a playlist is loaded
     
   v4.5.2
 
