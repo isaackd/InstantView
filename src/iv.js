@@ -25,11 +25,15 @@ const ivoptions = {
 
 // helper functions
 function ivlog(msg, prefix = "IV") {
-    if (!msg || !prefix) return;
+    if (!msg || !prefix) {
+        return;
+    }
     console.info(`[ %c${prefix} %c] %c${msg}`, "color: blue", "", "color: green");
 }
 function extractVideoID(videoURL) {
-    if (!videoURL) return;
+    if (!videoURL) {
+        return;
+    }
     if (videoURL.includes("watch_videos?")) {
     	const params = new URL(videoURL).searchParams;
     	const ids = params.get("video_ids");
@@ -68,30 +72,44 @@ function waitForDesign() {
 }
 
 function getVideoURL(video) {
-    if (!video || !video.querySelector) return false;
+    if (!video || !video.querySelector) {
+        return false;
+    }
 
     let materialId = video.querySelector(ivoptions.materialIdSelector)
     let oldId = video.querySelector(ivoptions.oldIdSelectors);
 
-    if (materialId && materialId.href) return materialId.href;
-    else if (oldId && oldId.href) return oldId.href;
+    if (materialId && materialId.href) {
+        return materialId.href;
+    }
+    else if (oldId && oldId.href) {
+        return oldId.href;
+    }
 
     // can't get video id
     throw new Error("Unable to retrieve the video\'s URL :/");
 }
 function getMaterialVideo(target) {
-    if (!target) return false;
+    if (!target) {
+        return false;
+    }
     for (let videoType of ivoptions.materialVideoTypes) {
         let video = target.closest(videoType);
-        if (target.closest(videoType)) return video;
+        if (target.closest(videoType)) {
+            return video;
+        }
     }
     return false;
 }
 function getOldVideo(target) {
-    if (!target) return false;
+    if (!target) {
+        return false;
+    }
     for (let videoType of ivoptions.oldVideoTypes) {
         let video = target.closest(videoType);
-        if (video) return video;
+        if (video) {
+            return video;
+        }
     }
     return false;
 }
@@ -280,7 +298,7 @@ function reloadUserPrefs() {
 
             instantview.modifier = prefs.clickModifier;
 
-            if (state.options.miniSize != prefs.miniSize) {
+            if (state.options.miniSize !== prefs.miniSize) {
                 const videoContainer = document.getElementById("iv-video-container");
                 videoContainer.resizeHandler(videoContainer);
             }
@@ -319,7 +337,9 @@ document.addEventListener("click", e => {
 }, true);
 
 document.addEventListener("iv_iframe_api_ready", () => {
-    if (document.__startedInstantView) return;
+    if (document.__startedInstantView) {
+        return;
+    }
     
     document.__startedInstantView = true;
     ivlog(`Starting InstantView version ${chrome.runtime.getManifest().version}`);
@@ -395,8 +415,12 @@ function handleKeyPress(e) {
         e.preventDefault();
 
         if (!instantview.dragging) {
-            if (state.minimized) instantview.store.dispatch(instantview.stateActions.maximizeModal());
-            else instantview.store.dispatch(instantview.stateActions.closeModal());
+            if (state.minimized) {
+                instantview.store.dispatch(instantview.stateActions.maximizeModal());
+            }
+            else {
+                instantview.store.dispatch(instantview.stateActions.closeModal());
+            }
         }
     }
 }
@@ -406,7 +430,9 @@ chrome.runtime.onMessage.addListener(request => {
 
     const modalState = instantview.store.getState().state;
 
-    if (!modalState.modalOpen || modalState.modalAnimating) return;
+    if (!modalState.modalOpen || modalState.modalAnimating) {
+        return;
+    }
 
     if (request === "instantview-video-play-pause") {
         const playerState = instantview.player.getPlayerState();
@@ -418,7 +444,7 @@ chrome.runtime.onMessage.addListener(request => {
         }
     }
     else if (request === "instantview-video-next") {
-        instantview.player.nextVideo()
+        instantview.player.nextVideo();
     }
     else if (request === "instantview-video-previous") {
         instantview.player.previousVideo();

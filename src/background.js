@@ -114,12 +114,12 @@ function handleGetAuthRequest(request, sender, sendResponse) {
     bglog(`get_auth_request: interactive=${interactive}`);
     chrome.identity.getAuthToken({ interactive }, token => {
         if (token) {
-            const responseData = {OAuthDenied: false}
+            const responseData = {OAuthDenied: false};
             bglog(`get_auth_response: OAuthDenied=${responseData.OAuthDenied}`);
             sendResponse(responseData);
         }
         else if (chrome.runtime.lastError || !token) {
-            const responseData = {OAuthDenied: true}
+            const responseData = {OAuthDenied: true};
             bglog(`get_auth_response: OAuthDenied=${responseData.OAuthDenied}`);
             sendResponse(responseData);
         }
@@ -136,7 +136,7 @@ function handleRequestPermissions(request, sender, sendResponse) {
     bglog("request_permissions");
     chrome.permissions.request({ permissions: ["identity"] }, granted => {
         bglog(`request_permissions_response: granted=${granted}`);
-        sendResponse(granted)
+        sendResponse(granted);
     });
 }
 
@@ -232,10 +232,12 @@ function handleGetSubscriptionRequest(request, sender, sendResponse) {
 
 function sendMessageToActiveTab(message) {
     chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-        if (tabs.length) chrome.tabs.sendMessage(tabs[0].id, message);
+        if (tabs.length) {
+            chrome.tabs.sendMessage(tabs[0].id, message);
+        }
     });
 }
 
 chrome.commands.onCommand.addListener(command => {
-    sendMessageToActiveTab(command)
+    sendMessageToActiveTab(command);
 });

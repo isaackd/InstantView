@@ -24,6 +24,7 @@ function handleGetVideoData(request, sender, sendResponse) {
                 part: "snippet,statistics",
                 fields: "items(id,snippet(title,channelId,description,publishedAt),statistics(viewCount,likeCount,dislikeCount))"
             });
+
             if (response[0] && response[0].snippet) {
                 resolve(response[0]);
             }
@@ -38,7 +39,7 @@ function handleGetVideoData(request, sender, sendResponse) {
     res.then(data => {
         sendResponse(data);
     }).catch(err => {
-        sendResponse({error: err})
+        sendResponse({error: err});
     });
 }
 function handleGetChannelData(request, sender, sendResponse) {
@@ -62,7 +63,7 @@ function handleGetChannelData(request, sender, sendResponse) {
     res.then(data => {
         sendResponse(data);
     }).catch(err => {
-        sendResponse({error: err})
+        sendResponse({error: err});
     });
 }
 function handleGetCommentData(request, sender, sendResponse) {
@@ -98,7 +99,7 @@ function handleGetCommentData(request, sender, sendResponse) {
     res.then(data => {
         sendResponse(data);
     }).catch(err => {
-        sendResponse({error: err})
+        sendResponse({error: err});
     });
 }
 
