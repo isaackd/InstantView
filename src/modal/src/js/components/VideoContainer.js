@@ -137,20 +137,6 @@ function handleResize(el, width, height) {
     instantview.player.setSize(desW, desH);
 }
 
-function loadVideo(id) {
-    if (id && (!instantview.player || !instantview.player.loadVideoById)) {
-        // make sure the player is loader
-        // if not, check again in 500ms
-        const queueVideoInterval = setInterval(() => {
-            if (instantview.player && instantview.player.loadVideoById) {
-                instantview.player.loadVideoById(id);
-                clearInterval(queueVideoInterval);
-            }
-        }, 500);
-    }
-    else if (id) instantview.player.loadVideoById(id);
-}
-
 function initPlayer(el) {
 
     const overlayed = instantview.store.getState().options.overlayedVisualizer;
@@ -171,12 +157,11 @@ async function onPlayerReady() {
     if (!instantview.initializedAudio && !document.initializedInstantViewAudio) {
 
         let media;
+        const vidContainer = document.getElementById("iv-video-container");
+        const iframe = vidContainer.getElementsByTagName("iframe")[0] || vidContainer.player.a;
+        iframe.setAttribute("allow", "autoplay");
 
         if (mode === prod) {
-            const vidContainer = document.getElementById("iv-video-container");
-            const iframe = vidContainer.getElementsByTagName("iframe")[0] || vidContainer.player.a;
-
-            iframe.setAttribute("allow", "autoplay");
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             const HTML5VidContainer = iframeDoc.querySelector(".html5-video-player.ytp-embed");
             const vid = iframeDoc.querySelector("video.html5-main-video");
@@ -254,10 +239,17 @@ async function onPlayerReady() {
             media = vid;
         }
         else {
-            const src = await import("../../audio/test.mp3");
-            const aud = new Audio(src.default);
+            // const src = await import("../../audio/test.mp3");
+            // const aud = new Audio(src.default);
+            const aud = new Audio();
             aud.setAttribute("controls", "true");
             document.body.append(aud);
+            
+            // const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const iframeDoc = document.createElement("div");
+            instantview.iframeDoc = iframeDoc;
+            document.dispatchEvent(new Event("iv_iframe_api_ready"));
+
             media = aud;
         }
 
