@@ -36,7 +36,7 @@ instantview.log = function(text) {
 
 document.body.append(instantview.modal);
 
-if (mode === dev) {
+if (mode === dev && document.URL.startsWith("http://localhost")) {
 	import("./test.js").then(module => {
 		document.body.prepend(module.default());
 	});
