@@ -164,7 +164,7 @@ async function onPlayerReady() {
         const iframe = vidContainer.getElementsByTagName("iframe")[0] || vidContainer.player.a;
         iframe.setAttribute("allow", "autoplay");
 
-        if (mode === prod) {
+        if (mode === prod || document.URL.startsWith("https://www.youtube.com")) {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             const vid = iframeDoc.querySelector("video.html5-main-video");
 
