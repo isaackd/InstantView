@@ -8,16 +8,22 @@ instantview.ytapi = ytapi;
 
 import store from "../store.js";
 
-export function loadVideo(videoId, playVideo = true, startSeconds = 0) {
-    if (!videoId) throw new Error("A video id must be provided to load");
+export function updateVideoData(videoId, playVideo = true, startSeconds = 0) {
+    if (!videoId) {
+        throw new Error("A video id must be provided to load");
+    }
     
     const data = store.getState();
     const loadVideo = data.videoData.videoId !== videoId;
-    const loadComments = data.state.commentsOpen && !data.state.commentsLoading
-        && ((data.videoData.commentsId !== data.videoData.videoId)
-        || (videoId !== data.videoData.videoId || videoId !== data.videoData.commentsId));
+    const loadComments = data.state.commentsOpen && !data.state.commentsLoading &&
+        ((data.videoData.commentsId !== data.videoData.videoId) ||
+        (videoId !== data.videoData.videoId || videoId !== data.videoData.commentsId));
 
-    if (videoId !== data.videoData.videoId && playVideo) instantview.player.loadVideoById(videoId, startSeconds);
+    // causes video data to be requested twice
+    // if (videoId !== data.videoData.videoId && playVideo) {
+    //     instantview.player.loadVideoById(videoId, startSeconds);
+    // }
+
     // get the video info
     if (loadVideo) {
         const videoDataAction = getVideoData(videoId);
@@ -69,7 +75,7 @@ export function loadPlaylist(videoId, playlistId, index = 0) {
         listType: "playlist",
         index
     });
-    loadVideo(videoId, false);
+    updateVideoData(videoId, false);
 }
 
 export function getVideoData(videoId) {
@@ -77,21 +83,21 @@ export function getVideoData(videoId) {
     return {
         type: "GET_VIDEO_DATA",
         payload: ytapi.getVideoData(videoId)
-    }
+    };
 }
 export function getChannelData(channelId) {
     if (!channelId) throw new Error("A channel id must be provided to retrieve information");
     return {
         type: "GET_CHANNEL_DATA",
         payload: ytapi.getChannelData(channelId)
-    }
+    };
 }
 export function getCommentData(videoId) {
     if (!videoId) throw new Error("A video id must be provided to retrieve information");
     return {
         type: "GET_COMMENT_DATA",
         payload: ytapi.getCommentData(videoId)
-    }
+    };
 }
 
 export function getVideoRating(videoId) {
@@ -99,7 +105,7 @@ export function getVideoRating(videoId) {
     return {
         type: "GET_VIDEO_RATING",
         payload: ytapi.getVideoRating(videoId)
-    }
+    };
 }
 export function rateVideo(videoId, rating) {
     if (!videoId) throw new Error("A video id must be provided to rate");
@@ -109,7 +115,7 @@ export function rateVideo(videoId, rating) {
     return {
         type: "RATE_VIDEO",
         payload: ytapi.rateVideo(videoId, rating)
-    }
+    };
 }
 
 export function getSubscribeStatus(channelId) {
@@ -117,7 +123,7 @@ export function getSubscribeStatus(channelId) {
     return {
         type: "GET_SUBSCRIBE_STATUS",
         payload: ytapi.getSubscriptionStatus(channelId)
-    }
+    };
 }
 
 export function subscribeToChannel(channelId) {
@@ -128,7 +134,7 @@ export function subscribeToChannel(channelId) {
     return {
         type: "SUBSCRIBE_TO_CHANNEL",
         payload: ytapi.subscribeToChannel(channelId)
-    }
+    };
 }
 export function unsubscribeFromChannel(subscriptionId) {
     if (!subscriptionId) throw new Error("A subscription id must be provided to remove a subscription");
@@ -138,14 +144,14 @@ export function unsubscribeFromChannel(subscriptionId) {
     return {
         type: "UNSUBSCRIBE_FROM_CHANNEL",
         payload: ytapi.unsubscribeFromChannel(subscriptionId)
-    }
+    };
 }
 
 export function getAuth(interactive = true) {
     return {
         type: "GET_AUTH",
         payload: ytapi.getAuth(interactive)
-    }
+    };
 }
 
 export function getLastWriteRequest() {

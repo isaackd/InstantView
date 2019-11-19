@@ -21,14 +21,9 @@ export function handleSubscribeClick() {
 			performAuthenticatedRequest((authAccepted) => {
 				if (authAccepted) {
 					instantview.stateActions.showToast(instantview.i18n["authAccepted"]);
-					if (mode === prod) {
-						chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
-				            // after the data is saved
-				        });
-					}
-					else if (mode === dev) {
-						localStorage.setItem("iv_first_time_auth_denied", true);
-					}
+					chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
+			            // after the data is saved
+			        });
 					resolve();
 					return;
 				}

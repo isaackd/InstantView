@@ -158,20 +158,29 @@ function handleThumbnailClick(e) {
                         		instantview.player.playVideoAt(vidIndex);
                         	}
                         	else {
-                        		instantview.player.stopVideo();
+                                // Stopping causes duplicate video data requests
+                                // since stopping the video sends out a state change
+                                // event with a code of -1 which we use to load new video
+                                // data
+                        		// instantview.player.stopVideo();
                 				instantview.player.loadVideoById(videoID);
                         	}
                         }
                 	}
                 	else {
-                		// instantview.videoDataActions.loadVideo(videoID);
                 		if (instantview.store.getState().videoData.videoId !== videoID) {
-                			instantview.player.stopVideo();
+                            // Stopping causes duplicate video data requests
+                            // since stopping the video sends out a state change
+                            // event with a code of -1 which we use to load new video
+                            // data
+                            // instantview.player.stopVideo();
                 			instantview.player.loadVideoById(videoID);
                 		}
                 	}
 
-                    if (!instantview.store.getState().state.modalOpen) instantview.store.dispatch(instantview.stateActions.openModal(instantview.playedFirstVideo));
+                    if (!instantview.store.getState().state.modalOpen) {
+                        instantview.store.dispatch(instantview.stateActions.openModal(instantview.playedFirstVideo));
+                    }
 
                     if (!instantview.playedFirstVideo) {
                         instantview.playedFirstVideo = true;
@@ -312,7 +321,7 @@ document.addEventListener("click", e => {
 document.addEventListener("iv_iframe_api_ready", () => {
     if (document.__startedInstantView) return;
     
-    document.__startedInstantView = true
+    document.__startedInstantView = true;
     ivlog(`Starting InstantView version ${chrome.runtime.getManifest().version}`);
     ivlog("Youtube IFrame API ready");
 
@@ -372,7 +381,7 @@ function handlePlayerStateChange(e) {
         	instantview.clickedVideoID = null;
         }
         else if (currentID !== videoID) {
-            instantview.videoDataActions.loadVideo(videoID, false);
+            instantview.videoDataActions.updateVideoData(videoID, false);
             instantview.clickedVideoID = null;
         }
 	}
