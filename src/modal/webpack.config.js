@@ -1,8 +1,5 @@
 const webpack = require("webpack");
-
 const path = require("path");
-
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = function(env) {
 	return {
@@ -15,12 +12,6 @@ module.exports = function(env) {
 		devServer: {
 			contentBase: `./dist/`
 		},
-		plugins: [
-			new HtmlWebpackPlugin({
-				filename: "index.html",
-				template: "./src/index.html"
-			})
-		],
 		optimization: {
 			minimize: true
 		},
@@ -37,20 +28,20 @@ module.exports = function(env) {
 				},
 				{
 					test: /\.svg$/,
-					loader: 'svg-inline-loader'
+					loader: "svg-inline-loader"
 				},
 			    {
 			        test: /\.(png|jpg|gif)$/,
-		            loader: 'file-loader',
+		            loader: "file-loader",
 		            options: {
-					    outputPath: '../../../images/'
+					    outputPath: "../../../images/"
 				  	}
 		      	},
 		      	{
 				    test: /\.mp3$/,
-				    loader: 'file-loader',
+				    loader: "file-loader",
 				    options: {
-					    outputPath: 'audio/'
+					    outputPath: "audio/"
 				  	}
 				}
 			]
@@ -58,5 +49,5 @@ module.exports = function(env) {
 		resolve: {
 			extensions: [".js", ".jsx"]
 		}
-	}
-}
+	};
+};
