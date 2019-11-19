@@ -39,7 +39,7 @@ const SubscribeButton = (store) => {
     subscribeButtonDataSync(store, subStatus, subscribers, subIcon, subbedIcon, spinner);
 
 	return base;
-}
+};
 
 function subscribeButtonDataSync(store, subStatus, subs, subIcon, subbedIcon, spinner) {
 	const data = store.getState().videoData;

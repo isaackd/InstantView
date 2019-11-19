@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import "./index.scss";
 
 import svgload from "../../libs/svgload.js";
@@ -10,8 +6,6 @@ import * as stateActions from "../../actions/stateActions.js";
 import * as videoDataActions from "../../actions/videoDataActions.js";
 
 import { handleRateButtonClick } from "../../actions/ratingsActions.js";
-
-import * as ytapi from "../../libs/ytapi.js";
 
 import Channel from "./Channel.js";
 import ActionButton from "./ActionButton.js";
@@ -24,8 +18,6 @@ import CommentsIcon     from "../../../icons/comments.svg";
 import VisualizerIcon   from "../../../icons/visualizer.svg";
 
 import SpinnerIcon      from "../../../icons/spinner.svg";
-
-let setRestoreListener = false;
 
 const VideoActions = (store) => {
     const base = document.createElement("div");
@@ -113,7 +105,7 @@ const VideoActions = (store) => {
     visualizerButton.addEventListener("click", () => {
         const data = store.getState();
         const state = data.state;
-        const options = data.options;
+
         if (!state.visualizerOpen) {
             store.dispatch(stateActions.openVisualizer());
         }
@@ -128,7 +120,7 @@ const VideoActions = (store) => {
 
     base.append(channel, actions);
     return base;
-}
+};
 
 function videoActionsDataSync(store, base) {
     const videoData = store.getState().videoData;
@@ -138,9 +130,9 @@ function videoActionsDataSync(store, base) {
 
     if (likeButton && dislikeButton) {
 
-        const buttonTitle = (videoData.videoLikes !== null && videoData.videoDislikes !== null) 
-        ? `${videoData.videoLikes} likes, ${videoData.videoDislikes} dislikes`
-        : "";
+        const buttonTitle = (videoData.videoLikes !== null && videoData.videoDislikes !== null)  ?
+        `${videoData.videoLikes} likes, ${videoData.videoDislikes} dislikes` :
+        "";
 
         likeButton.setAttribute("title", buttonTitle);
         dislikeButton.setAttribute("title", buttonTitle);
@@ -149,42 +141,26 @@ function videoActionsDataSync(store, base) {
             const icons = [
                 likeButton.querySelector("svg:nth-child(2)"),
                 dislikeButton.querySelector("svg:nth-child(2)")
-            ]
+            ];
 
             const spinners = [
                 document.querySelector("#iv-like-button > svg:nth-child(1)"),
                 document.querySelector("#iv-dislike-button > svg:nth-child(1)")
-            ]
+            ];
+
             for (const icon of icons) {
-                if (icon && icon.style) icon.style.removeProperty("display");
+                if (icon && icon.style) {
+                    icon.style.removeProperty("display");
+                }
             }
             for (const spinner of spinners) {
-                if (spinner && spinner.classList) spinner.classList.remove("active");
+                if (spinner && spinner.classList) {
+                    spinner.classList.remove("active");
+                }
             }
         }
 
     }
 }
-
-function changeOverlayMode(overlayed) {
-
-    instantview.log(`Changing overlay mode to ${overlayed}`);
-
-    const panels = document.getElementById("iv-panels");
-    const wrapper = document.getElementById("iv-player-wrapper");
-
-    const vis = document.getElementById("iv-visualizer");
-
-    if (overlayed) {
-        wrapper.prepend(vis);
-        instantview.modal.setAttribute("data-overlayed-vis", "");
-    }
-    else {
-        panels.append(vis);
-        instantview.modal.removeAttribute("data-overlayed-vis");
-    }
-}
-
-window.changeOverlayMode = changeOverlayMode;
 
 export default VideoActions;

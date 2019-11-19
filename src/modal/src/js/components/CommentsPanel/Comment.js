@@ -22,6 +22,6 @@ const Comment = (commentAuthor, commentText, authorUrl) => {
 	base.append(author, text);
 
 	return base;
-}
+};
 
 export default Comment;

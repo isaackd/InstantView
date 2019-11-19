@@ -2,8 +2,6 @@ import "./Snackbar.scss";
 
 instantview.notificationQueue = [];
 
-const snackbar = document.getElementById("snackbar");
-
 const Snackbar = () => {
 	const base = document.createElement("div");
 	base.setAttribute("id", "iv-snackbar");
@@ -11,7 +9,7 @@ const Snackbar = () => {
 	base.__id = 0;
 	base.__closed = true;
 
-	base.addEventListener("click", (e) => {
+	base.addEventListener("click", e => {
 		base.__id++;
 		base.hide(200, 0).then(() => {
 			base.__resolveShow();
@@ -56,7 +54,7 @@ const Snackbar = () => {
 			}
 		});
 		return x;
-	}
+	};
 
 	base.hide = (duration = 200) => {
 		return new Promise((resolve, reject) => {
@@ -78,9 +76,9 @@ const Snackbar = () => {
 				reject(new Error("Already animating snackbar (hide)"));
 			}
 		});
-	}
+	};
 
 	return base;
-}
+};
 
 export default Snackbar();

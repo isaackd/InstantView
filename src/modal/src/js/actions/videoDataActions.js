@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import * as ytapi from "../libs/ytapi.js";
 
 instantview.ytapi = ytapi;
@@ -79,21 +75,30 @@ export function loadPlaylist(videoId, playlistId, index = 0) {
 }
 
 export function getVideoData(videoId) {
-    if (!videoId) throw new Error("A video id must be provided to retrieve information");
+    if (!videoId) {
+        throw new Error("A video id must be provided to retrieve information");
+    }
+
     return {
         type: "GET_VIDEO_DATA",
         payload: ytapi.getVideoData(videoId)
     };
 }
 export function getChannelData(channelId) {
-    if (!channelId) throw new Error("A channel id must be provided to retrieve information");
+    if (!channelId) {
+        throw new Error("A channel id must be provided to retrieve information");
+    }
+
     return {
         type: "GET_CHANNEL_DATA",
         payload: ytapi.getChannelData(channelId)
     };
 }
 export function getCommentData(videoId) {
-    if (!videoId) throw new Error("A video id must be provided to retrieve information");
+    if (!videoId) {
+        throw new Error("A video id must be provided to retrieve information");
+    }
+
     return {
         type: "GET_COMMENT_DATA",
         payload: ytapi.getCommentData(videoId)
@@ -101,14 +106,19 @@ export function getCommentData(videoId) {
 }
 
 export function getVideoRating(videoId) {
-    if (!videoId) throw new Error("A video id must be provided to get a rating");
+    if (!videoId) {
+        throw new Error("A video id must be provided to get a rating");
+    }
+
     return {
         type: "GET_VIDEO_RATING",
         payload: ytapi.getVideoRating(videoId)
     };
 }
 export function rateVideo(videoId, rating) {
-    if (!videoId) throw new Error("A video id must be provided to rate");
+    if (!videoId) {
+        throw new Error("A video id must be provided to rate");
+    }
 
     updateLastWriteRequest();
 
@@ -127,7 +137,9 @@ export function getSubscribeStatus(channelId) {
 }
 
 export function subscribeToChannel(channelId) {
-    if (!channelId) throw new Error("A channel id must be provided to subscribe to a channel");
+    if (!channelId) {
+        throw new Error("A channel id must be provided to subscribe to a channel");
+    }
 
     updateLastWriteRequest();
 
@@ -137,7 +149,9 @@ export function subscribeToChannel(channelId) {
     };
 }
 export function unsubscribeFromChannel(subscriptionId) {
-    if (!subscriptionId) throw new Error("A subscription id must be provided to remove a subscription");
+    if (!subscriptionId) {
+        throw new Error("A subscription id must be provided to remove a subscription");
+    }
 
     updateLastWriteRequest();
 
@@ -156,37 +170,19 @@ export function getAuth(interactive = true) {
 
 export function getLastWriteRequest() {
     return new Promise((resolve, reject) => {
-
-        if (mode === prod) {
-            chrome.storage.local.get("iv_last_write_request", items => {
-                if (items && items.iv_last_write_request) {
-                    resolve(items.iv_last_write_request);
-                }
-                else {
-                    reject("Unable to retrieve last write request");
-                }
-            });
-        }
-        else {
-            const lrr = localStorage.getItem("iv_last_write_request");
-            if (lrr) {
-                resolve(parseInt(lrr, 10));
+        chrome.storage.local.get("iv_last_write_request", items => {
+            if (items && items.iv_last_write_request) {
+                resolve(items.iv_last_write_request);
             }
             else {
                 reject("Unable to retrieve last write request");
             }
-        }
-
+        });
     });
 }
 
 function updateLastWriteRequest() {
-    if (mode === prod) {
-        chrome.storage.local.set({iv_last_write_request: Date.now()}, function() {
-            // after the data is saved
-        });
-    }
-    else {
-        localStorage.setItem("iv_last_write_request", Date.now());
-    }
+    chrome.storage.local.set({iv_last_write_request: Date.now()}, function() {
+        // after the data is saved
+    });
 }

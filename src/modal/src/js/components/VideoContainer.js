@@ -46,16 +46,20 @@ const VideoContainer = (store, modal) => {
     base.onPlayerReady = onPlayerReady;
 
     return base;
-}
+};
 
 function initRO(videoContainer, el) {
     const ro = new ResizeObserver(entries => {
-        if (!store.getState().state.minimized) resizeHandler(videoContainer);
+        if (!store.getState().state.minimized) {
+            resizeHandler(videoContainer);
+        }
     });
     ro.observe(videoContainer);
 
     window.addEventListener("resize", e => {
-        if (store.getState().state.minimized) resizeHandler(videoContainer);
+        if (store.getState().state.minimized) {
+            resizeHandler(videoContainer);
+        }
     });
 
     if (!instantview.player) {
@@ -110,8 +114,6 @@ function resizeHandler(el) {
         }
 
         handleResize(el, window.innerWidth * multiplier, window.innerHeight);
-
-        const modal = instantview.modal;
         bringMiniIntoBounds();
     }
 }
@@ -122,7 +124,9 @@ function handleResize(el, width, height) {
     height = height || el.offsetHeight;
 
     let verticalPadding = 30;
-    if (el.hasAttribute("data-mini")) verticalPadding = 0;
+    if (el.hasAttribute("data-mini")) {
+        verticalPadding = 0;
+    }
 
     // subtract whatever vertical padding we want (element is centered so top == bottom)
     height -= verticalPadding;
@@ -139,7 +143,6 @@ function handleResize(el, width, height) {
 
 function initPlayer(el) {
 
-    const overlayed = instantview.store.getState().options.overlayedVisualizer;
     const playerPlaceholder = document.createElement("div");
     el.append(playerPlaceholder);
 
@@ -163,7 +166,6 @@ async function onPlayerReady() {
 
         if (mode === prod) {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            const HTML5VidContainer = iframeDoc.querySelector(".html5-video-player.ytp-embed");
             const vid = iframeDoc.querySelector("video.html5-main-video");
 
             // for some reason onPlayerReady is being called twice
@@ -183,8 +185,6 @@ async function onPlayerReady() {
             else {
                 return;
             }
-
-            // HTML5VidContainer.classList.remove("ytp-hide-info-bar");
 
             instantview.iframeDoc = iframeDoc;
 
@@ -227,7 +227,6 @@ async function onPlayerReady() {
             observer.observe(playlistMenu, { attributes : true, attributeFilter : ["style"] });
 
             videoTitle.remove();
-            // videoButtons.remove();
 
             const annoyingButtons = iframeDoc.querySelectorAll(".ytp-watch-later-button, .ytp-share-button");
             for (const ab of annoyingButtons) {
@@ -260,8 +259,13 @@ async function onPlayerReady() {
 }
 
 function dragElement(element, handle) {
-    if (!element) throw new Error("An element must be provided to drag");
-    if (!handle) handle = element;
+    if (!element) {
+        throw new Error("An element must be provided to drag");
+    }
+
+    if (!handle) {
+        handle = element;
+    }
 
     handle.onmousedown = dragStart;
 

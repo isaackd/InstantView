@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import "./Modal.scss";
 
 import Snackbar from "./Snackbar.js";
@@ -35,7 +31,7 @@ const Modal = (store) => {
 
     base.append(backdrop, panels, Snackbar);
     return base;
-}
+};
 
 let originalTabTitle = document.title;
 
@@ -69,18 +65,26 @@ function modalDataSync(store, base) {
     const dislikes = videoData.videoDislikes;
 
     if (instantview.modal) {
-        const percentage = (likes !== null && dislikes !== null && likes >= 0 && dislikes >=0)
-        ? Math.round(likes / (likes + dislikes) * 100)
-        : 0;
+        const percentage = (likes !== null && dislikes !== null && likes >= 0 && dislikes >= 0) ?
+        Math.round(likes / (likes + dislikes) * 100) :
+        0;
 
         instantview.modal.style.setProperty("--iv-ratings-likes-percent", percentage + "%");
     }
 
-    if (state.visualizerOpen) base.setAttribute("data-visualizer", "");
-    else base.removeAttribute("data-visualizer");
+    if (state.visualizerOpen) {
+        base.setAttribute("data-visualizer", "");
+    }
+    else {
+        base.removeAttribute("data-visualizer");
+    }
 
-    if (state.commentsOpen) base.setAttribute("data-comments", "");
-    else base.removeAttribute("data-comments");
+    if (state.commentsOpen) {
+        base.setAttribute("data-comments", "");
+    }
+    else {
+        base.removeAttribute("data-comments");
+    }
 
     if (state.minimized) {
         base.setAttribute("data-mini", options.miniPosition || "");
@@ -96,27 +100,53 @@ function modalDataSync(store, base) {
         base.removeAttribute("data-showdate");
     }
 
-    if (options.infoTop) base.setAttribute("data-infotop", "");
-    else base.removeAttribute("data-infotop");
+    if (options.infoTop) {
+        base.setAttribute("data-infotop", "");
+    }
+    else {
+        base.removeAttribute("data-infotop");
+    }
 
-    if (options.miniSize) base.setAttribute("data-minisize", options.miniSize);
+    if (options.miniSize) {
+        base.setAttribute("data-minisize", options.miniSize);
+    }
 
     setTheme(base, options);
 
-    if (videoData.videoRating) base.setAttribute("data-rating", videoData.videoRating);
-    else base.removeAttribute("data-rating");
+    if (videoData.videoRating) {
+        base.setAttribute("data-rating", videoData.videoRating);
+    }
+    else {
+        base.removeAttribute("data-rating");
+    }
 
-    if (options.titleCentered) base.setAttribute("data-title-centered", "");
-    else base.removeAttribute("data-title-centered");
+    if (options.titleCentered) {
+        base.setAttribute("data-title-centered", "");
+    }
+    else {
+        base.removeAttribute("data-title-centered");
+    }
 
-    if (options.commentBorders) base.setAttribute("data-comment-borders", "");
-    else base.removeAttribute("data-comment-borders");
+    if (options.commentBorders) {
+        base.setAttribute("data-comment-borders", "");
+    }
+    else {
+        base.removeAttribute("data-comment-borders");
+    }
 
-    if (options.commentSpacing) base.setAttribute("data-comment-spacing", "");
-    else base.removeAttribute("data-comment-spacing");
+    if (options.commentSpacing) {
+        base.setAttribute("data-comment-spacing", "");
+    }
+    else {
+        base.removeAttribute("data-comment-spacing");
+    }
 
-    if (options.commentSeparation) base.setAttribute("data-comment-separation", "");
-    else base.removeAttribute("data-comment-separation");
+    if (options.commentSeparation) {
+        base.setAttribute("data-comment-separation", "");
+    }
+    else {
+        base.removeAttribute("data-comment-separation");
+    }
 
     if (instantview.modal && options.overlayOpacity) {
         instantview.modal.style.setProperty("--iv-overlay-vis-opacity", options.overlayOpacity);
@@ -134,7 +164,7 @@ function modalDataSync(store, base) {
         instantview.modal.style.setProperty("--iv-backdrop-vis-color", color + opacityToHex);
     }
 
-    const visualizer = document.getElementById("iv-visualizer")
+    const visualizer = document.getElementById("iv-visualizer");
 
     if (visualizer) {
         if (options.overlayedVisualizer && visualizer.parentNode.matches("#iv-panels")) {
@@ -154,18 +184,33 @@ function setTheme(base, options) {
             return;
         }
     }
-    if (mode === prod) {
-        instantview.getUserPrefs().then(prefs => {
-            const newOptions = Object.assign(prefs, {theme: "light"});
-            chrome.storage.local.set({iv_options: JSON.stringify(newOptions)}, function() {
-                // data is saved
-            });
-        }).catch(e => {
-            throw e;
+
+    instantview.getUserPrefs().then(prefs => {
+        const newOptions = Object.assign(prefs, {theme: "light"});
+        chrome.storage.local.set({iv_options: JSON.stringify(newOptions)}, function() {
+            // data is saved
         });
-    } 
-    else if (mode === dev) {
-        base.setAttribute("data-theme", "light");
+    }).catch(e => {
+        throw e;
+    });
+}
+
+function changeOverlayMode(overlayed) {
+
+    instantview.log(`Changing overlay mode to ${overlayed}`);
+
+    const panels = document.getElementById("iv-panels");
+    const wrapper = document.getElementById("iv-player-wrapper");
+
+    const vis = document.getElementById("iv-visualizer");
+
+    if (overlayed) {
+        wrapper.prepend(vis);
+        instantview.modal.setAttribute("data-overlayed-vis", "");
+    }
+    else {
+        panels.append(vis);
+        instantview.modal.removeAttribute("data-overlayed-vis");
     }
 }
 

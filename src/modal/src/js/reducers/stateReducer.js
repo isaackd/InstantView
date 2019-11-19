@@ -1,9 +1,3 @@
-import store from "../store.js";
-
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 const defaultState = {
 	modalOpen: false,
 	modalAnimating: false,
@@ -16,8 +10,6 @@ const defaultState = {
 
 let openedVisualizer = false;
 
-let originalTabTitle = "";
-
 export default function reducer(state, action) {
 	
 	const results = [
@@ -29,7 +21,9 @@ export default function reducer(state, action) {
 		handleMaximize(state, action)
 	];
 	for (const res of results) {
-		if (res) return res;
+		if (res) {
+			return res;
+		}
 	}
 
 	return state ? state : defaultState;
@@ -86,40 +80,35 @@ function handleModalClose(state, action) {
 function handleVisualizer(state, action) {
 	if (action.type === "OPEN_VISUALIZER") {
 		if (!openedVisualizer) {
-
-			if (mode === prod) {
-				chrome.storage.local.get("iv_last_vis", (result) => {
-					if (result.iv_last_vis) {
-						const modules = instantview.modal.getElementsByClassName("iv-visualizer-module");
-						for (let i = 0; i < modules.length; i++) {
-							const name = modules[i].getAttribute("data-name");
-							if (name === result.iv_last_vis) {
-								modules[i].click();
-								openedVisualizer = true;
-								instantview.visualizer.start();
-								break;
-							}
-							else if (i === modules.length - 1) {
-								document.querySelectorAll(".iv-visualizer-module")[0].click();
-								openedVisualizer = true;
-								instantview.visualizer.start();
-							}
+			chrome.storage.local.get("iv_last_vis", (result) => {
+				if (result.iv_last_vis) {
+					const modules = instantview.modal.getElementsByClassName("iv-visualizer-module");
+					for (let i = 0; i < modules.length; i++) {
+						const name = modules[i].getAttribute("data-name");
+						if (name === result.iv_last_vis) {
+							modules[i].click();
+							openedVisualizer = true;
+							instantview.visualizer.start();
+							break;
+						}
+						else if (i === modules.length - 1) {
+							document.querySelectorAll(".iv-visualizer-module")[0].click();
+							openedVisualizer = true;
+							instantview.visualizer.start();
 						}
 					}
-					else {
-						document.querySelectorAll(".iv-visualizer-module")[0].click();
-						openedVisualizer = true;
-						instantview.visualizer.start();
-					}
-				});
-			}
-			else if (mode === dev) {
-				document.querySelectorAll(".iv-visualizer-module")[0].click();
-				openedVisualizer = true;
-				instantview.visualizer.start();
-			}
+				}
+				else {
+					document.querySelectorAll(".iv-visualizer-module")[0].click();
+					openedVisualizer = true;
+					instantview.visualizer.start();
+				}
+			});
 		}
-		if (openedVisualizer) instantview.visualizer.start();
+		if (openedVisualizer) {
+			instantview.visualizer.start();
+		}
+
 		return Object.assign({}, state, {
 			visualizerOpen: true
 		});

@@ -61,7 +61,7 @@ const CommentsPanel = () => {
     commentsPanelDataSync(store, base);
 
 	return base;
-}
+};
 
 function clearComments(base) {
 	const comments = base.getElementsByClassName("iv-comment");
@@ -80,9 +80,18 @@ function timeStringToSeconds(time) {
   	const m = (h[1] || time).split("m");
   	const s = (m[1] || time).split("s");
 	  
-  	if (h[0] && h.length === 2) seconds += parseInt(h[0], 10) * 60 * 60;
-  	if (m[0] && m.length === 2) seconds += parseInt(m[0], 10) * 60;
-  	if (s[0] && s.length === 2) seconds += parseInt(s[0], 10);
+  	if (h[0] && h.length === 2) {
+  		seconds += parseInt(h[0], 10) * 60 * 60;
+  	}
+
+  	if (m[0] && m.length === 2) {
+  		seconds += parseInt(m[0], 10) * 60;
+  	}
+
+  	if (s[0] && s.length === 2) {
+  		seconds += parseInt(s[0], 10);
+  	}
+
 
 	return seconds;
 }
@@ -95,7 +104,11 @@ function commentsPanelDataSync(store, base, newVal, oldVal) {
 		for (let i = 0; i < newVal.length; i++) {
 			const comment = newVal[i];
 			const newComment = Comment(comment.author, comment.text, comment.authorUrl);
-			if (channelLink === comment.authorUrl) newComment.classList.add("iv-channel-owner-comment");
+
+			if (channelLink === comment.authorUrl) {
+				newComment.classList.add("iv-channel-owner-comment");
+			}
+
 			base.append(newComment);
 			newComment.animate([{opacity: 0}, {opacity: 1}], 200 + (i * 75));
 		}

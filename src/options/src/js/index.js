@@ -88,7 +88,7 @@ class OptionsPage extends Component {
 					}
 					console.log(`Invalid theme: ${currentTheme}. Setting to light..`);
 					// if the current selected theme no longer exists, set it back to light
-					const newOptions = Object.assign(parsedOptions, {theme: "light"})
+					const newOptions = Object.assign(parsedOptions, {theme: "light"});
 					this.saveOptions(newOptions).then(() => {
 						resolve(newOptions);
 					});

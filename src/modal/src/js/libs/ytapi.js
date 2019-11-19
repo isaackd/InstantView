@@ -52,8 +52,12 @@ export function getVideoRating(videoId) {
                 if (response.OAuthDenied) {
                     reject("OAuthDenied");
                 }
-                else if (!response.error) resolve(response);
-                else reject(response.error);
+                else if (!response.error) {
+                    resolve(response);
+                }
+                else {
+                    reject(response.error);
+                }
             });
         }
     });
@@ -75,7 +79,9 @@ export function rateVideo(videoId, rating) {
                 else if (response.success) {
                     resolve({success: response.success, rating});
                 }
-                else reject(`Unable to rate video: ${videoId} as: ${rating}`);
+                else {
+                    reject(`Unable to rate video: ${videoId} as: ${rating}`);
+                }
             }); 
         }
     });
@@ -95,8 +101,12 @@ export function getSubscriptionStatus(channelId) {
                 if (response.OAuthDenied) {
                     reject("OAuthDenied");
                 }
-                else if (!response.error) resolve(response);
-                else reject(response.error);
+                else if (!response.error) {
+                    resolve(response);
+                }
+                else {
+                    reject(response.error);
+                }
             });
         }
     });
@@ -118,7 +128,9 @@ export function subscribeToChannel(channelId) {
                 else if (response.success) {
                     resolve({success: response.success});
                 }
-                else reject(`Unable to subscribe to channel: ${channelId}`);
+                else {
+                    reject(`Unable to subscribe to channel: ${channelId}`);
+                }
             }); 
         }
     });
@@ -140,7 +152,9 @@ export function unsubscribeFromChannel(subscriptionId) {
                 else if (response.success) {
                     resolve({success: response.success});
                 }
-                else reject(`Unable to unsubscribe from channel: ${subscriptionId}`);
+                else {
+                    reject(`Unable to unsubscribe from channel: ${subscriptionId}`);
+                }
             }); 
         }
     });
@@ -158,7 +172,7 @@ export function getAuth(interactive = true) {
                 else {
                     resolve();
                 }
-            }, 76)
+            }, 76);
         }
         else if (mode === prod) {
             chrome.runtime.sendMessage({message: "get_auth", interactive}, response => {

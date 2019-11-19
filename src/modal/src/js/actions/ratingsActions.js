@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import { performAuthenticatedRequest, performWriteRequest } from "./stateActions.js";
 import { subscribeToChannel, unsubscribeFromChannel, rateVideo } from "./videoDataActions";
 
@@ -61,11 +57,14 @@ export function handleSubscribeClick() {
 			});
 
 		})
-	}
+	};
 }
 
 export function handleRateButtonClick(rating) {
-	if (!rating) throw new Error(`A rating must be provided`);
+	if (!rating) {
+		throw new Error(`A rating must be provided`);
+	}
+
 	return {
 		type: "RATE_BUTTON_CLICK",
 		payload: new Promise((resolve, reject) => {
@@ -80,14 +79,10 @@ export function handleRateButtonClick(rating) {
 
 				if (authAccepted) {
 					instantview.stateActions.showToast(instantview.i18n["authAccepted"]);
-					if (mode === prod) {
-						chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
-				            // after the data is saved
-				        });
-					}
-					else if (mode === dev) {
-						localStorage.setItem("iv_first_time_auth_denied", true);
-					}
+
+					chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
+				    	// after the data is saved
+				    });
 					resolve();
 					return;
 				}
@@ -99,7 +94,7 @@ export function handleRateButtonClick(rating) {
 							if (rating === "like") {
 								// like the video
 
-								const likeButton = document.getElementById("iv-like-button")
+								const likeButton = document.getElementById("iv-like-button");
 
 								const icon = likeButton.querySelectorAll("svg")[1];
 								const spinner = document.getElementById("iv-like-spinner");
@@ -117,7 +112,7 @@ export function handleRateButtonClick(rating) {
 							else if (rating === "dislike") {
 								// dislike the video
 
-								const dislikeButton = document.getElementById("iv-dislike-button")
+								const dislikeButton = document.getElementById("iv-dislike-button");
 
 								const icon = dislikeButton.querySelectorAll("svg")[1];
 								const spinner = document.getElementById("iv-dislike-spinner");
@@ -135,7 +130,7 @@ export function handleRateButtonClick(rating) {
 						else {
 							// remove the rating from the video
 
-							const button = document.getElementById(`iv-${rating}-button`)
+							const button = document.getElementById(`iv-${rating}-button`);
 
 							const icon = button.querySelectorAll("svg")[1];
 							const spinner = document.getElementById(`iv-${rating}-spinner`);
@@ -159,5 +154,5 @@ export function handleRateButtonClick(rating) {
 				reject();
 			});
 		})
-	}
+	};
 }

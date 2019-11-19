@@ -17,6 +17,6 @@ const ActionButton = (icon, title, iconSize = 16, storeChangeHandler) => {
 
     base.append(icon, buttonTitle);
     return base;
-}
+};
 
 export default ActionButton;

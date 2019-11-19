@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import store from "../store.js";
 
 const animations = {
@@ -25,27 +21,11 @@ export function openModal(play = true) {
 	const backdrop = document.getElementById("iv-backdrop");
 
 	if (!openedModal) {
-		if (mode === prod) {
-			chrome.storage.local.get("iv_first_time_auth_denied", items => {
-	            if (items && !items.iv_first_time_auth_denied) {
-					askForAuth();
-	            }
-	         //    chrome.storage.local.get("iv_chrome_bug_acknowledged", crbitems => {
-        		// 	if (crbitems && !crbitems.iv_chrome_bug_acknowledged) {
-	         //    		notifyChrome72Bug();
-	         //    	}
-	        	// });
-	        });
-		}
-		else if (mode === dev) {
-			if (!localStorage.getItem("iv_first_time_auth_denied")) {
+		chrome.storage.local.get("iv_first_time_auth_denied", items => {
+            if (items && !items.iv_first_time_auth_denied) {
 				askForAuth();
-			}
-			// if (!localStorage.getItem("iv_chrome_bug_acknowledged")) {
-			// 	notifyChrome72Bug();
-			// }
-		}
-
+            }
+        });
 	}
 
 	return {
@@ -60,15 +40,13 @@ export function openModal(play = true) {
 					}
 
 	                const anim = el.animate(animations.opening, {duration: 200, easing: "ease-in-out"});
-	                // this.backdrop.fadeIn();
 	                backdrop.animate([{opacity: 0}, {opacity: 0.85}], 200);
 
 	                anim.addEventListener("finish", e => {
 	                	openedModal = true;
-	                    if (play) instantview.player.playVideo();
-	                    // const overlayedVis = instantview.modal.hasAttribute("data-overlayed-vis");
-	                    // const visEnabled = instantview.modal.hasAttribute("data-visualizer");
-	                    // if (overlayedVis && visEnabled) instantview.visualizer.start();
+	                    if (play) {
+	                    	instantview.player.playVideo();
+	                    }
 	                    resolve(e);
 	                });
 				}
@@ -77,42 +55,8 @@ export function openModal(play = true) {
 				}
 			});
 		}
-	}
+	};
 }
-
-// function notifyChrome72Bug() {
-// 	const message = `
-// 		<span style="color: yellow">Video information may fail to load due to an issue affecting Chrome 72+
-// 		<br>Please use the following fix for the time being</span>
-// 		`;
-// 	const fixList = `<ol style=";padding: 10px; padding-left: 30px; margin: 0">
-// 	    <li>Navigate to <span style="color: lightblue">chrome://flags/#network-service</span> in the Chrome address bar
-// 	    <li>Set this to <span style="color: lightblue">Disabled</span></li>
-// 	    <li>Restart Chrome</li>
-// 	</ol>`;
-
-// 	const dontShowButton = document.createElement("button");
-// 	dontShowButton.classList.add("iv-notification-button");
-// 	dontShowButton.textContent = instantview.i18n["signInNotificationText_DontShow"];
-// 	dontShowButton.addEventListener("click", () => {
-// 		if (mode === prod) {
-// 			chrome.storage.local.set({iv_chrome_bug_acknowledged: true}, function() {
-// 	            // after the data is saved
-// 	        });
-// 		}
-// 		else if (mode === dev) {
-// 			localStorage.setItem("iv_chrome_bug_acknowledged", true);
-// 		}
-// 	});
-// 	dontShowButton.style.marginTop = "0.5vw";
-// 	dontShowButton.style.marginLeft = "0";
-
-// 	showToast(
-// 		`${message} ${fixList}For more information see <a class="iv-notification-link" href="http://bit.ly/2V0HQzt">here<br></a><span>Sorry for the inconvenience</span><br>`, 
-// 		120 * 1000, 
-// 		[dontShowButton]
-// 	);
-// }
 
 function askForAuth() {
 
@@ -125,14 +69,10 @@ function askForAuth() {
 		const pl = instantview.videoDataActions.getAuth();
 		pl.payload.then(() => {
 			instantview.stateActions.showToast(instantview.i18n["authAccepted"]);
-			if (mode === prod) {
-				chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
-		            // after the data is saved
-		        });
-			}
-			else if (mode === dev) {
-				localStorage.setItem("iv_first_time_auth_denied", true);
-			}
+
+			chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
+	            // after the data is saved
+	        });
 		}).catch(e => {
 			instantview.stateActions.showToast(instantview.i18n["authDenied"], 7000);
 		});
@@ -146,14 +86,9 @@ function askForAuth() {
 	dontShowButton.classList.add("iv-notification-button");
 	dontShowButton.textContent = instantview.i18n["signInNotificationText_DontShow"];
 	dontShowButton.addEventListener("click", () => {
-		if (mode === prod) {
-			chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
-	            // after the data is saved
-	        });
-		}
-		else if (mode === dev) {
-			localStorage.setItem("iv_first_time_auth_denied", true);
-		}
+		chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
+            // after the data is saved
+        });
 	});
 
 	instantview.stateActions.showToast(instantview.i18n["signInNotificationText"], 30 * 1000, [yesButton, noButton, dontShowButton]);
@@ -172,14 +107,14 @@ export function closeModal(pause = true, mini = false) {
 					reject("Cannot close while the modal is animating");
 				}
 				else {
-					if (pause) instantview.player.pauseVideo();
+					if (pause) {
+						instantview.player.pauseVideo();
+					}
 
 		            const anim = el.animate(animations.closing, 200);
 		            backdrop.animate([{opacity: 0.85}, {opacity: 0}], 200);
 
 		            anim.addEventListener("finish", e => {
-		                // this.videoPanel.visualiser.stop();
-		                // el.removeAttribute("data-visualiser");
 		                modal.removeAttribute("data-open");
 		                if (!state.minimized) {
 							document.body.style.overflow = "auto";
@@ -187,33 +122,33 @@ export function closeModal(pause = true, mini = false) {
 						else {
 							instantview.store.dispatch({type: "CLOSE_MODAL_MINI"});
 						}
-		                // this.onClosed();
+
 		                resolve(e);
 		            });
 				}
 			});
 		}
-	}
+	};
 }
 export function openVisualizer() {
 	return {
 		type: "OPEN_VISUALIZER"
-	}
+	};
 }
 export function closeVisualizer() {
 	return {
 		type: "CLOSE_VISUALIZER"
-	}
+	};
 }
 export function openComments() {
 	return {
 		type: "OPEN_COMMENTS"
-	}
+	};
 }
 export function closeComments() {
 	return {
 		type: "CLOSE_COMMENTS"
-	}
+	};
 }
 export function minimizeModal() {
 	const state = store.getState().state;
@@ -248,7 +183,7 @@ export function minimizeModal() {
 				}
 			});
 		}
-	}
+	};
 }
 export function maximizeModal() {
 	const state = store.getState().state;
@@ -259,7 +194,7 @@ export function maximizeModal() {
 		payload: () => {
 			return new Promise((resolve, reject) => {
 				if (state.minimized && !state.modalAnimating) {
-					const closeMod = closeModal(false)
+					const closeMod = closeModal(false);
 					store.dispatch(closeMod);
 					closeMod.payload().then(e => {
 						// remove left and top set by move handle
@@ -282,7 +217,7 @@ export function maximizeModal() {
 				}
 			});
 		}
-	}
+	};
 }
 
 export function showToast(text, duration, appendElements = null) {
@@ -351,7 +286,9 @@ export async function performWriteRequest(callback, errorHandler, timeLimitHandl
             msg = msg.replace("{1}", waitLeft);
             msg = msg.replace("{2}", sec);
             showToast(msg);
-            if (timeLimitHandler) timeLimitHandler(timeLeft);
+            if (timeLimitHandler) {
+            	timeLimitHandler(timeLeft);
+            }
 
             return;
         }
@@ -365,27 +302,14 @@ export async function performWriteRequest(callback, errorHandler, timeLimitHandl
 
 export function requestIdentityPermission() {
 	return new Promise((resolve, reject) => {
-		if (mode === dev) {
-			setTimeout(() => {
-				const permissionGranted = true;
-				if (permissionGranted) {
-					resolve();
-				}
-				else {
-					reject();
-				}
-			}, 200);
-		}
-		else if (mode === prod) {
-			chrome.runtime.sendMessage({message: "request_permissions"}, response => {
-		        if (response) {
-		            resolve();
-		        }
-		        else {
-		            reject();
-		        }
-		    });
-		}
+		chrome.runtime.sendMessage({message: "request_permissions"}, response => {
+	        if (response) {
+	            resolve();
+	        }
+	        else {
+	            reject();
+	        }
+	    });
 	});
 }
 
@@ -401,4 +325,3 @@ export function getIdentityGranted() {
 	    });
 	});
 }
-

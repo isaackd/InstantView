@@ -1,22 +1,13 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import "./Channel.scss";
-
-// import * as ytapi from "../../libs/ytapi.js";
-
-// import * as stateActions from "../../actions/stateActions.js";
-// import * as videoDataActions from "../../actions/videoDataActions.js";
 
 import { handleSubscribeClick } from "../../actions/ratingsActions.js";
 
 import DefaultAvatar from "../../../images/default_avatar.png";
 import SubscribeButton from "./SubscribeButton.js";
 
-const defaultAvatar = (window.chrome && chrome.runtime && chrome.runtime.getURL)
-    ? chrome.runtime.getURL("src/" + DefaultAvatar)
-    : DefaultAvatar;
+const defaultAvatar = (window.chrome && chrome.runtime && chrome.runtime.getURL) ?
+    chrome.runtime.getURL("src/" + DefaultAvatar) :
+    DefaultAvatar;
 
 const Channel = (store) => {
     const base = document.createElement("div");
@@ -65,12 +56,12 @@ const Channel = (store) => {
     channelDataSync(store, avatarWrapper, avatar, channelTitle);
 
     return base;
-}
+};
 
 function channelDataSync(store, avatarWrapper, avatar, channelTitle) {
     const data = store.getState().videoData;
 
-    const title = data.channelTitle || "N/A"
+    const title = data.channelTitle || "N/A";
 
     if (data.channelLink) {
         avatarWrapper.setAttribute("href", data.channelLink);

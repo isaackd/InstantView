@@ -41,7 +41,4 @@ if (mode === dev) {
 		document.body.prepend(module.default());
 	});
 	store.dispatch(stateActions.openModal(false));
-	// setTimeout(() => {
-	// 	store.dispatch(stateActions.minimizeModal());
-	// }, 500);
 }

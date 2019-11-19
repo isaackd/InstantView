@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import "./VideoPanel.scss";
 
 import VideoContainer from "./VideoContainer.js";
@@ -15,7 +11,7 @@ const VideoPanel = (store, modal) => {
 
     base.append(VideoContainer(store, modal), VideoInfo(store), VideoActions(store));
     return base;
-}
+};
 
 const VideoInfo = (store, modal) => {
     const base = document.createElement("div");
@@ -76,12 +72,12 @@ const VideoInfo = (store, modal) => {
     videoInfoDataSync(store, videoTitle, videoViews, videoDate);
 
     return base;
-}
+};
 
 function videoInfoDataSync(store, videoTitle, videoViews, videoDate) {
 
     const data = store.getState().videoData;
-    const title = data.videoTitle || "N/A"
+    const title = data.videoTitle || "N/A";
     videoTitle.textContent = title;
     videoTitle.setAttribute("title", title);
     if (data.videoId) {
@@ -109,7 +105,7 @@ function videoInfoDataSync(store, videoTitle, videoViews, videoDate) {
 }
 
 function getLanguage() {
-    return mode === dev ? "en-US" : chrome.i18n.getUILanguage();
+    return chrome.i18n.getUILanguage();
 }
 
 export default VideoPanel;

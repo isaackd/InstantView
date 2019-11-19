@@ -1,7 +1,3 @@
-const mode = process.env.NODE_ENV;
-const prod = "production";
-const dev = "development";
-
 import "./index.scss";
 
 import { Visualizer } from "./Visualizer.js";
@@ -12,7 +8,7 @@ import Module from "./Module.js";
 import * as stateActions from "../../actions/stateActions.js";
 
 import svgload from "../../libs/svgload.js";
-import BackIcon from "../../../icons/arrow_back.svg"
+import BackIcon from "../../../icons/arrow_back.svg";
     
 const VisualizerPanel = (store) => {
 	const base = document.createElement("div");
@@ -63,7 +59,7 @@ const VisualizerPanel = (store) => {
 	base.canvas = canvas;
 	base.vis = vis;
 	return base;
-}
+};
 
 function addModules() {
 	const moduleElements = [];
@@ -81,21 +77,14 @@ function addModules() {
             	}
             }
 
-
-            // if (modEl.hasAttribute("data-active")) {
-            //     modEl.removeAttribute("data-active");
-            //     this.stop();
-            // }
             if (modClass) {
                 removeActiveModules();
                 modEl.setAttribute("data-active", "");
                 useModule(modClass);
-                if (mode === prod) {
-                	chrome.storage.local.set({iv_last_vis: modName}, function() {
-	                    // data is saved
-	                });
-                }
-                // if (!this.active) this.start();
+
+            	chrome.storage.local.set({iv_last_vis: modName}, function() {
+                    // data is saved
+                });
             }
         });
         
