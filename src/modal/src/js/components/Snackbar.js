@@ -18,6 +18,8 @@ const Snackbar = () => {
 
 	base.show = (text, appendElements = null, duration = 500, hideDelay = 3000) => {
 
+		instantview.log(`SHOWING SNACKBAR: text: ${text}, duration: ${duration}, hideDelay: ${hideDelay}`);
+
 		const x = new Promise((resolve, reject) => {
 			if (base.__closed && !base.animating) {
 				base.__closed = false;
