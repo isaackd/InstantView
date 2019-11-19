@@ -28,16 +28,11 @@ instantview.animationSpeed = 90;
 
 instantview.modal = Modal(instantview.store);
 
-if (mode === prod) {
-	instantview.log = function(text) {
-		chrome.runtime.sendMessage({message: "log_request", log: text});
-	}
-}
-else {
-	instantview.log = function(text) {
-		console.log(text);
-	}
-}
+
+instantview.log = function(text) {
+	chrome.runtime.sendMessage({message: "log_request", log: text});
+};
+
 
 document.body.append(instantview.modal);
 
