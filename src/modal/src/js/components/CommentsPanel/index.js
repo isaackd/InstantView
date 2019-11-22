@@ -36,7 +36,20 @@ const CommentsPanel = () => {
 	description.classList.add("iv-video-description");
 	descriptionContainer.append(description);
 
-	base.append(descriptionContainer);
+	const commentsContainer = document.createElement("div");
+	commentsContainer.setAttribute("id", "iv-video-comments-container");
+
+	const loadMore = document.createElement("span");
+	loadMore.textContent = "Load More";
+	loadMore.classList.add("iv-load-more-comments");
+
+	loadMore.addEventListener("click", e => {
+		if (!store.getState().videoData.commentsLoading) {
+			store.dispatch(instantview.videoDataActions.getMoreCommentData());
+		}
+	});
+
+	base.append(descriptionContainer, commentsContainer, loadMore);
 
 	const desc = store.getState().videoData.videoDescription;
 	store.subscribe(() => {
@@ -56,19 +69,26 @@ const CommentsPanel = () => {
 	}
 
 	store.subscribe(w((newVal, oldVal, objectPath) => {
-        commentsPanelDataSync(store, base, newVal, oldVal);
+        commentsPanelDataSync(store, commentsContainer, newVal, oldVal);
     }));
     commentsPanelDataSync(store, base);
 
 	return base;
 };
 
-function clearComments(base) {
+function clearComments(base, oldCommentIds = []) {
+	let reused = 0;
 	const comments = base.getElementsByClassName("iv-comment");
 	for (let i = comments.length - 1; i >= 0; i--) {
 		const comment = comments[i];
+
 		if (!comment.classList.contains("iv-video-description")) {
-			comment.remove();
+			if (!oldCommentIds.includes(comment.commentData.id)) {
+				comment.remove();
+			}
+			else {
+				reused++;
+			}
 		}
 	}
 }
@@ -96,21 +116,51 @@ function timeStringToSeconds(time) {
 	return seconds;
 }
 
+function hideLoadMore() {
+	const el = document.querySelector("#iv-comments span.iv-load-more-comments");
+	el.style.display = "none";
+}
+
+function showLoadMore() {
+	const el = document.querySelector("#iv-comments span.iv-load-more-comments");
+	el.style.display = "block";
+}
+
 function commentsPanelDataSync(store, base, newVal, oldVal) {
-	clearComments(base);
-	const channelLink = store.getState().videoData.channelLink;
+	const data = store.getState();
+	const videoId = data.videoData.videoId;
+	const channelLink = data.videoData.channelLink;
+
+	const reusableComments = [];
+	if (oldVal) {
+		for (const oldComment of oldVal) {
+			if (oldComment.videoId === videoId) {
+				reusableComments.push(oldComment.id);
+			}
+		}
+	}
+
+	clearComments(base, reusableComments);
 
 	if (newVal) {
+
+		let animationMultiplier = 0;
+
 		for (let i = 0; i < newVal.length; i++) {
 			const comment = newVal[i];
-			const newComment = Comment(comment.author, comment.text, comment.authorUrl);
 
-			if (channelLink === comment.authorUrl) {
-				newComment.classList.add("iv-channel-owner-comment");
+			if (!reusableComments.includes(comment.id)) {
+				const newComment = Comment(comment.author, comment.text, comment.authorUrl);
+				newComment.commentData = comment;
+
+				if (channelLink === comment.authorUrl) {
+					newComment.classList.add("iv-channel-owner-comment");
+				}
+
+				base.append(newComment);
+				newComment.animate([{opacity: 0}, {opacity: 1}], 200 + (animationMultiplier * 75));
+				animationMultiplier++;
 			}
-
-			base.append(newComment);
-			newComment.animate([{opacity: 0}, {opacity: 1}], 200 + (i * 75));
 		}
 	}
 }

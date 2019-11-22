@@ -26,9 +26,9 @@ export function getChannelData(channelId) {
         });
     });
 }
-export function getCommentData(videoId) {
+export function getCommentData(videoId, pageToken = null) {
     return new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage({message: "get_comment_data", videoId}, response => {
+        chrome.runtime.sendMessage({message: "get_comment_data", videoId, pageToken}, response => {
             if (response.error) {
                 reject(response.error);
             }

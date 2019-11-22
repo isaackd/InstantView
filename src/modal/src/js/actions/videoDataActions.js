@@ -105,6 +105,20 @@ export function getCommentData(videoId) {
     };
 }
 
+export function getMoreCommentData() {
+    const data = store.getState();
+
+    const videoId = data.videoData.videoId;
+    const nextPageToken = data.videoData.commentsNextToken;
+
+    if (nextPageToken) {
+        return {
+            type: "GET_MORE_COMMENT_DATA",
+            payload: ytapi.getCommentData(videoId, nextPageToken)
+        };
+    }
+}
+
 export function getVideoRating(videoId) {
     if (!videoId) {
         throw new Error("A video id must be provided to get a rating");

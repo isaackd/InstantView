@@ -25,10 +25,10 @@ function handleGetVideoData(request, sender, sendResponse) {
                 fields: "items(id,snippet(title,channelId,description,publishedAt),statistics(viewCount,likeCount,dislikeCount))"
             });
 
-            if (response[0] && response[0].snippet) {
-                resolve(response[0]);
+            if (response.items[0] && response.items[0].snippet) {
+                resolve(response.items[0]);
             }
-            else if (!response.length) {
+            else if (!response.items.length) {
                 reject({error: new Error(`There were no videos matching the id: ${request.videoId}`)});
             }
         }
@@ -54,7 +54,7 @@ function handleGetChannelData(request, sender, sendResponse) {
                 part: "snippet,statistics",
                 fields: "items(id,snippet(title,thumbnails/default),statistics/subscriberCount)"
             });
-            resolve(response[0]);
+            resolve(response.items[0]);
         }
         catch(e) {
             reject({error: e});
@@ -67,30 +67,40 @@ function handleGetChannelData(request, sender, sendResponse) {
     });
 }
 function handleGetCommentData(request, sender, sendResponse) {
-    ivlog(`getting comment data: videoId=${request.videoId}`);
+    ivlog(`getting comment data: videoId=${request.videoId} pageToken: ${request.pageToken}`);
     const res = new Promise(async (resolve, reject) => {
 
         const endpoint = `https://www.googleapis.com/youtube/v3/commentThreads`;
 
         try {
             const field = "snippet/topLevelComment/snippet";
-            const response = await ytget(endpoint, {
+            const items = `items(snippet/topLevelComment/id,${field}/authorChannelUrl,${field}/authorDisplayName,${field}/textDisplay)`;
+
+            const requestData = {
                 videoId: request.videoId,
                 part: "snippet",
-                fields: `items(${field}/authorChannelUrl,${field}/authorDisplayName,${field}/textDisplay)`,
+                fields: `nextPageToken,${items}`,
                 maxResults: 15,
                 order: "relevance"
-            });
-            const comments = response.map(comment => {
+            };
+
+            if (request.pageToken) {
+                requestData.pageToken = request.pageToken;
+            }
+
+            const response = await ytget(endpoint, requestData);
+            const comments = response.items.map(comment => {
                 const data = comment.snippet.topLevelComment.snippet;
                 return {
+                    id: comment.snippet.topLevelComment.id,
+                    videoId: request.videoId,
                     author: data.authorDisplayName,
                     authorUrl: data.authorChannelUrl,
                     text: data.textDisplay
                 };
             });
 
-            resolve(comments);
+            resolve({comments, nextPageToken: response.nextPageToken});
         }
         catch(e) {
             reject({error: e});
@@ -117,11 +127,11 @@ function ytget(endpoint, options, key = API_KEY) {
         fetch(url).then(response => {
             return response.json();
         }).then(data => {
-            if (data.items) {
-                resolve(data.items);
-            }
-            else if (data.error) {
+            if (data.error) {
                 reject("Error while retrieving data from youtube: " + data.error.message + ` (code ${data.error.code})`);
+            }
+            else if (data.items) {
+                resolve(data);
             }
             else {
                 ivlog("Error while retrieving data from youtube (ytget_e)");

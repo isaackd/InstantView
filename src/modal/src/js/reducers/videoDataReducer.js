@@ -12,6 +12,7 @@ const defaultState = {
     videoRatingPending: false,
 
     commentsId: null,
+    commentsNextToken: null,
     commentsLoading: false,
 
     videoComments: [],
@@ -28,7 +29,6 @@ const defaultState = {
 };
 
 export default function reducer(state, action) {
-
     const results = [
         handleVideoData(state, action), 
         handleChannelData(state, action), 
@@ -107,20 +107,55 @@ function handleChannelData(state, action) {
     }
 }
 function handleCommentData(state, action) {
+
     if (action.type === "GET_COMMENT_DATA_PENDING") {
+        hideLoadMore();
+
         return Object.assign({}, state, {
             commentsLoading: true
         });
     }
     else if (action.type === "GET_COMMENT_DATA_FULFILLED") {
+        if (action.payload.nextPageToken) {
+            showLoadMore();
+        }
+
         return Object.assign({}, state, {
-            videoComments: action.payload,
+            videoComments: action.payload.comments,
             commentsId: state.videoId,
+            commentsNextToken: action.payload.nextPageToken,
             commentsLoading: false
         });
     }
     else if (action.type === "GET_COMMENT_DATA_REJECTED") {
         instantview.log("GET_COMMENT_DATA_REJECTED");
+        instantview.stateActions.showToast(instantview.i18n["retriveDataFail_Comment"]);
+        return Object.assign({}, state, {
+            commentsLoading: false
+        });
+    }
+
+    else if (action.type === "GET_MORE_COMMENT_DATA_PENDING") {
+        hideLoadMore();
+
+        return Object.assign({}, state, {
+            commentsLoading: true
+        });
+    }
+    else if (action.type === "GET_MORE_COMMENT_DATA_FULFILLED") {
+        if (action.payload.nextPageToken) {
+            showLoadMore();
+        }
+
+        return Object.assign({}, state, {
+            videoComments: state.videoComments.concat(action.payload.comments),
+            commentsId: state.videoId,
+            commentsNextToken: action.payload.nextPageToken,
+            commentsLoading: false
+        });
+    }
+    else if (action.type === "GET_MORE_COMMENT_DATA_REJECTED") {
+        instantview.log("GET_MORE_COMMENT_DATA_REJECTED");
         instantview.stateActions.showToast(instantview.i18n["retriveDataFail_Comment"]);
         return Object.assign({}, state, {
             commentsLoading: false
@@ -253,6 +288,16 @@ function handleGetAuth(state, action) {
     else if (action.type === "GET_AUTH_REJECTED") {
         instantview.stateActions.showToast(instantview.i18n["authDenied"], 7000);
     }
+}
+
+function hideLoadMore() {
+    const el = document.querySelector("#iv-comments span.iv-load-more-comments");
+    el.style.display = "none";
+}
+
+function showLoadMore() {
+    const el = document.querySelector("#iv-comments span.iv-load-more-comments");
+    el.style.display = "block";
 }
 
 // https://stackoverflow.com/a/32638472
