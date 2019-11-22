@@ -47,8 +47,19 @@ export default function reducer(state, action) {
 
     return state ? state : defaultState;
 }
+
+// Expects an object payload with the following properties:
+
+// id: the ID of the video
+// channelId: the ID of the channel that uploaded the video
+// title: the title of the video
+// description: the description of the video
+// publishedAt: when the video was published in ISO 8601 format
+
+// views: amount of views the video has
+// likes: amount of likes the video has
+// dislikes: amount of dislikes the video has
 function handleVideoData(state, action) {
-    // VIDEO DATA
     if (action.type === "GET_VIDEO_DATA_PENDING") {
         return Object.assign({}, state, {
             videoId: null,
@@ -61,14 +72,16 @@ function handleVideoData(state, action) {
         });
     }
     else if (action.type === "GET_VIDEO_DATA_FULFILLED") {
+        const { payload } = action;
+
         return Object.assign({}, state, {
-            videoId: action.payload.id,
-            videoTitle: action.payload.snippet.title,
-            videoViews: parseInt(action.payload.statistics.viewCount, 10),
-            videoLikes: parseInt(action.payload.statistics.likeCount, 10),
-            videoDislikes: parseInt(action.payload.statistics.dislikeCount, 10),
-            videoDescription: action.payload.snippet.description,
-            videoDate: action.payload.snippet.publishedAt
+            videoId: payload.id,
+            videoTitle: payload.title,
+            videoViews: parseInt(payload.views, 10),
+            videoLikes: parseInt(payload.likes, 10),
+            videoDislikes: parseInt(payload.dislikes, 10),
+            videoDescription: payload.description,
+            videoDate: payload.publishedAt
         });
     }
     else if (action.type === "GET_VIDEO_DATA_REJECTED") {
@@ -77,14 +90,22 @@ function handleVideoData(state, action) {
         return defaultState;
     }
 }
+
+
+// Expects an object payload with the following properties:
+
+// id: the ID of the channel
+// title: the title of the channel
+// thumbnail: url to the default thumbnail of the channel
+// subscribers: the amount of subscribers the channel has
 function handleChannelData(state, action) {
-    // CHANNEL DATA
     if (action.type === "GET_CHANNEL_DATA_PENDING") {
 
     }
     else if (action.type === "GET_CHANNEL_DATA_FULFILLED") {
+        const { payload } = action;
 
-        let subCount = parseInt(action.payload.statistics.subscriberCount, 10);
+        let subCount = parseInt(payload.subscribers, 10);
         if (!isNaN(subCount)) {
             subCount = abbreviateNumber(subCount);
         }
@@ -93,10 +114,10 @@ function handleChannelData(state, action) {
         }
 
         return Object.assign({}, state, {
-            channelId: action.payload.id,
-            channelTitle: action.payload.snippet.title,
-            channelLink: `http://www.youtube.com/channel/${action.payload.id}`,
-            channelAvatar: action.payload.snippet.thumbnails.default.url,
+            channelId: payload.id,
+            channelTitle: payload.title,
+            channelLink: `http://www.youtube.com/channel/${payload.id}`,
+            channelAvatar: payload.thumbnail,
             channelSubscribers: subCount
         });
     }
@@ -106,8 +127,20 @@ function handleChannelData(state, action) {
         return defaultState;
     }
 }
-function handleCommentData(state, action) {
 
+
+// Expects an object payload with the following properties:
+
+// comments: array of objects with these properties
+//      id: the ID of the comment
+//      videoId: the ID of the video that the comment is on
+//      author: the title of the channel who authored the comment
+//      authorUrl: a link to the channel
+//      text: the content of the comment
+
+// nextPageToken: the continuation key for the next page of comments
+// only required if intending to load more comments
+function handleCommentData(state, action) {
     if (action.type === "GET_COMMENT_DATA_PENDING") {
         hideLoadMore();
 
@@ -284,6 +317,7 @@ function handleGetAuth(state, action) {
         
     }
     else if (action.type === "GET_AUTH_FULFILLED") {
+
     }
     else if (action.type === "GET_AUTH_REJECTED") {
         instantview.stateActions.showToast(instantview.i18n["authDenied"], 7000);

@@ -25,18 +25,18 @@ export function updateVideoData(videoId, playVideo = true, startSeconds = 0) {
         const videoDataAction = getVideoData(videoId);
         videoDataAction.payload.then(vidData => {
             // get the channel info
-            const loadChannel = (data.videoData.channelId !== vidData.snippet.channelId);
+            const loadChannel = (data.videoData.channelId !== vidData.channelId);
             if (loadChannel) {
-                store.dispatch(getChannelData(vidData.snippet.channelId));
+                store.dispatch(getChannelData(vidData.channelId));
 
                 instantview.stateActions.getIdentityGranted().then(() => {
                     // We have the identity permission
-                    store.dispatch(getSubscribeStatus(vidData.snippet.channelId)).catch(e => {});
+                    store.dispatch(getSubscribeStatus(vidData.channelId)).catch(e => {});
                 }).catch(e => {
                     // We have the identity permission, ask for it
                     instantview.stateActions.requestIdentityPermission().then(() => {
                         // user allowed identity permission
-                        store.dispatch(getSubscribeStatus(vidData.snippet.channelId)).catch(e => {});
+                        store.dispatch(getSubscribeStatus(vidData.channelId)).catch(e => {});
                     }).catch(e => {
                         // user denied identity permission
                     });

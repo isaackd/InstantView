@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "InstantView for YouTube™",
     "short_name": "InstantView",
-    "version": "4.5.3",
+    "version": "4.6.0",
     "default_locale": "en",
 
     "description": "__MSG_extDesc__",
@@ -37,12 +37,22 @@
         "default_popup": "src/options/dist/index.html"
     },
     "content_scripts": [{
-        "matches": ["https://www.youtube.com/*"],
-        "js": ["libs/youtube_iframe_api.js", "src/iv.js", "src/modal/dist/js/bundle.js"],
+        "matches": ["https://www.youtube.com/*", "http://localhost/*"],
+        "js": [
+            "libs/youtube_iframe_api.js",
+            "src/iv.js",
+            "src/modal/dist/js/bundle.js",
+            "src/modal/dist/js/0.bundle.js"
+        ],
         "all_frames": false
     }],
     "background": {
-        "scripts": ["src/background.js", "src/background_video_info.js"],
+        "scripts": [
+            "src/background.js",
+            "src/datasource/youtube.js",
+            "src/datasource/invidious.js",
+            "src/background_video_info.js"
+        ],
         "persistent": false
     },
 
