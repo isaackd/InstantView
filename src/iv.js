@@ -17,10 +17,22 @@ const ivoptions = {
     oldIdSelectors: "a.yt-uix-sessionlink.spf-link, .lohp-video-link",
 
     // video types for the new youtube design
-    materialVideoTypes: ["ytd-video-renderer", "ytd-grid-video-renderer", "ytd-grid-radio-renderer", "ytd-compact-video-renderer", "ytd-playlist-video-renderer", "ytd-playlist-panel-video-renderer", "ytd-newspaper-hero-video-renderer", "ytd-newspaper-mini-video-renderer", "ytd-playlist-thumbnail"],
+    materialVideoTypes: [
+        "ytd-video-renderer", "ytd-grid-video-renderer", 
+        "ytd-grid-radio-renderer", "ytd-compact-video-renderer", 
+        "ytd-playlist-video-renderer", "ytd-playlist-panel-video-renderer", 
+        "ytd-newspaper-hero-video-renderer", "ytd-newspaper-mini-video-renderer", 
+        "ytd-playlist-thumbnail", "ytd-rich-grid-video-renderer"
+    ],
 
     // video types for the old youtube design
-    oldVideoTypes: [".expanded-shelf-content-item-wrapper", ".yt-shelf-grid-item", ".video-list-item.related-list-item", ".pl-video", ".yt-uix-scroller-scroll-unit", ".yt-lockup.yt-lockup-tile.yt-lockup-video.clearfix", ".lohp-large-shelf-container", ".lohp-medium-shelf"]
+    oldVideoTypes: [
+        ".expanded-shelf-content-item-wrapper", ".yt-shelf-grid-item", 
+        ".video-list-item.related-list-item", ".pl-video", 
+        ".yt-uix-scroller-scroll-unit", 
+        ".yt-lockup.yt-lockup-tile.yt-lockup-video.clearfix", 
+        ".lohp-large-shelf-container", ".lohp-medium-shelf"
+    ]
 };
 
 // helper functions
