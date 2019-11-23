@@ -1,4 +1,4 @@
-const YOUTUBE_DATA_SOURCE = {};
+const YOUTUBE_DATA_SOURCE = {name: "YouTube"};
 const API_KEY = "AIzaSyBBdCo-KyDeWBHkR2JrGdeL7tyrMq3z1-4";
 
 // For format information see

@@ -129,7 +129,12 @@ function getOldVideo(target) {
 function handleThumbnailClick(e) {
     const target = e.target;
 
-    if (!target.matches(".yt-uix-tooltip, .ytd-thumbnail-overlay-toggle-button-renderer, .spf-link, .title, h1, h2, h3, h4, h5, h6, span, li") || target.closest("ytd-playlist-thumbnail") || target.closest("ytd-grid-radio-renderer")) {
+    const filterSelector = ".yt-uix-tooltip, .ytd-thumbnail-overlay-toggle-button-renderer, .spf-link, .title, h1, h2, h3, h4, h5, h6, span, li";
+
+    if (
+        !target.matches(filterSelector) ||
+        target.closest("ytd-playlist-thumbnail") ||
+        target.closest("ytd-grid-radio-renderer") || target.closest("ytd-radio-renderer")) {
 
         const video = getMaterialVideo(target) || getOldVideo(target);
         let videoURL = getVideoURL(video);
@@ -139,7 +144,6 @@ function handleThumbnailClick(e) {
         if (!mod || mod === "none" || ( (mod === "shift" && e.shiftKey) || (mod === "alt" && e.altKey) || (mod === "ctrl" && e.ctrlKey)) ) {
             // if the target clicked on is a video thumbnail and not text or a video button (watch later)
             if (instantview.ready && ((target.closest("ytd-thumbnail") || target.closest("ytd-playlist-thumbnail") || target.closest("#thumbnail-container") || instantview.design === "old") && video && videoURL)) {
-
 
                 e.stopImmediatePropagation();
                 e.preventDefault();
@@ -271,6 +275,7 @@ function reloadUserPrefs() {
                 miniPosition: prefs.miniPosition,
                 miniSize: prefs.miniSize,
                 miniDefault: prefs.miniDefault,
+                dataSource: prefs.dataSource,
 
                 showDate: prefs.showDate,
 
@@ -278,6 +283,7 @@ function reloadUserPrefs() {
                 customPrimary: prefs.primaryColor,
                 customSecondary: prefs.secondaryColor,
                 animationSpeed: prefs.animationSpeed,
+                fftSize: prefs.fftSize,
 
                 overlayedVisualizer: prefs.overlayMode,
                 overlayOpacity: prefs.overlayOpacity,
@@ -313,6 +319,17 @@ function reloadUserPrefs() {
             if (state.options.miniSize !== prefs.miniSize) {
                 const videoContainer = document.getElementById("iv-video-container");
                 videoContainer.resizeHandler(videoContainer);
+            }
+
+            if (state.options.dataSource !== prefs.dataSource) {
+                chrome.runtime.sendMessage({
+                    message: "change_data_source",
+                    dataSource: prefs.dataSource
+                });
+            }
+
+            if (instantview.ready && state.options.fftSize !== prefs.fftSize) {
+                instantview.analyzer.fftSize = prefs.fftSize;
             }
 
             const ab = document.querySelector("#iv-minimize-button svg").style;
@@ -375,6 +392,8 @@ document.addEventListener("iv_iframe_api_ready", () => {
             }
             window.instantview.ready = true;
 
+            const prefs = instantview.store.getState().options;
+            instantview.analyzer.fftSize = prefs.fftSize;
         }).catch(e => {
             // defaults should be set when the user first opens the options page
             throw e;

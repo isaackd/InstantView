@@ -1,5 +1,5 @@
 // https://github.com/omarroth/invidious/wiki/API
-const INVIDIOUS_DATA_SOURCE = {};
+const INVIDIOUS_DATA_SOURCE = {name: "Invidious"};
 const INVIDIOUS_INSTANCE = "https://invidio.us";
 
 // For format information see
@@ -22,7 +22,7 @@ INVIDIOUS_DATA_SOURCE.handleGetVideoData = function(request, sender, sendRespons
 
                 title: data.title,
                 description: data.description,
-                publishedAt: data.published,
+                publishedAt: new Date(data.published * 1000).toISOString(),
 
                 views: data.viewCount,
                 likes: data.likeCount,

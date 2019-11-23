@@ -105,6 +105,30 @@ const VisualizerOptions = (props) => {
                     class="animation-speed-display"
                     value={props.animationSpeed} />
             </div>
+            <div id="fft-size-wrapper" class="option-wrapper">
+                <label for="fft-size" title="Source of video and channel data" class="option-label">FFT Size</label>
+                <select id="fft-size"
+                    value={props.fftSize}
+                    onChange={props.handleFFTSizeChange}>
+                    <optgroup label="Light">
+                        <option value="32">32</option>
+                        <option value="64">64</option>
+                        <option value="128">128</option>
+                        <option value="256">256</option>
+                        <option value="512">512</option>
+                    </optgroup>
+                    <optgroup label="Normal">
+                        <option value="1024">1024</option>
+                        <option value="2048">2048 (default)</option>
+                        <option value="4096">4096</option>
+                    </optgroup>
+                    <optgroup label="Intensive">
+                        <option value="8192">8192</option>
+                        <option value="16384">16384</option>
+                        <option value="32768">32768</option>
+                    </optgroup>
+                </select>
+            </div>
         </OptionsGroup>
     );
 }

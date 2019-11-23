@@ -6,12 +6,14 @@ const defaultState = {
     miniSize: 25,
     miniDefault: false,
     showDate: "top",
+    dataSource: "youtube",
 
     customColors: false,
     customPrimary: "#252525",
     customSecondary: "#bababa",
 
     animationSpeed: 90,
+    fftSize: 2048,
     overlayedVisualizer: false,
     overlayOpacity: 0.7,
     backdropOpacity: 0,

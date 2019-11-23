@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --env.BROWSER firefox --mode development --open"
+    "start": "webpack  --watch --mode development"
   },
   "author": "afrmtbl",
   "license": "ISC",

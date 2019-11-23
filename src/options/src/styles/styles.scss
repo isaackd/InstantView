@@ -86,14 +86,18 @@ body {
 
 #mini-position-wrapper,
 #click-modifier-wrapper,
-#show-date-wrapper {
+#show-date-wrapper,
+#data-source-wrapper,
+#fft-size-wrapper {
     display: grid;
     grid-template-columns: auto 1fr;
 }
 
 #mini-position,
 #click-modifier,
-#show-date {
+#show-date,
+#data-source,
+#fft-size {
     margin-left: 1em;
 }
 

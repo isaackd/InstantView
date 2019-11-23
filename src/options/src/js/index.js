@@ -20,6 +20,7 @@ class OptionsPage extends Component {
 			// visualizer
 			customColorsEnabled: false,
 			animationSpeed: 90,
+			fftSize: 2048,
 			primaryColor: "#C8C800",
 			secondaryColor: "#00eeee",
 			overlayMode: false,
@@ -39,7 +40,9 @@ class OptionsPage extends Component {
 			theme: "light",
 			clickModifier: "none",
 			titleCenterEnabled: false,
-			showDate: "top"
+			showDate: "top",
+
+			dataSource: "youtube"
 		};
 
 		this.state = Object.assign({}, this.defaultOptions);
@@ -80,7 +83,6 @@ class OptionsPage extends Component {
 					// (season themes are removed)
 					const currentTheme = parsedOptions.theme;
 					for (const theme of this.themes) {
-						console.log(currentTheme, theme);
 						if (currentTheme === theme.toLowerCase()) {
 							resolve(parsedOptions);
 							return;
@@ -132,6 +134,10 @@ class OptionsPage extends Component {
 		this.setState({animationSpeed: parseInt(e.target.value, 10)});
 	}
 
+	handleFFTSizeChange = (e) => {
+		this.setState({fftSize: parseInt(e.target.value, 10)});
+	}
+
 	handleMiniSizeChange = (e) => {
 		this.setState({miniSize: parseInt(e.target.value, 10)});
 	}
@@ -163,6 +169,10 @@ class OptionsPage extends Component {
 		this.setState({showDate: e.target.value});
 	}
 
+	handleDataSourceChange = (e) => {
+		this.setState({dataSource: e.target.value});
+	}
+
 	handleColorChange = (e) => {
 		const id = e.target.id;
 		if (id === "primary-color") {
@@ -185,6 +195,7 @@ class OptionsPage extends Component {
 					infoPosition={this.state.infoPosition}
 					clickModifier={this.state.clickModifier}
 					showDate={this.state.showDate}
+					dataSource={this.state.dataSource}
 					titleCenterEnabled={this.state.titleCenterEnabled}
 					captureMediaKeys={this.state.captureMediaKeys}
 
@@ -192,6 +203,7 @@ class OptionsPage extends Component {
 					handleInfoPositionChange={this.handleInfoPositionChange}
 					handleModifierChange={this.handleModifierChange}
 					handleShowDateChange={this.handleShowDateChange}
+					handleDataSourceChange={this.handleDataSourceChange}
 					toggleTitleCenter={this.toggleTitleCenter}
 					toggleOption={this.toggleOption} />
 
@@ -217,12 +229,14 @@ class OptionsPage extends Component {
 					secondaryColor={this.state.secondaryColor}
 					customColorsEnabled={this.state.customColorsEnabled}
 					animationSpeed={this.state.animationSpeed}
+					fftSize={this.state.fftSize}
 					overlayMode={this.state.overlayMode}
 					overlayOpacity={this.state.overlayOpacity}
 					backdropOpacity={this.state.backdropOpacity}
 					backdropColor={this.state.backdropColor}
 					
 					handleSpeedChange={this.handleSpeedChange}
+					handleFFTSizeChange={this.handleFFTSizeChange}
 					handleColorChange={this.handleColorChange}
 					handleOverlayOpacityChange={this.handleOverlayOpacityChange}
 					handleBackdropOpacityChange={this.handleBackdropOpacityChange}

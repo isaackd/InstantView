@@ -32,6 +32,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     else if (request.message === "request_permissions") {
         handleRequestPermissions(request, sender, sendResponse);
     }
+    else if (request.message === "change_data_source") {
+        bglog(`Changing the data source from ${currentDataSource.name} to ${request.dataSource}`);
+        if (request.dataSource === "youtube") {
+            currentDataSource = YOUTUBE_DATA_SOURCE;
+        }
+        else if (request.dataSource === "invidious") {
+            currentDataSource = INVIDIOUS_DATA_SOURCE;
+        }
+    }
     return true;
 });
 
