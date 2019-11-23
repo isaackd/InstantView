@@ -128,10 +128,9 @@ function getOldVideo(target) {
 
 function handleThumbnailClick(e) {
     const target = e.target;
-
     const filterSelector = ".yt-uix-tooltip, .ytd-thumbnail-overlay-toggle-button-renderer, .spf-link, .title, h1, h2, h3, h4, h5, h6, span, li";
 
-    if (
+    if (target.matches("#label-container") ||
         !target.matches(filterSelector) ||
         target.closest("ytd-playlist-thumbnail") ||
         target.closest("ytd-grid-radio-renderer") || target.closest("ytd-radio-renderer")) {
