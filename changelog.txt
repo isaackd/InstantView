@@ -1,4 +1,17 @@
 CHANGELOG
+  v4.6.0
+    FEATURES
+    - Added a button to load more comments!
+    - Added an option to change the data source from the YouTube Data API to the Invidious API
+      - https://github.com/omarroth/invidious
+    - Added an option to change the FFT size for the visualizer
+
+
+    FIXES
+    - Fixed issue on the homepage where clicking on a video's thumbnail would not open in the popup
+    - Fixed issue where clicking close to a thumbnail icon (watch later, add to queue) would not open the video in the popup
+    - Fixed video information being requested twice
+
   v4.5.3
     FIXES
     - Video information may fail to load (again!). This was due to new security features introduced in Chrome 76 causing network requests to fail
