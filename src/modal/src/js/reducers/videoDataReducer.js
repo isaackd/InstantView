@@ -86,7 +86,7 @@ function handleVideoData(state, action) {
     }
     else if (action.type === "GET_VIDEO_DATA_REJECTED") {
         instantview.log("GET_VIDEO_DATA_REJECTED");
-        instantview.stateActions.showToast(instantview.i18n["retriveDataFail_Video"]);
+        instantview.stateActions.showToast(instantview.i18n["retrieveDataFail_Video"]);
         return defaultState;
     }
 }
@@ -123,7 +123,7 @@ function handleChannelData(state, action) {
     }
     else if (action.type === "GET_CHANNEL_DATA_REJECTED") {
         instantview.log("GET_CHANNEL_DATA_REJECTED");
-        instantview.stateActions.showToast(instantview.i18n["retriveDataFail_Channel"]);
+        instantview.stateActions.showToast(instantview.i18n["retrieveDataFail_Channel"]);
         return defaultState;
     }
 }
@@ -162,7 +162,7 @@ function handleCommentData(state, action) {
     }
     else if (action.type === "GET_COMMENT_DATA_REJECTED") {
         instantview.log("GET_COMMENT_DATA_REJECTED");
-        instantview.stateActions.showToast(instantview.i18n["retriveDataFail_Comment"]);
+        instantview.stateActions.showToast(instantview.i18n["retrieveDataFail_Comment"]);
         return Object.assign({}, state, {
             commentsLoading: false
         });
@@ -189,7 +189,7 @@ function handleCommentData(state, action) {
     }
     else if (action.type === "GET_MORE_COMMENT_DATA_REJECTED") {
         instantview.log("GET_MORE_COMMENT_DATA_REJECTED");
-        instantview.stateActions.showToast(instantview.i18n["retriveDataFail_Comment"]);
+        instantview.stateActions.showToast(instantview.i18n["retrieveDataFail_Comment"]);
         return Object.assign({}, state, {
             commentsLoading: false
         });

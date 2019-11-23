@@ -95,7 +95,9 @@ const VideoActions = (store) => {
         if (!data.state.commentsOpen) {
             store.dispatch(stateActions.openComments());
             if (data.videoData.commentsId !== data.videoData.videoId) {
-                store.dispatch(videoDataActions.getCommentData(data.videoData.videoId));
+                store.dispatch(videoDataActions.getCommentData(data.videoData.videoId)).catch(e => {
+                    
+                });
             }
         }
         else {

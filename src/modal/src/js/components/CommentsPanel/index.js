@@ -45,7 +45,9 @@ const CommentsPanel = () => {
 
 	loadMore.addEventListener("click", e => {
 		if (!store.getState().videoData.commentsLoading) {
-			store.dispatch(instantview.videoDataActions.getMoreCommentData());
+			store.dispatch(instantview.videoDataActions.getMoreCommentData()).catch(e => {
+				
+			});
 		}
 	});
 
