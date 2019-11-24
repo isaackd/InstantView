@@ -12,6 +12,9 @@ CHANGELOG
     - Fixed issue where clicking close to a thumbnail icon (watch later, add to queue) would not open the video in the popup
     - Fixed video information being requested twice
 
+    CHANGES
+    - Comments panel now notifies when comments are disabled on a video
+
   v4.5.3
     FIXES
     - Video information may fail to load (again!). This was due to new security features introduced in Chrome 76 causing network requests to fail
