@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "dev": "cp -r src/icons dist/icons && webpack --mode development",
+    "build": "cp -r src/icons dist/icons && webpack --mode production",
+    "start": "cp -r src/icons dist/icons && webpack-dev-server --mode development --open"
   },
   "author": "afrmtbl",
   "license": "ISC",
