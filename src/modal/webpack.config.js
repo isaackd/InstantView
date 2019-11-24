@@ -2,6 +2,9 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = function(env) {
+
+	console.log(env);
+
 	return {
 		target: "web",
 		entry: ["regenerator-runtime/runtime", "./src/js/index.js"],
@@ -43,7 +46,14 @@ module.exports = function(env) {
 				    options: {
 					    outputPath: "audio/"
 				  	}
-				}
+				},
+				{
+					test: /\.js$/, 
+				   	exclude: /node_modules/, 
+				   	use: [
+				      	{ loader: "ifdef-loader", options: {BROWSER: env && env.BROWSER ? env.BROWSER : "chrome"} } 
+				   	]
+				},
 			]
 		},
 		resolve: {

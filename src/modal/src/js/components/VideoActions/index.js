@@ -33,6 +33,8 @@ const VideoActions = (store) => {
     const actions = document.createElement("div");
     actions.setAttribute("id", "iv-actions");
 
+    /// #if BROWSER === "chrome"
+
     const ratingsButtons = document.createElement("div");
     ratingsButtons.classList.add("iv-ratings-buttons");
 
@@ -77,6 +79,8 @@ const VideoActions = (store) => {
 
     ratingsButtons.append(likeButton, dislikeButton);
 
+    /// #endif
+
     const commonButtons = document.createElement("div");
     commonButtons.classList.add("iv-common-buttons");
 
@@ -118,7 +122,16 @@ const VideoActions = (store) => {
 
     commonButtons.append(minimizeButton, commentsButton, visualizerButton);
 
+    /// #if BROWSER === "chrome"
+
     actions.append(ratingsButtons, commonButtons);
+
+    /// #else
+
+    actions.append(commonButtons);
+
+    /// #endif
+
 
     base.append(channel, actions);
     return base;

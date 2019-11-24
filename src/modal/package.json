@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack  --watch --mode development"
+    "dev-ff": "webpack --mode development --env.BROWSER=firefox",
+    "dev-cr": "webpack --mode development --env.BROWSER=chrome",
+
+    "build-ff": "webpack --mode production --env.BROWSER=firefox",
+    "build-cr": "webpack --mode production --env.BROWSER=chrome",
+
+    "start-ff": "webpack  --watch --mode development --env.BROWSER=firefox",
+    "start-cr": "webpack  --watch --mode development --env.BROWSER=chrome"
   },
   "author": "afrmtbl",
   "license": "ISC",
@@ -23,6 +28,7 @@
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "ifdef-loader": "^2.1.4",
     "node-sass": "^4.12.0",
     "regenerator-runtime": "^0.12.1",
     "sass-loader": "^7.1.0",

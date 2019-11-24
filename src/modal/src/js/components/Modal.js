@@ -16,6 +16,12 @@ const Modal = (store) => {
     base.setAttribute("id", "iv-modal");
     base.setAttribute("data-theme", options.theme);
 
+    /// #if BROWSER === "firefox"
+
+    base.setAttribute("data-browser", "firefox");
+
+    /// #endif
+
     store.subscribe(() => {
         modalDataSync(store, base);
     });

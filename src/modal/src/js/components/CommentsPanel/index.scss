@@ -47,21 +47,6 @@
 		}
 	}
 
-	span.iv-load-more-comments {
-		display: block;
-
-		font-size: 0.9vw;
-		text-align: center;
-		margin-top: 1.2vw;
-
-		color: steelblue;
-
-		&:hover {
-			cursor: pointer;
-			text-decoration: underline;
-		}
-	}
-
 	#iv-comments-disabled {
 		display: block;
 
@@ -72,4 +57,8 @@
 		color: var(--iv-comment-text-color);
 	}
 
+}
+
+#iv-modal[data-browser="firefox"] #iv-comments span.iv-load-more-comments {
+    margin-bottom: 1.2vw;
 }

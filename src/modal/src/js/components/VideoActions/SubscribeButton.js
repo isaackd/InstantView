@@ -29,7 +29,15 @@ const SubscribeButton = (store) => {
     spinner.classList.add("iv-channel-subscribe-icon");
 	spinner.setAttribute("id", "iv-subscribe-spinner");
 
+	/// #if BROWSER === "chrome"
+
 	base.append(spinner, subIcon, subbedIcon, subStatus, subscribers);
+
+	/// #else
+
+	base.append(spinner, subStatus, subscribers);
+
+	/// #endif
 
 	store.subscribe(() => {
 		subscribeButtonDataSync(store, subStatus, subscribers, subIcon, subbedIcon, spinner);

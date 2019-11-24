@@ -32,6 +32,9 @@ const Channel = (store) => {
     channelTitle.setAttribute("rel", "noopener");
 
     const subscribeButton = SubscribeButton(store);
+
+    /// #if BROWSER === "chrome"
+
     subscribeButton.addEventListener("click", e => {
         const state = instantview.store.getState();
         const alreadyHandling = state.ratings.handlingSubscribeClick;
@@ -42,6 +45,8 @@ const Channel = (store) => {
             });
         }
     });
+
+    /// #endif
 
     avatarWrapper.append(avatar);
     channelContent.append(channelTitle, subscribeButton);

@@ -20,6 +20,8 @@ export function openModal(play = true) {
 	const el = document.getElementById("iv-panels");
 	const backdrop = document.getElementById("iv-backdrop");
 
+	/// #if BROWSER === "chrome"
+
 	if (!openedModal) {
 		chrome.storage.local.get("iv_first_time_auth_denied", items => {
             if (items && !items.iv_first_time_auth_denied) {
@@ -27,6 +29,8 @@ export function openModal(play = true) {
             }
         });
 	}
+
+	/// #endif
 
 	return {
 		type: "OPEN_MODAL",
@@ -57,6 +61,8 @@ export function openModal(play = true) {
 		}
 	};
 }
+
+/// #if BROWSER === "chrome"
 
 function askForAuth() {
 
@@ -93,6 +99,8 @@ function askForAuth() {
 
 	instantview.stateActions.showToast(instantview.i18n["signInNotificationText"], 30 * 1000, [yesButton, noButton, dontShowButton]);
 }
+
+/// #endif
 
 export function closeModal(pause = true, mini = false) {
 	const state = store.getState().state;
