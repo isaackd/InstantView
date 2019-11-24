@@ -80,6 +80,12 @@ const CommentsPanel = () => {
 
 function clearComments(base, oldCommentIds = []) {
 	let reused = 0;
+
+	const commentsDisabledEl = document.getElementById("iv-comments-disabled");
+	if (commentsDisabledEl) {
+		commentsDisabledEl.remove();
+	}
+
 	const comments = base.getElementsByClassName("iv-comment");
 	for (let i = comments.length - 1; i >= 0; i--) {
 		const comment = comments[i];
@@ -130,11 +136,12 @@ function showLoadMore() {
 
 function commentsPanelDataSync(store, base, newVal, oldVal) {
 	const data = store.getState();
+
 	const videoId = data.videoData.videoId;
 	const channelLink = data.videoData.channelLink;
 
 	const reusableComments = [];
-	if (oldVal) {
+	if (!data.videoData.commentsDisabled && oldVal) {
 		for (const oldComment of oldVal) {
 			if (oldComment.videoId === videoId) {
 				reusableComments.push(oldComment.id);
@@ -143,6 +150,14 @@ function commentsPanelDataSync(store, base, newVal, oldVal) {
 	}
 
 	clearComments(base, reusableComments);
+
+	if (data.videoData.commentsDisabled) {
+		const cdel = document.createElement("span");
+		cdel.setAttribute("id", "iv-comments-disabled");
+		cdel.textContent = "Comments are disabled";
+		base.append(cdel);
+		return;
+	}
 
 	if (newVal) {
 

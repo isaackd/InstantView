@@ -14,6 +14,7 @@ const defaultState = {
     commentsId: null,
     commentsNextToken: null,
     commentsLoading: false,
+    commentsDisabled: false,
 
     videoComments: [],
     videoDescription: null,
@@ -157,15 +158,30 @@ function handleCommentData(state, action) {
             videoComments: action.payload.comments,
             commentsId: state.videoId,
             commentsNextToken: action.payload.nextPageToken,
-            commentsLoading: false
+            commentsLoading: false,
+            commentsDisabled: false
         });
     }
     else if (action.type === "GET_COMMENT_DATA_REJECTED") {
         instantview.log("GET_COMMENT_DATA_REJECTED");
-        instantview.stateActions.showToast(instantview.i18n["retrieveDataFail_Comment"]);
-        return Object.assign({}, state, {
-            commentsLoading: false
-        });
+        
+        if (action.payload.error === "commentsDisabled") {
+            return Object.assign({}, state, {
+                commentsLoading: false,
+                commentsDisabled: true,
+                videoComments: [],
+                commentsId: state.videoId
+            });
+        }
+        else {
+            instantview.stateActions.showToast(instantview.i18n["retrieveDataFail_Comment"]);
+            return Object.assign({}, state, {
+                commentsLoading: false,
+                commentsDisabled: false,
+                videoComments: []
+            });
+        }
+
     }
 
     else if (action.type === "GET_MORE_COMMENT_DATA_PENDING") {

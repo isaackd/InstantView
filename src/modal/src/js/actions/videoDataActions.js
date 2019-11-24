@@ -61,7 +61,9 @@ export function updateVideoData(videoId, playVideo = true, startSeconds = 0) {
         });
     }
     if (loadComments) {
-        store.dispatch(getCommentData(videoId));
+        store.dispatch(getCommentData(videoId)).catch(e => {
+
+        });
     }   
 }
 

@@ -147,7 +147,12 @@ function ytget(endpoint, options, key = API_KEY) {
             return response.json();
         }).then(data => {
             if (data.error) {
-                reject("Error while retrieving data from youtube: " + data.error.message + ` (code ${data.error.code})`);
+                if (data.error && data.error.errors && data.error.errors[0] && data.error.errors[0].reason && data.error.errors[0].reason === "commentsDisabled") {
+                    reject("commentsDisabled");
+                }
+                else {
+                    reject("Error while retrieving data from youtube: " + data.error.message + ` (code ${data.error.code})`);
+                }
             }
             else if (data.items) {
                 resolve(data);
