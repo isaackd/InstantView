@@ -6,16 +6,15 @@
   "scripts": {
     "dev-ff": "webpack --mode development --env.BROWSER=firefox",
     "dev-cr": "webpack --mode development --env.BROWSER=chrome",
-
     "build-ff": "webpack --mode production --env.BROWSER=firefox",
     "build-cr": "webpack --mode production --env.BROWSER=chrome",
-
     "start-ff": "webpack  --watch --mode development --env.BROWSER=firefox",
     "start-cr": "webpack  --watch --mode development --env.BROWSER=chrome"
   },
   "author": "afrmtbl",
   "license": "ISC",
   "dependencies": {
+    "dompurify": "^2.0.7",
     "linkify-lite": "^1.0.0",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
