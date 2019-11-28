@@ -1,4 +1,9 @@
 CHANGELOG
+  v4.6.1
+    FIXES
+    - Purify YouTube comments
+      - Only affects the Invidious Data API since the comment HTML is already purified in YouTube's API
+
   v4.6.0
     FEATURES
     - Added a button to load more comments!
