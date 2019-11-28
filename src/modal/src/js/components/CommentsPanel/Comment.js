@@ -1,5 +1,7 @@
 import "./Comment.scss";
 
+const DomPurify = require("dompurify");
+
 const Comment = (commentAuthor, commentText, authorUrl) => {
 	const base = document.createElement("div");
 	base.classList.add("iv-comment");
@@ -17,7 +19,7 @@ const Comment = (commentAuthor, commentText, authorUrl) => {
 	text.classList.add("iv-comment-text");
 
 	author.textContent = commentAuthor;
-	text.innerHTML = commentText;
+	text.innerHTML = DomPurify.sanitize(commentText);
 
 	base.append(author, text);
 
