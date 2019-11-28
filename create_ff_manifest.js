@@ -5,7 +5,6 @@ fs.rename("manifest.json", "manifest.json.orig", err => {
 		throw err;
 	}
 
-	console.log("renamed it hhahah");
 	const manifest = fs.readFileSync("manifest.json.orig", "utf8");
 	const manifestJson = JSON.parse(manifest);
 
