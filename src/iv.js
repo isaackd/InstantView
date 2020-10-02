@@ -22,7 +22,7 @@ const ivoptions = {
         "ytd-grid-radio-renderer", "ytd-compact-video-renderer", 
         "ytd-playlist-video-renderer", "ytd-playlist-panel-video-renderer", 
         "ytd-newspaper-hero-video-renderer", "ytd-newspaper-mini-video-renderer", 
-        "ytd-playlist-thumbnail", "ytd-rich-grid-video-renderer"
+        "ytd-playlist-thumbnail", "ytd-rich-grid-video-renderer", "ytd-rich-item-renderer"
     ],
 
     // video types for the old youtube design
@@ -88,7 +88,7 @@ function getVideoURL(video) {
         return false;
     }
 
-    let materialId = video.querySelector(ivoptions.materialIdSelector)
+    let materialId = video.querySelector(ivoptions.materialIdSelector);
     let oldId = video.querySelector(ivoptions.oldIdSelectors);
 
     if (materialId && materialId.href) {
@@ -274,7 +274,6 @@ function reloadUserPrefs() {
                 miniPosition: prefs.miniPosition,
                 miniSize: prefs.miniSize,
                 miniDefault: prefs.miniDefault,
-                dataSource: prefs.dataSource,
 
                 showDate: prefs.showDate,
 
@@ -318,13 +317,6 @@ function reloadUserPrefs() {
             if (state.options.miniSize !== prefs.miniSize) {
                 const videoContainer = document.getElementById("iv-video-container");
                 videoContainer.resizeHandler(videoContainer);
-            }
-
-            if (state.options.dataSource !== prefs.dataSource) {
-                chrome.runtime.sendMessage({
-                    message: "change_data_source",
-                    dataSource: prefs.dataSource
-                });
             }
 
             if (instantview.ready && state.options.fftSize !== prefs.fftSize) {
@@ -435,6 +427,15 @@ function handlePlayerStateChange(e) {
             instantview.clickedVideoID = null;
         }
 	}
+    else if (e.data === 2 && !instantview.removedPauseOverlay) {
+        if (instantview && instantview.iframeDoc) {
+            const pauseOverlay = instantview.iframeDoc.querySelector(".ytp-pause-overlay");
+            if (pauseOverlay) {
+                pauseOverlay.remove();
+                instantview.removedPauseOverlay = true;
+            }
+        }
+    }
 }
 
 function handleKeyPress(e) {
