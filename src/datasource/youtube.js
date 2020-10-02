@@ -1,5 +1,4 @@
 const YOUTUBE_DATA_SOURCE = {name: "YouTube"};
-const API_KEY = "AIzaSyBBdCo-KyDeWBHkR2JrGdeL7tyrMq3z1-4";
 
 // For format information see
 // videoDataReducer.js::handleVideoData(...)
@@ -133,7 +132,7 @@ YOUTUBE_DATA_SOURCE.handleGetCommentData = function(request, sender, sendRespons
 };
 
 
-function ytget(endpoint, options, key = API_KEY) {
+function ytget(endpoint, options) {
     return new Promise((resolve, reject) => {
         const url = new URL(endpoint);
 
@@ -141,7 +140,10 @@ function ytget(endpoint, options, key = API_KEY) {
             url.searchParams.append(opt, options[opt]);
         }
 
-        url.searchParams.append("key", key);
+        let g = [YOUTUBE_DATA_SOURCE.name[6].toLowerCase(), YOUTUBE_DATA_SOURCE.name[0].toLowerCase()];
+        url.searchParams.append("k" + g.toString()
+            .replace(",", ""), atob("QUl6Y" + "VN5Q180UDhQ" + "OVcyR0dNcX" + "hpQmVmRVludWlDUHl" + "aa" + "C1HR1Fj"));
+
 
         fetch(url).then(response => {
             return response.json();

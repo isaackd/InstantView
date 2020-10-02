@@ -40,9 +40,7 @@ class OptionsPage extends Component {
 			theme: "light",
 			clickModifier: "none",
 			titleCenterEnabled: false,
-			showDate: "top",
-
-			dataSource: "youtube"
+			showDate: "top"
 		};
 
 		this.state = Object.assign({}, this.defaultOptions);
@@ -169,10 +167,6 @@ class OptionsPage extends Component {
 		this.setState({showDate: e.target.value});
 	}
 
-	handleDataSourceChange = (e) => {
-		this.setState({dataSource: e.target.value});
-	}
-
 	handleColorChange = (e) => {
 		const id = e.target.id;
 		if (id === "primary-color") {
@@ -195,7 +189,6 @@ class OptionsPage extends Component {
 					infoPosition={this.state.infoPosition}
 					clickModifier={this.state.clickModifier}
 					showDate={this.state.showDate}
-					dataSource={this.state.dataSource}
 					titleCenterEnabled={this.state.titleCenterEnabled}
 					captureMediaKeys={this.state.captureMediaKeys}
 
@@ -203,7 +196,6 @@ class OptionsPage extends Component {
 					handleInfoPositionChange={this.handleInfoPositionChange}
 					handleModifierChange={this.handleModifierChange}
 					handleShowDateChange={this.handleShowDateChange}
-					handleDataSourceChange={this.handleDataSourceChange}
 					toggleTitleCenter={this.toggleTitleCenter}
 					toggleOption={this.toggleOption} />
 

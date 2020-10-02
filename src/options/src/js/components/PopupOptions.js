@@ -84,15 +84,6 @@ const PopupOptions = (props) => {
                     <option value="ctrl">Ctrl</option>
                 </select>
             </div>
-            <div id="data-source-wrapper" class="option-wrapper">
-                <label for="data-source" title="Source of video and channel data" class="option-label">Data Source</label>
-                <select id="data-source"
-                    value={props.dataSource}
-                    onChange={props.handleDataSourceChange}>
-                    <option value="youtube">YouTube (default)</option>
-                    <option value="invidious">Invidious</option>
-                </select>
-            </div>
         </OptionsGroup>
     );
 }

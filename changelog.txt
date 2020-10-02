@@ -1,4 +1,11 @@
 CHANGELOG
+  v4.6.3
+    FIXES
+    - Fixed videos on the home page not opening in the popup
+
+    CHANGES
+    - Removed the Invidious API data source option due to shutdown 
+
   v4.6.1
     FIXES
     - Purify YouTube comments
