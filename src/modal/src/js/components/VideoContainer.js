@@ -190,11 +190,7 @@ async function onPlayerReady() {
 
             document.dispatchEvent(new Event("iv_iframe_api_ready"));
 
-            const videoTop = iframeDoc.querySelector(".ytp-chrome-top");
-
             const videoTitle = iframeDoc.querySelector(".ytp-title");
-            const videoButtons = iframeDoc.querySelector(".ytp-chrome-top-buttons");
-            const pauseOverlay = iframeDoc.querySelector(".ytp-pause-overlay");
 
             const playlistMenu = iframeDoc.querySelector(".ytp-playlist-menu");
             const playlistMenuButton = iframeDoc.querySelector(".ytp-playlist-menu-button");
@@ -226,14 +222,14 @@ async function onPlayerReady() {
 
             observer.observe(playlistMenu, { attributes : true, attributeFilter : ["style"] });
 
-            videoTitle.remove();
+            if (videoTitle) {
+                videoTitle.remove();
+            }
 
             const annoyingButtons = iframeDoc.querySelectorAll(".ytp-watch-later-button, .ytp-share-button");
             for (const ab of annoyingButtons) {
                 ab.remove();
             }
-
-            pauseOverlay.remove();
 
             media = vid;
         }
