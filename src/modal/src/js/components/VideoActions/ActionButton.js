@@ -1,4 +1,4 @@
-import "./ActionButton.scss";
+import "./ActionButton.css";
 
 import svgload from "../../libs/svgload.js";
 

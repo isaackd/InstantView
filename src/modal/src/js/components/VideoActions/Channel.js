@@ -1,4 +1,4 @@
-import "./Channel.scss";
+import "./Channel.css";
 
 import { handleSubscribeClick } from "../../actions/ratingsActions.js";
 

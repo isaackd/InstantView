@@ -1,4 +1,4 @@
-import "./VideoPanel.scss";
+import "./VideoPanel.css";
 
 import VideoContainer from "./VideoContainer.js";
 import VideoActions from "./VideoActions";

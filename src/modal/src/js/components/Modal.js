@@ -1,4 +1,4 @@
-import "./Modal.scss";
+import "./Modal.css";
 
 import Snackbar from "./Snackbar.js";
 

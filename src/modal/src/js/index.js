@@ -13,9 +13,9 @@ import * as ratingsActions from "./actions/ratingsActions.js";
 
 import Modal from "./components/Modal.js";
 
-import "../themes/light.scss";
-import "../themes/dark.scss";
-import "../themes/gray.scss";
+import "../themes/light.css";
+import "../themes/dark.css";
+import "../themes/gray.css";
 
 instantview.store = store;
 

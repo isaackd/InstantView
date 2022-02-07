@@ -37,25 +37,25 @@
     outline: none;
 
     opacity: var(--iv-action-button-opacity);
-    &:hover {
-        opacity: var(--iv-action-button-hover-opacity);
-    }
+}
 
-    &:focus {
-        outline-offset: -4px;
-    }
+.iv-action-button:hover {
+    opacity: var(--iv-action-button-hover-opacity);
+}
 
-    .iv-action-button-icon {
-        width: var(--iv-action-button-icon-size);
-        height: var(--iv-action-button-icon-size);
-        margin-bottom: var(--iv-action-button-icon-margin-bottom);
-        fill: var(--iv-text-color);
-    }
+.iv-action-button:focus {
+    outline-offset: -4px;
+}
 
-    .iv-action-button-title {
-        font-size: var(--iv-action-button-font-size);
-        text-transform: uppercase;
-        color: var(--iv-text-color);
-    }
+.iv-action-button-icon {
+    width: var(--iv-action-button-icon-size);
+    height: var(--iv-action-button-icon-size);
+    margin-bottom: var(--iv-action-button-icon-margin-bottom);
+    fill: var(--iv-text-color);
+}
 
+.iv-action-button-title {
+    font-size: var(--iv-action-button-font-size);
+    text-transform: uppercase;
+    color: var(--iv-text-color);
 }

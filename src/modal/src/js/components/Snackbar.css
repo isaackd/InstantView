@@ -14,6 +14,6 @@
     background-color: #333; 
     color: #f8f8f8; 
     cursor: pointer;
-    // z-index same as var(--iv-layer-1)
+    /*z-index same as var(--iv-layer-1)*/
     z-index: 2147483646;
 }

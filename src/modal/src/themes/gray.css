@@ -1,39 +1,38 @@
-$modal-background-color: #212121;
-$visualizer-background-color: lighten($modal-background-color, 5%);
-
 #iv-modal[data-theme=gray] {
+    --modal-background-color: #212121;
+    --visualizer-background-color: #2E2E2E;
 
-    // general theme styles
+    /*general theme styles*/
     --iv-border-color: rgba(255, 255, 255, 0.07);
 
     --iv-text-color: white;
     --iv-link-color: #aaaafa;
 
-    // modal styles
-    --iv-modal-background-color: #{$modal-background-color};
+    /*modal styles*/
+    --iv-modal-background-color: var(--modal-background-color);
     
-    // visualizer styles
-    --iv-visualizer-background-color: #{$visualizer-background-color};
+    /*visualizer styles*/
+    --iv-visualizer-background-color: var(--visualizer-background-color);
 
     --iv-visualizer-back-color: var(--iv-modal-background-color);
     --iv-visualizer-back-icon-color: #fafafa;
 
     --iv-visualizer-module-color: var(--iv-modal-background-color);
 
-    // comments styles
+    /*comments styles*/
     --iv-comments-color: var(--iv-modal-background-color);
     --iv-comments-border-color: var(--iv-border-color);
 
     --iv-comments-description-container-border-color: var(--iv-border-color);
 
-    // comment styles
+    /*comment styles*/
     --iv-comment-border-color: var(--iv-border-color);
     --iv-comment-author-text-color: rgba(255, 255, 255, 0.90);
     --iv-comment-text-color: rgba(255, 255, 255, 0.85);
 
     --iv-channel-owner-color: #dcaa05;
 
-    // button styles
+    /*button styles*/
     --iv-action-button-opacity: 0.70;
     --iv-action-button-hover-opacity: 1;
 
@@ -44,9 +43,9 @@ $visualizer-background-color: lighten($modal-background-color, 5%);
 
     --iv-like-button-active-color: #2d6ef0;
     --iv-dislike-button-active-color: #ff0000;
+}
 
-    #iv-video-info {
-        border: none;
-        background-color: #262626;
-    }
+#iv-modal[data-theme=gray] #iv-video-info {
+    border: none;
+    background-color: #262626;
 }

@@ -1,4 +1,4 @@
-import "./Comment.scss";
+import "./Comment.css";
 
 const DomPurify = require("dompurify");
 

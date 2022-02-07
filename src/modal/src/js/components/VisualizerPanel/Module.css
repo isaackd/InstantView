@@ -1,0 +1,52 @@
+.iv-visualizer-module {
+
+	display: flex;
+
+	align-items: center;
+
+	padding: 0 0 0 1vw;
+	margin-right: 1vw;
+	margin-bottom: 1vw;
+
+	min-width: 8vw;
+	min-height: 2.5vw;
+	height: 1.3vw;
+
+	border-radius: 10px;
+
+	cursor: pointer;
+
+	opacity: 0.95;
+
+	box-shadow: 4px 5px 8px 0px rgba(0, 0, 0, 0.20);
+	background-color: var(--iv-visualizer-module-color);
+}
+
+.iv-visualizer-module[data-active] .iv-visualizer-module-icon {
+	fill: #4284F5 !important;
+}
+
+.iv-visualizer-module[data-active] .iv-visualizer-module-title {
+	color: #4284F5 !important;
+}
+
+.iv-visualizer-module-icon {
+	width: 1.5vw;
+	height: 1.5vw;
+	padding-right: 0.5vw;
+	fill: var(--iv-text-color);
+	transition: fill 0.2s ease-out;
+}
+
+.iv-visualizer-module-title {
+	font-size: 1vw;
+	margin-right: 1vw;
+
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+
+	color: var(--iv-text-color);
+
+	transition: color 0.2s ease-out;
+}

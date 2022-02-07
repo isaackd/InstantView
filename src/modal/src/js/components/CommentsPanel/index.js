@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./index.css";
 
 import store from "../../store.js";
 import watch from "redux-watch";

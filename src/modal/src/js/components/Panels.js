@@ -1,4 +1,4 @@
-import "./Panels.scss";
+import "./Panels.css";
 
 import VideoPanel from "./VideoPanel.js";
 import VisualizerPanel from "./VisualizerPanel";

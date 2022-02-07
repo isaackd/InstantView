@@ -1,0 +1,49 @@
+#iv-panels {
+
+	--iv-panels-width: 70vw;
+	--iv-panels-height: 90vh;
+
+	--iv-panels-width-multiplier: 1.65;
+	--iv-panels-height-multiplier: 0.7;
+
+	--iv-panels-width-ar: calc(var(--iv-panels-height) * var(--iv-panels-width-multiplier));
+	--iv-panels-height-ar: calc(var(--iv-panels-width) * var(--iv-panels-height-multiplier));
+
+	--iv-panels-max-width: 80vw;
+	--iv-panels-max-height: 90vh;
+
+    width: var(--iv-panels-width-ar);
+    height: var(--iv-panels-height-ar);
+
+    max-width: var(--iv-panels-max-width);
+    max-height: var(--iv-panels-max-height);
+
+    /*overflow: hidden;*/
+
+    z-index: var(--iv-layer-1);
+
+    transition: all 0.05s ease-in-out;
+}
+
+#iv-modal[data-comments] #iv-panels {
+	--iv-panels-width-multiplier: 2.00;
+	--iv-panels-max-width: 90vw;
+
+	display: flex;
+
+	flex-flow: row nowrap;
+}
+
+#iv-modal[data-comments] #iv-video-panel,
+#iv-modal[data-comments] #iv-video-panel * {
+	transition-property: color, background-color, fill, border;
+	transition-duration: var(--iv-modal-theme-transition-speed);
+	transition-timing-function: ease-out;
+}
+
+#iv-modal[data-comments] #iv-comments,
+#iv-modal[data-comments] #iv-comments * {
+	transition-property: color, background-color, fill, border;
+	transition-duration: var(--iv-modal-theme-transition-speed);
+	transition-timing-function: ease-out;
+}

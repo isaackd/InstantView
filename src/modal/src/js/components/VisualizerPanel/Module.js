@@ -1,4 +1,4 @@
-import "./Module.scss";
+import "./Module.css";
 
 import svgload from "../../libs/svgload.js";
 import ModuleIcon from "../../../icons/vis_module.svg";

@@ -22,41 +22,41 @@ body {
 
 #overlay-mode-wrapper {
     display: block;
+}
 
-    #overlay-mode-additional {
-        display: flex;
-        flex-flow: column nowrap;
-        margin-left: 1.5em;
-    }
+#overlay-mode-additional {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 1.5em;
+}
 
-    #overlay-opacity-wrapper,
-    #backdrop-opacity-wrapper {
-        display: flex;
-        justify-content: space-between;
-        margin: 0.25em 0 0.25em 0;
-    }
+#overlay-opacity-wrapper,
+#backdrop-opacity-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25em 0 0.25em 0;
+}
 
-    #backdrop-color-wrapper {
-        display: flex;
-        justify-content: space-between;
-        margin: 0.25em 0 0.25em 0;
-    }
+#backdrop-color-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25em 0 0.25em 0;
 }
 
 #custom-colors-wrapper {
     display: block;
+}
 
-    #custom-colors-additional {
-        display: flex;
-        flex-flow: column nowrap;
-        margin-left: 1.5em;
+#custom-colors-additional {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 1.5em;
 
-        div {
-            display: flex;
-            justify-content: space-between;
-        }
+}
 
-    }
+#custom-colors-additional div {
+    display: flex;
+    justify-content: space-between;
 }
 
 #primary-color,
@@ -67,7 +67,6 @@ body {
     background-color: white;
     border: none;
 }
-
 
 #animation-speed-wrapper,
 #mini-size-wrapper {
@@ -109,10 +108,11 @@ body {
     display: flex;
     flex-flow: column nowrap;
     margin-left: 1.5em;
+}
 
-    input[name=theme] {
-        margin-right: 0.5em;
-    }
+#theme-choices input[name=theme],
+#info-position-choices input[name=theme] {
+    margin-right: 0.5em;
 }
 
 input[type=button] {
@@ -131,6 +131,22 @@ input[type=button]:active {
     background-color: darken(white, 15%);
 }
 
+button {
+    padding: 0.5em;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darken(white, 6%);
+}
+
+button:active {
+    background-color: darken(white, 15%);
+}
+
 #actions {
     display: grid;
     grid-template-columns: 1fr;
@@ -138,17 +154,60 @@ input[type=button]:active {
 
 #restore-defaults {
     grid-column: 1 / 4;
+    margin-bottom: 1em;
 }
 
 #links {
     display: block;
     grid-row: 3;
     grid-column: 1 / 4;
-    a {
-        margin-right: 1em;
-    }
+}
+
+#links a {
+    margin-right: 1em;
 }
 
 .mini-opt .header-left img {
     transform: rotateY(180deg);
+}
+
+#sign-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
+#sign-in img {
+    margin-right: 0.5em;
+}
+
+#sign-in:hover {
+    background-color: #fafafa;
+}
+
+#sign-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
+#sign-out img {
+    margin-right: 0.5em;
+}
+
+#sign-out:hover {
+    background-color: #fafafa;
+}
+
+.account .options-group-content {
+    padding: 0.5em;
+}
+
+#sign-in-status {
+    margin: 0.5em 0;
+    margin-top: 0.3em;
+    font-size: 1rem;
+    margin-left: 0.5em;
 }

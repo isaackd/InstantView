@@ -1,0 +1,74 @@
+options-group {
+
+    display: block;
+
+    border: 1px solid lightgray;
+
+    margin-bottom: 1em; 
+}
+
+.options-group-header {
+    display: grid;
+
+    grid-template-columns: 3fr 1fr;
+    grid-auto-flow: column;
+
+    align-items: center;
+    color: rgba(0, 0, 0, 0.7);
+
+    padding: 0.7em 0;
+
+    padding-left: 0.7em;
+    padding-right: 0em;
+
+    border-bottom: 1px solid lightgray;
+
+}
+
+& > * {
+    margin: 0 0.3em;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.7em;
+}
+
+.options-group-name {
+    margin-left: 0.5em;
+    font-size: 1.3em;
+}
+.options-group-help {
+    cursor: pointer;
+}
+
+.options-group-content {
+    display: block;
+
+    flex-flow: column nowrap;
+    grid-column-gap: 1em;
+    padding: 0.2em 0.2em;
+}
+
+.option-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0.5em;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.option-label {
+    margin-left: 0.2em;
+    font-size: 1.2em;
+}

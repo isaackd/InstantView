@@ -2,7 +2,7 @@ const mode = process.env.NODE_ENV;
 const prod = "production";
 const dev = "development";
 
-import "./VideoContainer.scss";
+import "./VideoContainer.css";
 
 import * as stateActions from "../actions/stateActions.js";
 

@@ -1,4 +1,4 @@
-import "./Snackbar.scss";
+import "./Snackbar.css";
 
 instantview.notificationQueue = [];
 

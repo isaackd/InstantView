@@ -1,4 +1,4 @@
-import "./test.scss";
+import "./test.css";
 
 import store from "./store.js";
 

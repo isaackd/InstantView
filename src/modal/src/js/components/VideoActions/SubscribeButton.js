@@ -1,4 +1,4 @@
-import "./SubscribeButton.scss";
+import "./SubscribeButton.css";
 
 import svgload from "../../libs/svgload.js";
 

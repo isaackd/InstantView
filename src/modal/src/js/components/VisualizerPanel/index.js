@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./index.css";
 
 import { Visualizer } from "./Visualizer.js";
 import * as Visuals from "./Visuals.js";
