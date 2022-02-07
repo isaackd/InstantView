@@ -1,9 +1,10 @@
 import { h, render, Component } from "preact";
 
-import "../styles/styles.scss";
+import "../styles/styles.css";
 
 import OptionsGroup from "./components/OptionsGroup.js";
 
+import AccountOptions from "./components/AccountOptions.js";
 import PopupOptions from "./components/PopupOptions.js";
 import MiniOptions from "./components/MiniOptions.js";
 import CommentsOptions from "./components/CommentsOptions.js";
@@ -15,6 +16,23 @@ class OptionsPage extends Component {
 		super();
 
 		this.themes = ["Light", "Dark", "Gray"];
+		this.signInInitiated = false;
+
+		chrome.permissions.contains({ permissions: ["identity"] }, result => {
+	        if (result) {
+				chrome.identity.clearAllCachedAuthTokens(() => {
+					chrome.identity.getAuthToken({ "interactive": false }, token => {
+				        if (token) {
+				        	this.setState({signedIn: true});
+				        }
+				        else {
+				            this.setState({signedIn: false});
+				        }
+				    });
+				});
+	        }
+	    });
+
 
 		this.defaultOptions = {
 			// visualizer
@@ -40,10 +58,11 @@ class OptionsPage extends Component {
 			theme: "light",
 			clickModifier: "none",
 			titleCenterEnabled: false,
-			showDate: "top"
+			showDate: "top",
+			signedIn: false,
 		};
 
-		this.state = Object.assign({}, this.defaultOptions);
+		this.state = Object.assign({signedIn: false}, this.defaultOptions);
 	}
 
 	componentDidMount() {
@@ -100,6 +119,20 @@ class OptionsPage extends Component {
 				}
 			});
 		});
+	}
+
+	initiateSignIn() {
+		console.log("sign in initaited");
+		chrome.runtime.sendMessage({message: "get_auth"}, response => {
+			console.log(response);
+	        if (response && !response.OAuthDenied) {
+	            this.setState({signedIn: true});
+	            this.signInInitiated = false;
+	        }
+	        else {
+	            this.signInInitiated = false;
+	        }
+	    });
 	}
 
 	toggleOption = (name) => {
@@ -177,10 +210,32 @@ class OptionsPage extends Component {
 		}
 	}
 
+	handleSignInClick = (e) => {
+		if (this.signInInitiated) return;
+		console.log("Signing in...");
+		
+		this.signInInitiated = true;
+		chrome.permissions.contains({ permissions: ["identity"] }, result => {
+	        if (result) {
+	        	this.initiateSignIn();
+	        }
+	        else {
+	        	chrome.permissions.request({ permissions: ["identity"], origins: ["https://www.youtube.com/*"] }, granted => {
+			        this.signInInitiated = false;
+			    });
+	        }
+	    });
+	}
+
 	render(props) {
 
 		return (
 			<div id="options-page">
+
+				<AccountOptions
+					signedIn={this.state.signedIn}
+
+				 	handleSignInClick={this.handleSignInClick} />
 				
 				<PopupOptions
 					themes={this.themes}

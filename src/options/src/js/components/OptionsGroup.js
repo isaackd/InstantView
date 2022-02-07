@@ -1,6 +1,6 @@
 import { h, Component } from "preact";
 
-import "./OptionsGroup.scss";
+import "./OptionsGroup.css";
 
 export default class OptionsGroup extends Component {
 
