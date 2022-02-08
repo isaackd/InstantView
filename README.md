@@ -5,7 +5,7 @@
 
 ### Features
   - Popup to quickly view videos, playlists, comments, and descriptions
-  - Minimal **Mini Player** (Picture in Picture)
-  - Minimal **comments section**
-  - 10+ **audio visualizers**
-  - Loads of different **customization options**
+  - Minimal Mini Player (Picture in Picture)
+  - Minimal comments section
+  - 10+ audio visualizers
+  - Loads of different customization options
