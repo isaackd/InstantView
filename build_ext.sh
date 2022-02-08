@@ -29,14 +29,12 @@ then
 	then
 		zip -r dist.zip _locales icons images \
 			libs manifest.json src/background.js \
-			src/background_video_info.js src/datasource \
 			src/iv.js src/modal/dist/js/bundle.js src/options/dist
 	else
 		node create_ff_manifest.js
 
 		zip -r dist.zip _locales icons images \
 			libs manifest.json src/background.js \
-			src/background_video_info.js src/datasource \
 			src/iv.js src/modal/dist/js/bundle.js src/options/dist
 
 		rm -f manifest.json
