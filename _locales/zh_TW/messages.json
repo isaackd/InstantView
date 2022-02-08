@@ -20,7 +20,7 @@
 		"message": "您現在可以訂閱頻道和評分視頻！"
 	},
 	"authDenied": {
-		"message": "InstantView需要訪問您的帳戶才能為視頻評分和訂閱頻道."
+		"message": "在評分和訂閱之前，您必須在選項頁面中登錄您的帳戶。"
 	},
 
 	"identityDenied": {

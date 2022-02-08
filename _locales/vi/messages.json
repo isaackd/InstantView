@@ -20,7 +20,7 @@
 		"message": "Giờ đây, bạn có thể đăng ký kênh và xếp hạng video!"
 	},
 	"authDenied": {
-		"message": "InstantView cần quyền truy cập vào tài khoản của bạn để có thể xếp hạng video và đăng ký kênh"
+		"message": "Bạn phải đăng nhập vào tài khoản của mình trong trang tùy chọn trước khi xếp hạng và đăng ký."
 	},
 
 	"identityDenied": {

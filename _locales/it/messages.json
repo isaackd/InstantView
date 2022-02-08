@@ -20,7 +20,7 @@
 		"message": "Ora puoi iscriverti ai canali e valutare i video!"
 	},
 	"authDenied": {
-		"message": "InstantView ha bisogno di accedere al tuo account per essere in grado di valutare i video e iscriversi ai canali"
+		"message": "Devi accedere al tuo account nella pagina delle opzioni prima di valutare e iscriverti."
 	},
 
 	"identityDenied": {

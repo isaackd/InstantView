@@ -20,7 +20,7 @@
 		"message": "Sie können jetzt Kanäle abonnieren und Videos bewerten!"
 	},
 	"authDenied": {
-		"message": "InstantView benötigt Zugriff auf Ihr Konto, um Videos bewerten und Kanäle abonnieren zu können"
+		"message": "Sie müssen sich auf der Optionsseite bei Ihrem Konto anmelden, bevor Sie eine Bewertung abgeben und ein Abonnement abschließen können."
 	},
 
 	"identityDenied": {

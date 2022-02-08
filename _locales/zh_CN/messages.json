@@ -20,7 +20,7 @@
 		"message": "您现在可以订阅频道和评分视频！"
 	},
 	"authDenied": {
-		"message": "InstantView需要访问您的帐户才能为视频评分和订阅频道"
+		"message": "在评分和订阅之前，您必须在选项页面中登录您的帐户。"
 	},
 
 	"identityDenied": {

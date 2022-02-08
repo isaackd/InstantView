@@ -20,7 +20,7 @@
 		"message": "이제 채널을 구독하고 비디오를 평가할 수 있습니다!"
 	},
 	"authDenied": {
-		"message": "InstantView는 비디오를 평가하고 채널을 구독 할 수 있도록 계정에 액세스해야합니다."
+		"message": "평가 및 구독하기 전에 옵션 페이지에서 계정에 로그인해야 합니다."
 	},
 
 	"identityDenied": {

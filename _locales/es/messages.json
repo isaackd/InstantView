@@ -20,7 +20,7 @@
 		"message": "¡Ahora puedes suscribirte a canales y calificar videos!"
 	},
 	"authDenied": {
-		"message": "InstantView necesita acceso a su cuenta para poder calificar videos y suscribirse a canales"
+		"message": "Debe iniciar sesión en su cuenta en la página de opciones antes de calificar y suscribirse."
 	},
 
 	"identityDenied": {

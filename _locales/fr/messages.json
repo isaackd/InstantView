@@ -20,7 +20,7 @@
 		"message": "Vous pouvez maintenant vous abonner à des chaînes et noter des vidéos!"
 	},
 	"authDenied": {
-		"message": "InstantView a besoin d'accéder à votre compte pour pouvoir évaluer des vidéos et s'abonner à des chaînes"
+		"message": "Vous devez vous connecter à votre compte dans la page des options avant de noter et de vous abonner."
 	},
 
 	"identityDenied": {
