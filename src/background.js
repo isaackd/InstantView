@@ -5,7 +5,16 @@ const SUBSCRIBE_ENDPOINT = "https://www.googleapis.com/youtube/v3/subscriptions"
 const GET_SUBSCRIPTION_ENDPOINT = "https://www.googleapis.com/youtube/v3/subscriptions";
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === "log_request") {
+    if (request.message === "get_video_data") {
+        handleGetVideoData(request, sender, sendResponse);
+    }
+    else if (request.message === "get_channel_data") {
+        handleGetChannelData(request, sender, sendResponse);
+    }
+    else if (request.message === "get_comment_data") {
+        handleGetCommentData(request, sender, sendResponse);
+    }
+    else if (request.message === "log_request") {
         handleLogRequest(request, sender, sendResponse);
     }
     else if (request.message === "rate_request") {
@@ -31,15 +40,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
     else if (request.message === "request_permissions") {
         handleRequestPermissions(request, sender, sendResponse);
-    }
-    else if (request.message === "change_data_source") {
-        bglog(`Changing the data source from ${currentDataSource.name} to ${request.dataSource}`);
-        if (request.dataSource === "youtube") {
-            currentDataSource = YOUTUBE_DATA_SOURCE;
-        }
-        else if (request.dataSource === "invidious") {
-            currentDataSource = INVIDIOUS_DATA_SOURCE;
-        }
     }
     return true;
 });
@@ -143,7 +143,7 @@ function handleGetPermissionsRequest(request, sender, sendResponse) {
 }
 function handleRequestPermissions(request, sender, sendResponse) {
     bglog("request_permissions");
-    chrome.permissions.request({ permissions: ["identity"] }, granted => {
+    chrome.permissions.request({ permissions: ["identity"], origins: ["https://www.youtube.com/*"] }, granted => {
         bglog(`request_permissions_response: granted=${granted}`);
         sendResponse(granted);
     });
@@ -236,6 +236,177 @@ function handleGetSubscriptionRequest(request, sender, sendResponse) {
             bglog(`Couldn\'t get OAuth token: token=${token}`);
             sendResponse({OAuthDenied: true});
         }
+    });
+}
+
+// For format information see
+// videoDataReducer.js::handleVideoData(...)
+function handleGetVideoData(request, sender, sendResponse) {
+    ivlog(`getting video data: videoId=${request.videoId}`);
+    const res = new Promise(async (resolve, reject) => {
+        const endpoint = `https://www.googleapis.com/youtube/v3/videos`;
+
+        try {
+            const response = await ytget(endpoint, {
+                id: request.videoId,
+                part: "snippet,statistics",
+                fields: "items(id,snippet(title,channelId,description,publishedAt),statistics(viewCount,likeCount))"
+            });
+
+            console.log(response);
+
+            if (response.items[0] && response.items[0].snippet) {
+                const data = response.items[0];
+
+                resolve({
+                    id: data.id,
+                    channelId: data.snippet.channelId,
+
+                    title: data.snippet.title,
+                    description: data.snippet.description,
+                    publishedAt: data.snippet.publishedAt,
+
+                    views: data.statistics.viewCount,
+                    likes: data.statistics.likeCount
+                });
+            }
+            else if (!response.items.length) {
+                reject({error: new Error(`There were no videos matching the id: ${request.videoId}`)});
+            }
+        }
+        catch(e) {
+            reject({error: e});
+        }
+    });
+    res.then(data => {
+        sendResponse(data);
+    }).catch(err => {
+        sendResponse({error: err});
+    });
+};
+
+
+// For format information see
+// videoDataReducer.js::handleChannelData(...)
+function handleGetChannelData(request, sender, sendResponse) {
+    ivlog(`getting channel data: channelId=${request.channelId}`);
+    const res = new Promise(async (resolve, reject) => {
+
+        const endpoint = `https://www.googleapis.com/youtube/v3/channels`;
+
+        try {
+            const response = await ytget(endpoint, {
+                id: request.channelId,
+                part: "snippet,statistics",
+                fields: "items(id,snippet(title,thumbnails/default),statistics/subscriberCount)"
+            });
+
+            const data = response.items[0];
+            resolve({
+                id: data.id,
+                title: data.snippet.title,
+                thumbnail: data.snippet.thumbnails.default.url,
+                subscribers: data.statistics.subscriberCount
+            });
+        }
+        catch(e) {
+            reject({error: e});
+        }
+    });
+    res.then(data => {
+        sendResponse(data);
+    }).catch(err => {
+        sendResponse({error: err});
+    });
+};
+
+
+
+// For format information see
+// videoDataReducer.js::handleCommentData(...)
+function handleGetCommentData(request, sender, sendResponse) {
+    ivlog(`getting comment data: videoId=${request.videoId} pageToken: ${request.pageToken}`);
+    const res = new Promise(async (resolve, reject) => {
+
+        const endpoint = `https://www.googleapis.com/youtube/v3/commentThreads`;
+
+        try {
+            const field = "snippet/topLevelComment/snippet";
+            const items = `items(snippet/topLevelComment/id,${field}/authorChannelUrl,${field}/authorDisplayName,${field}/textDisplay)`;
+
+            const requestData = {
+                videoId: request.videoId,
+                part: "snippet",
+                fields: `nextPageToken,${items}`,
+                maxResults: 15,
+                order: "relevance"
+            };
+
+            if (request.pageToken) {
+                requestData.pageToken = request.pageToken;
+            }
+
+            const response = await ytget(endpoint, requestData);
+            const comments = response.items.map(comment => {
+                const data = comment.snippet.topLevelComment.snippet;
+                return {
+                    id: comment.snippet.topLevelComment.id,
+                    videoId: request.videoId,
+                    author: data.authorDisplayName,
+                    authorUrl: data.authorChannelUrl,
+                    text: data.textDisplay
+                };
+            });
+
+            resolve({comments, nextPageToken: response.nextPageToken});
+        }
+        catch(e) {
+            reject({error: e});
+        }
+    });
+    res.then(data => {
+        sendResponse(data);
+    }).catch(err => {
+        sendResponse({error: err});
+    });
+};
+
+
+function ytget(endpoint, options) {
+    return new Promise((resolve, reject) => {
+        const url = new URL(endpoint);
+
+        for (const opt in options) {
+            url.searchParams.append(opt, options[opt]);
+        }
+
+        let g = ["YouTube"[6].toLowerCase(), "YouTube"[0].toLowerCase()];
+        url.searchParams.append("k" + g.toString()
+            .replace(",", ""), atob("QUl6Y" + "VN5Q180UDhQ" + "OVcyR0dNcX" + "hpQmVmRVludWlDUHl" + "aa" + "C1HR1Fj"));
+
+
+        fetch(url).then(response => {
+            return response.json();
+        }).then(data => {
+            if (data.error) {
+                if (data.error && data.error.errors && data.error.errors[0] && data.error.errors[0].reason && data.error.errors[0].reason === "commentsDisabled") {
+                    reject("commentsDisabled");
+                }
+                else {
+                    reject("Error while retrieving data from youtube: " + data.error.message + ` (code ${data.error.code})`);
+                }
+            }
+            else if (data.items) {
+                resolve(data);
+            }
+            else {
+                ivlog("Error while retrieving data from youtube (ytget_e)");
+                reject("Error while retrieving data from youtube");
+            }
+        }).catch(e => {
+            ivlog(`Error while retrieving data from youtube (ytget_c): e=${e.message}`);
+        });
+
     });
 }
 

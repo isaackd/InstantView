@@ -145,12 +145,8 @@ function videoActionsDataSync(store, base) {
 
     if (likeButton && dislikeButton) {
 
-        const buttonTitle = (videoData.videoLikes !== null && videoData.videoDislikes !== null)  ?
-        `${videoData.videoLikes} likes, ${videoData.videoDislikes} dislikes` :
-        "";
-
-        likeButton.setAttribute("title", buttonTitle);
-        dislikeButton.setAttribute("title", buttonTitle);
+        likeButton.setAttribute("title", "Like this video");
+        dislikeButton.setAttribute("title", "Dislike this video");
 
         if (!videoData.videoRatingPending) {
             const icons = [

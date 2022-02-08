@@ -33,13 +33,7 @@ export function updateVideoData(videoId, playVideo = true, startSeconds = 0) {
                     // We have the identity permission
                     store.dispatch(getSubscribeStatus(vidData.channelId)).catch(e => {});
                 }).catch(e => {
-                    // We have the identity permission, ask for it
-                    instantview.stateActions.requestIdentityPermission().then(() => {
-                        // user allowed identity permission
-                        store.dispatch(getSubscribeStatus(vidData.channelId)).catch(e => {});
-                    }).catch(e => {
-                        // user denied identity permission
-                    });
+                    // we don't have the identity permission
                 });
             }
             store.dispatch(videoDataAction);
@@ -51,13 +45,7 @@ export function updateVideoData(videoId, playVideo = true, startSeconds = 0) {
             // We have the identity permission
             store.dispatch(getVideoRating(videoId)).catch(e => {});
         }).catch(() => {
-            // We have the identity permission, ask for it
-            instantview.stateActions.requestIdentityPermission().then(() => {
-                // user allowed identity permission
-                store.dispatch(getVideoRating(videoId)).catch(e => {});
-            }).catch(() => {
-                // user denied identity permission
-            });
+            // we don't have the identity permission
         });
     }
     if (loadComments) {

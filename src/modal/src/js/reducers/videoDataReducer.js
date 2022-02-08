@@ -4,7 +4,6 @@ const defaultState = {
     videoTitle: null,
     videoViews: null,
     videoLikes: null,
-    videoDislikes: null,
 
     videoDate: null,
 
@@ -59,7 +58,6 @@ export default function reducer(state, action) {
 
 // views: amount of views the video has
 // likes: amount of likes the video has
-// dislikes: amount of dislikes the video has
 function handleVideoData(state, action) {
     if (action.type === "GET_VIDEO_DATA_PENDING") {
         return Object.assign({}, state, {
@@ -67,7 +65,6 @@ function handleVideoData(state, action) {
             videoTitle: null,
             videoViews: null,
             videoLikes: null,
-            videoDislikes: null,
             videoDescription: null,
             videoDate: null
         });
@@ -80,7 +77,6 @@ function handleVideoData(state, action) {
             videoTitle: payload.title,
             videoViews: parseInt(payload.views, 10),
             videoLikes: parseInt(payload.likes, 10),
-            videoDislikes: parseInt(payload.dislikes, 10),
             videoDescription: payload.description,
             videoDate: payload.publishedAt
         });

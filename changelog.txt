@@ -1,4 +1,11 @@
 CHANGELOG
+  v4.7.0
+    FIXES
+    - Allowing InstantView access to your YouTube account is now possible again through the sign in button in the options page
+
+    CHANGES
+    - Removed the ratings bar now that YouTube now longer provides access to the dislikes count
+
   v4.6.3
     FIXES
     - Fixed videos on the home page not opening in the popup

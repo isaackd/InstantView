@@ -26,7 +26,7 @@
 		"description": "Text shown in the notification when the user gives account access."
 	},
 	"authDenied": {
-		"message": "InstantView needs access to your account to be able to rate videos and subscribe to channels",
+		"message": "You must sign into your account in the options page before rating and subscribing.",
 		"description": "Text shown in the notification when the user denies account access."
 	},
 
@@ -37,7 +37,7 @@
 
 	"thresholdWait": {
 		"message": "Please wait <span style=\"color: var(--iv-channel-owner-color)\">{1}</span> more {2} to subscribe or rate again.",
-		"description": "Text shown in the notification when the user tries to rate or subscribe to quickly after a previous request."
+		"description": "Text shown in the notification when the user tries to rate or subscribe too quickly after a previous request."
 	},
 
 	"retrieveDataFail_Video": {

@@ -67,17 +67,6 @@ function modalDataSync(store, base) {
         document.title = originalTabTitle;
     }
 
-    const likes = videoData.videoLikes;
-    const dislikes = videoData.videoDislikes;
-
-    if (instantview.modal) {
-        const percentage = (likes !== null && dislikes !== null && likes >= 0 && dislikes >= 0) ?
-        Math.round(likes / (likes + dislikes) * 100) :
-        0;
-
-        instantview.modal.style.setProperty("--iv-ratings-likes-percent", percentage + "%");
-    }
-
     if (state.visualizerOpen) {
         base.setAttribute("data-visualizer", "");
     }

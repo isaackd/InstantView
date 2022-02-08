@@ -20,18 +20,6 @@ export function openModal(play = true) {
 	const el = document.getElementById("iv-panels");
 	const backdrop = document.getElementById("iv-backdrop");
 
-	/// #if BROWSER === "chrome"
-
-	if (!openedModal) {
-		chrome.storage.local.get("iv_first_time_auth_denied", items => {
-            if (items && !items.iv_first_time_auth_denied) {
-				askForAuth();
-            }
-        });
-	}
-
-	/// #endif
-
 	return {
 		type: "OPEN_MODAL",
 		payload: () => {
@@ -61,46 +49,6 @@ export function openModal(play = true) {
 		}
 	};
 }
-
-/// #if BROWSER === "chrome"
-
-function askForAuth() {
-
-	const yesButton = document.createElement("button");
-	yesButton.classList.add("iv-notification-button");
-	yesButton.textContent = instantview.i18n["signInNotificationText_Accept"];
-
-	yesButton.addEventListener("click", () => {
-
-		const pl = instantview.videoDataActions.getAuth();
-		pl.payload.then(() => {
-			instantview.stateActions.showToast(instantview.i18n["authAccepted"]);
-
-			chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
-	            // after the data is saved
-	        });
-		}).catch(e => {
-			instantview.stateActions.showToast(instantview.i18n["authDenied"], 7000);
-		});
-	});
-
-	const noButton = document.createElement("button");
-	noButton.classList.add("iv-notification-button");
-	noButton.textContent = instantview.i18n["signInNotificationText_Deny"];
-
-	const dontShowButton = document.createElement("button");
-	dontShowButton.classList.add("iv-notification-button");
-	dontShowButton.textContent = instantview.i18n["signInNotificationText_DontShow"];
-	dontShowButton.addEventListener("click", () => {
-		chrome.storage.local.set({iv_first_time_auth_denied: true}, function() {
-            // after the data is saved
-        });
-	});
-
-	instantview.stateActions.showToast(instantview.i18n["signInNotificationText"], 30 * 1000, [yesButton, noButton, dontShowButton]);
-}
-
-/// #endif
 
 export function closeModal(pause = true, mini = false) {
 	const state = store.getState().state;
@@ -246,21 +194,20 @@ export function performAuthenticatedRequest(callback, errorHandler) {
 				callback();
 			}
 			catch(e) {
+				console.log(e);
 				if (e === "OAuthDenied") {
-		            instantview.log("OAuth denied, requesting authorization");
-		            const pl = instantview.videoDataActions.getAuth();
-					pl.payload.then(() => callback(true)).catch(errorHandler);
-			        instantview.store.dispatch(pl).catch(errorHandler);
+		            instantview.log("OAuth denied...");
+		            errorHandler();
+		            showToast(instantview.i18n["authDenied"], 10000);
 		        }
 		        else {
 		        	errorHandler();
 		        }
 			}
 		}).catch((e) => {
-			instantview.log("OAuth denied, requesting authorization");
-			const pl = instantview.videoDataActions.getAuth();
-			pl.payload.then(() => callback(true)).catch(errorHandler);
-	        instantview.store.dispatch(pl).catch(errorHandler);
+			instantview.log("OAuth denied...");
+			errorHandler();
+			showToast(instantview.i18n["authDenied"], 10000);
 		});
 	}, errorHandler);
 }
@@ -270,14 +217,9 @@ export function performIdentityRequiredRequest(callback, errorHandler) {
         // We have the identity permission
         callback();
     }).catch((e) => {
-        // We don't have the identity permission, request it
-        requestIdentityPermission().then(() => {
-            callback();
-        }).catch((e) => {
-            // user denied identity permissions
-            errorHandler();
-            showToast(instantview.i18n["authDenied"]);
-        });
+        // user denied identity permissions
+        errorHandler();
+        showToast(instantview.i18n["authDenied"], 10000);
     });
 }
 
@@ -305,19 +247,6 @@ export async function performWriteRequest(callback, errorHandler, timeLimitHandl
         }
 	}).catch(e => {
 		callback();
-	});
-}
-
-export function requestIdentityPermission() {
-	return new Promise((resolve, reject) => {
-		chrome.runtime.sendMessage({message: "request_permissions"}, response => {
-	        if (response) {
-	            resolve();
-	        }
-	        else {
-	            reject();
-	        }
-	    });
 	});
 }
 
