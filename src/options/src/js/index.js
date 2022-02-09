@@ -222,6 +222,9 @@ class OptionsPage extends Component {
 	        else {
 	        	chrome.permissions.request({ permissions: ["identity"], origins: ["https://www.youtube.com/*"] }, granted => {
 			        this.signInInitiated = false;
+			        if (granted) {
+			        	this.handleSignInClick();
+			        }
 			    });
 	        }
 	    });
